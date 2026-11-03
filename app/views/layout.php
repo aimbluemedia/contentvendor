@@ -13,10 +13,10 @@ $nav = function (string $path, string $label) use ($current) {
 <title><?= e(($title ?? '') !== '' ? $title . ' · ContentVendor' : 'ContentVendor') ?></title>
 <meta name="description" content="ContentVendor by Toutify turns one business idea into articles, social posts, promotions and directory updates for local small businesses.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="<?= e(asset('css/style.css')) ?>">
 </head>
-<body class="<?= $me ? 'is-app' : 'is-public' ?>">
+<body class="<?= $me ? 'is-app' : 'is-public' ?><?= $current === '' ? ' is-home' : '' ?>">
 <header class="site-header">
   <div class="container nav">
     <a class="brand" href="<?= e(url($me ? 'dashboard' : '')) ?>">

@@ -58,3 +58,73 @@
     ta.addEventListener('input', upd); upd();
   });
 })();
+
+// Homepage content calculator
+(function () {
+  var root = document.querySelector('[data-calc]');
+  if (!root) return;
+  var form = root.querySelector('form');
+  var base = (document.querySelector('.brand') || {}).getAttribute ? document.querySelector('.brand').getAttribute('href').replace(/[^/]*$/, '') : '/';
+  var out = function (name) { return root.querySelector('[data-out="' + name + '"]'); };
+  var set = function (name, html) { var el = out(name); if (el) el.innerHTML = html; };
+  var fmtH = function (h) { return (h < 10 ? Math.round(h * 10) / 10 : Math.round(h)) + 'h'; };
+
+  function calc() {
+    var data = new FormData(form);
+    var networks = data.getAll('networks').length || 1;
+    var perWeek = parseInt(data.get('perweek'), 10) || 1;
+    var articles = parseInt(data.get('articles'), 10) || 0;
+    var who = data.get('who') || 'me';
+
+    var campaigns = Math.round(perWeek * 52 / 12);
+    var social = campaigns * networks;
+    var total = social + articles;
+    var diy = social * 20 / 60 + articles * 2;
+    var withCv = total * 4 / 60;
+    var saved = Math.max(0, diy - withCv);
+
+    var plan, price, why, href;
+    if (who === 'team') {
+      if (campaigns <= 4) { plan = 'Content Starter'; price = '$299'; href = 'done-for-you?package=starter'; }
+      else if (campaigns <= 8) { plan = 'Content Growth'; price = '$749'; href = 'done-for-you?package=growth'; }
+      else { plan = 'Content Dominator'; price = '$999'; href = 'done-for-you?package=dominator'; }
+      why = 'Our team writes, schedules and reports on ' + campaigns + ' campaigns a month. Premium is included.';
+    } else if (total <= 5 && networks <= 3 && who === 'me') {
+      plan = 'Starter'; price = '$0'; href = 'register';
+      why = 'Free covers this. Copy and download every draft.';
+    } else if (total <= 40 && social <= 30) {
+      plan = 'Pro'; price = '$19'; href = 'register';
+      why = 'Covers your monthly volume, with scheduling and repurposing included.';
+    } else if (total <= 150 && social <= 150) {
+      plan = 'Premium'; price = '$49'; href = 'register';
+      why = 'Your volume needs Premium: 150 generations, the AI planner and recycling.';
+    } else {
+      plan = 'Content Dominator'; price = '$999'; href = 'done-for-you?package=dominator';
+      why = 'That is more than 150 pieces a month. Our team can handle it for you.';
+    }
+
+    set('perweek', perWeek + ' / week');
+    set('articles', String(articles));
+    set('total', String(total));
+    set('campaigns', String(campaigns));
+    set('social', String(social));
+    set('diy', fmtH(diy));
+    set('saved', fmtH(saved));
+    set('plan', plan);
+    set('planwhy', why);
+    set('price', price + '<small>/mo</small>');
+    set('summary', 'Posting <b>' + perWeek + '× a week</b> on <b>' + networks + ' channel' + (networks === 1 ? '' : 's') + '</b>' +
+      (articles ? ' plus <b>' + articles + ' article' + (articles === 1 ? '' : 's') + '</b>' : '') +
+      ' means about <b>' + total + ' pieces</b> of content every month. That is ' + fmtH(diy) + ' of writing to do it yourself.');
+    var ring = root.querySelector('[data-ring]');
+    if (ring) ring.style.setProperty('--p', Math.min(100, Math.round(total / 150 * 100)));
+    var cta = root.querySelector('[data-out-href="cta"]');
+    if (cta) {
+      cta.setAttribute('href', base + href);
+      cta.textContent = (plan === 'Starter' ? 'Start free' : who === 'team' ? 'Request ' + plan : 'Start with ' + plan) + ' →';
+    }
+  }
+  form.addEventListener('input', calc);
+  form.addEventListener('change', calc);
+  calc();
+})();
