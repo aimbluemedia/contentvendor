@@ -71,7 +71,7 @@ php -S localhost:8000 index.php
 
 ## Homepage hero photo
 
-The hero shows `assets/img/hero-owner.webp`, `.jpg` or `.png` if one exists (checked in that order). Otherwise it shows the built-in illustration `hero-owner.svg`. Upload a landscape photo of a small business owner at a computer, about 1280×1040 px, to `public_html/assets/img/hero-owner.jpg`. Make sure you have the rights to use it. The platform cards float on top automatically.
+The hero uses an Unsplash photo by default; it loads in visitors' browsers through Unsplash's image CDN. To use your own, upload a landscape photo of a small business owner at a computer (about 1300 px wide) as `public_html/assets/img/hero-owner.jpg`. `.webp` and `.png` also work. Your file takes priority automatically. The floating ChatGPT, Google, Facebook, TikTok, Reddit and lead cards are illustrative examples.
 
 ## Website check (homepage calculator)
 

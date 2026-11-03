@@ -18,74 +18,40 @@ $faqs = [
 ?>
 
 <!-- HERO -->
-<section class="m-hero">
-  <div class="container m-hero-grid">
-    <div class="m-hero-copy">
-      <a class="m-badge" href="<?= e(url('register')) ?>"><span>New</span> Free AI content tools for local businesses →</a>
-      <h1>Get found online <span class="m-hl">before your competitors do.</span></h1>
-      <p class="m-lead">Customers search Google and AI assistants before they call anyone. ContentVendor's free AI tools write your posts, articles and Google updates in minutes, so your business stays visible and turns searches into leads.</p>
-      <div class="m-cta">
-        <a class="m-btn m-btn-primary" href="<?= e(url('register')) ?>">Start free, no card needed</a>
-        <a class="m-btn m-btn-light" href="#calculator">See what you're missing</a>
+<?php
+$heroPhoto = 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1300&q=85';
+foreach (['webp', 'jpg', 'png'] as $ext) {
+    if (is_file(ROOT . '/assets/img/hero-owner.' . $ext)) { $heroPhoto = asset('img/hero-owner.' . $ext); break; }
+}
+$thumb = 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=180&q=75';
+?>
+<section class="th-hero" aria-label="ContentVendor for small businesses">
+  <div class="th-wrap">
+    <div class="th-copy">
+      <div class="th-eyebrow"><span class="th-spark">✦</span> AI + Search + Social + Leads, in One Platform</div>
+      <p class="th-label">FOR SMALL BUSINESSES</p>
+      <h1>Get Discovered Everywhere Your <span class="th-accent">Customers Look.</span></h1>
+      <p class="th-intro">ContentVendor creates the content that grows your visibility across AI, Google, social media and local communities, and turns that visibility into real leads and customers.</p>
+      <div class="th-actions">
+        <a class="th-btn th-btn-primary" href="<?= e(url('register')) ?>">Get Started Free <span aria-hidden="true">→</span></a>
+        <a class="th-btn th-btn-outline" href="#how-it-works"><span class="th-play" aria-hidden="true">▶</span> See How It Works</a>
       </div>
-      <ul class="m-ticks">
-        <li>Free forever plan</li>
-        <li>Ready in 2 minutes</li>
-        <li>No marketing skills needed</li>
-      </ul>
+      <div class="th-proof"><span><b class="th-tick">✓</b> More Visibility</span><span><b class="th-tick">✓</b> More Engagement</span><span><b class="th-tick">✓</b> More Leads</span></div>
     </div>
-
-    <?php
-    $heroPhoto = null;
-    foreach (['webp', 'jpg', 'png'] as $ext) {
-        if (is_file(ROOT . '/assets/img/hero-owner.' . $ext)) { $heroPhoto = 'img/hero-owner.' . $ext; break; }
-    }
-    ?>
-    <div class="m-stage" aria-hidden="true">
-      <div class="m-photo">
-        <img src="<?= e(asset($heroPhoto ?? 'img/hero-owner.svg')) ?>" alt="" width="640" height="520">
+    <div class="th-visual" aria-label="Illustrative example of marketing results across AI, search and social media">
+      <div class="th-photo">
+        <img src="<?= e($heroPhoto) ?>" alt="Small business owners working together at a laptop" fetchpriority="high">
       </div>
-
-      <div class="m-float f-chatgpt">
-        <div class="f-head"><span class="f-logo f-gpt">✦</span><b>ChatGPT</b></div>
-        <p class="f-q">“Best turf installer near Phoenix?”</p>
-        <p class="f-a"><b>Desert Turf Pros</b> is a well-reviewed local option, with recent tips on pet-friendly turf…</p>
-      </div>
-
-      <div class="m-float f-google">
-        <div class="f-head"><span class="f-logo f-g">G</span><b>Google</b><em>Local results</em></div>
-        <p class="f-title">Desert Turf Pros</p>
-        <p class="f-meta"><span class="f-stars">★★★★★</span> 4.9 · Open now · Updated today</p>
-      </div>
-
-      <div class="m-float f-facebook">
-        <span class="f-logo f-fb">f</span>
-        <div><b>128 likes · 24 comments</b><small>“$200 off turf this month”</small></div>
-      </div>
-
-      <div class="m-float f-tiktok">
-        <span class="f-logo f-tt">♪</span>
-        <div><b>12.4K views</b><small>Before &amp; after: Mesa backyard</small></div>
-      </div>
-
-      <div class="m-float f-reddit">
-        <span class="f-logo f-rd">r/</span>
-        <div><b>▲ 86 · r/phoenix</b><small>“Who installed your turf?”</small></div>
-      </div>
-
-      <div class="m-float f-lead">
-        <span class="f-logo f-ld">✓</span>
-        <div><b>New lead: quote request</b><small>From your website · 2 min ago</small></div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="m-found">
-      <span>Get found on</span>
-      <b>Google</b><b>ChatGPT</b><b>Facebook</b><b>Instagram</b><b>TikTok</b><b>Reddit</b><b>Google Maps</b>
+      <article class="th-card th-chatgpt"><div class="th-card-head"><span class="th-logo th-logo-gpt">✳</span> ChatGPT</div><div class="th-bubble">“Best turf installer near Phoenix?”</div><div class="th-answer">✦ &nbsp;I recommend <strong>Desert Turf Pros</strong> for professional turf installation in Phoenix.</div></article>
+      <article class="th-card th-google"><div class="th-card-head"><span class="th-logo th-logo-google">G</span> Google</div><div class="th-row"><img class="th-thumb" src="<?= e($thumb) ?>" alt="" loading="lazy"><div class="th-meta"><strong>Desert Turf Pros</strong><br><span class="th-star">★</span> <strong>4.9 stars</strong><br><span class="th-status">● Open now</span></div></div></article>
+      <article class="th-card th-facebook"><div class="th-card-head"><span class="th-logo th-logo-facebook">f</span> Facebook</div><div class="th-row"><img class="th-thumb" src="<?= e($thumb) ?>" alt="" loading="lazy"><div class="th-meta"><span class="th-num">128 likes</span> and <span class="th-num">24 comments</span> on the $200-off post.</div></div></article>
+      <article class="th-card th-tiktok"><div class="th-card-head"><span class="th-logo th-logo-tiktok">♪</span> TikTok</div><div class="th-row"><div class="th-icon th-icon-dark">▶</div><div class="th-meta"><span class="th-num">12.4K views</span> on a before-and-after video.</div></div></article>
+      <article class="th-card th-reddit"><div class="th-card-head"><span class="th-logo th-logo-reddit">●</span> Reddit</div><div class="th-row"><span class="th-upvote">↑</span><div class="th-meta"><span class="th-num">86 upvotes</span><br>on r/phoenix.</div></div></article>
+      <article class="th-card th-lead"><div class="th-card-head"><span class="th-logo th-logo-lead">♙</span> New quote request</div><div class="th-row"><span class="th-icon">✉</span><p>A new quote request just came in from your website.</p></div></article>
     </div>
   </div>
 </section>
+<!-- Illustrative marketing data only; these mock metrics and AI answers are examples, not real results. -->
 
 <!-- CALCULATOR -->
 <section class="m-section m-alt m-calc-section" id="calculator">
@@ -200,7 +166,7 @@ $faqs = [
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="m-section">
+<section class="m-section" id="how-it-works">
   <div class="container">
     <div class="m-head">
       <span class="m-eyebrow">How it works</span>
