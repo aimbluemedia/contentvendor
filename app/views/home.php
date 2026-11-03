@@ -14,7 +14,7 @@ $tools = [
     ['icon' => '📇', 'soon' => true, 'name' => 'Directory Distribution', 'tag' => 'pro', 'text' => 'Share offers and updates to SearchMonster, MonsterList and approved state directories.'],
     ['icon' => '🧠', 'soon' => true, 'name' => 'AI Monthly Planner', 'tag' => 'premium', 'text' => 'Get a month of campaign ideas built around your seasons, services and goals, ready to approve.'],
     ['icon' => '🔁', 'soon' => true, 'name' => 'Automatic Recycling', 'tag' => 'premium', 'text' => 'Your best evergreen posts come back on a schedule, refreshed so they never look copied.'],
-    ['icon' => '📈', 'name' => 'Performance Dashboard', 'tag' => 'free', 'text' => 'See what's published, scheduled and in draft, plus your monthly usage at a glance.'],
+    ['icon' => '📈', 'name' => 'Performance Dashboard', 'tag' => 'free', 'text' => 'See what is published, scheduled and in draft, plus your monthly usage at a glance.'],
 ];
 $tagLabels = ['free' => 'Free', 'pro' => 'Pro', 'premium' => 'Premium'];
 $goalCards = [
