@@ -59,72 +59,105 @@
   });
 })();
 
-// Homepage content calculator
+// Homepage content calculator with website check
 (function () {
   var root = document.querySelector('[data-calc]');
   if (!root) return;
   var form = root.querySelector('form');
-  var base = (document.querySelector('.brand') || {}).getAttribute ? document.querySelector('.brand').getAttribute('href').replace(/[^/]*$/, '') : '/';
-  var out = function (name) { return root.querySelector('[data-out="' + name + '"]'); };
-  var set = function (name, html) { var el = out(name); if (el) el.innerHTML = html; };
+  var scanUrl = root.getAttribute('data-scan-url');
+  var states = {};
+  root.querySelectorAll('[data-state]').forEach(function (el) { states[el.getAttribute('data-state')] = el; });
+  var out = function (n) { return root.querySelector('[data-out="' + n + '"]'); };
+  var setText = function (n, t) { var el = out(n); if (el) el.textContent = t; };
   var fmtH = function (h) { return (h < 10 ? Math.round(h * 10) / 10 : Math.round(h)) + 'h'; };
+  var errEl = root.querySelector('[data-scan-error]');
+  var btn = root.querySelector('[data-scan-btn]');
+  var site = null;
 
-  function calc() {
+  function show(name) { Object.keys(states).forEach(function (k) { states[k].hidden = k !== name; }); }
+
+  function numbers() {
     var data = new FormData(form);
     var networks = data.getAll('networks').length || 1;
     var perWeek = parseInt(data.get('perweek'), 10) || 1;
     var articles = parseInt(data.get('articles'), 10) || 0;
-    var who = data.get('who') || 'me';
-
-    var campaigns = Math.round(perWeek * 52 / 12);
-    var social = campaigns * networks;
+    var social = Math.round(perWeek * 52 / 12) * networks;
     var total = social + articles;
     var diy = social * 20 / 60 + articles * 2;
-    var withCv = total * 4 / 60;
-    var saved = Math.max(0, diy - withCv);
-
-    var plan, price, why, href;
-    if (who === 'team') {
-      if (campaigns <= 4) { plan = 'Content Starter'; price = '$299'; href = 'done-for-you?package=starter'; }
-      else if (campaigns <= 8) { plan = 'Content Growth'; price = '$749'; href = 'done-for-you?package=growth'; }
-      else { plan = 'Content Dominator'; price = '$999'; href = 'done-for-you?package=dominator'; }
-      why = 'Our team writes, schedules and reports on ' + campaigns + ' campaigns a month. Premium is included.';
-    } else if (total <= 5 && networks <= 3 && who === 'me') {
-      plan = 'Starter'; price = '$0'; href = 'register';
-      why = 'Free covers this. Copy and download every draft.';
-    } else if (total <= 40 && social <= 30) {
-      plan = 'Pro'; price = '$19'; href = 'register';
-      why = 'Covers your monthly volume, with scheduling and repurposing included.';
-    } else if (total <= 150 && social <= 150) {
-      plan = 'Premium'; price = '$49'; href = 'register';
-      why = 'Your volume needs Premium: 150 generations, the AI planner and recycling.';
-    } else {
-      plan = 'Content Dominator'; price = '$999'; href = 'done-for-you?package=dominator';
-      why = 'That is more than 150 pieces a month. Our team can handle it for you.';
-    }
-
-    set('perweek', perWeek + ' / week');
-    set('articles', String(articles));
-    set('total', String(total));
-    set('campaigns', String(campaigns));
-    set('social', String(social));
-    set('diy', fmtH(diy));
-    set('saved', fmtH(saved));
-    set('plan', plan);
-    set('planwhy', why);
-    set('price', price + '<small>/mo</small>');
-    set('summary', 'Posting <b>' + perWeek + '× a week</b> on <b>' + networks + ' channel' + (networks === 1 ? '' : 's') + '</b>' +
-      (articles ? ' plus <b>' + articles + ' article' + (articles === 1 ? '' : 's') + '</b>' : '') +
-      ' means about <b>' + total + ' pieces</b> of content every month. That is ' + fmtH(diy) + ' of writing to do it yourself.');
-    var ring = root.querySelector('[data-ring]');
-    if (ring) ring.style.setProperty('--p', Math.min(100, Math.round(total / 150 * 100)));
-    var cta = root.querySelector('[data-out-href="cta"]');
-    if (cta) {
-      cta.setAttribute('href', base + href);
-      cta.textContent = (plan === 'Starter' ? 'Start free' : who === 'team' ? 'Request ' + plan : 'Start with ' + plan) + ' →';
-    }
+    var saved = Math.max(0, diy - total * 4 / 60);
+    setText('perweek', perWeek + ' / week');
+    setText('articles', String(articles));
+    setText('total', String(total));
+    setText('diy', fmtH(diy));
+    setText('saved', fmtH(saved));
+    setText('summary', 'Posting ' + perWeek + '× a week on ' + networks + ' channel' + (networks === 1 ? '' : 's') +
+      (articles ? ' plus ' + articles + ' article' + (articles === 1 ? '' : 's') : '') + ' each month keeps your business active where customers search.');
   }
-  form.addEventListener('input', calc);
-  form.addEventListener('change', calc);
-  calc();
+
+  function renderSite() {
+    setText('site', site.name || site.domain);
+    var list = out('findings');
+    list.textContent = '';
+    var missing = [];
+    var add = function (ok, label, missingLabel) {
+      var li = document.createElement('li');
+      li.className = ok ? 'ok' : 'miss';
+      li.textContent = label;
+      list.appendChild(li);
+      if (!ok && missingLabel) missing.push(missingLabel);
+    };
+    if (site.unreachable) {
+      var li = document.createElement('li');
+      li.className = 'info';
+      li.textContent = "We couldn't read " + site.domain + ' right now, so this plan is based on your answers.';
+      list.appendChild(li);
+      setText('gap', "ContentVendor's free AI tools write your posts, articles and Google updates for you.");
+      return;
+    }
+    add(site.https, 'Secure website (HTTPS)', 'a secure website');
+    add(site.description, 'Search description for Google', 'a search description');
+    add(site.blog, 'Blog or helpful articles', 'helpful articles');
+    add(site.facebook, 'Facebook page linked', 'Facebook');
+    add(site.instagram, 'Instagram linked', 'Instagram');
+    add(site.google, 'Google Business Profile linked', 'a Google Business Profile link');
+    setText('gap', missing.length
+      ? 'Missing: ' + missing.join(', ') + ". ContentVendor's free tools help you fill these gaps and post consistently."
+      : 'Great foundation. Now stay consistent, because regular fresh content is what keeps you ahead.');
+  }
+
+  form.addEventListener('input', function () { numbers(); });
+  form.addEventListener('change', function () { numbers(); });
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var input = form.querySelector('[name=website]');
+    var value = input.value.trim();
+    errEl.hidden = true;
+    if (!/^(https?:\/\/)?[^\s\/]+\.[a-z]{2,}(\/\S*)?$/i.test(value)) {
+      errEl.textContent = 'Enter your website address, like yourbusiness.com.';
+      errEl.hidden = false; input.focus(); return;
+    }
+    setText('checking', value.replace(/^https?:\/\//i, '').replace(/\/.*$/, ''));
+    show('loading');
+    btn.disabled = true;
+    var body = new FormData();
+    body.append('website', value);
+    body.append('_csrf', form.querySelector('[name=_csrf]').value);
+    fetch(scanUrl, { method: 'POST', body: body, credentials: 'same-origin' })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res || !res.site) {
+          errEl.textContent = (res && res.error) || 'Something went wrong. Please try again.';
+          errEl.hidden = false; show('empty'); return;
+        }
+        site = res.site;
+        numbers(); renderSite(); show('result');
+        if (window.matchMedia('(max-width: 1000px)').matches) states.result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      })
+      .catch(function () {
+        errEl.textContent = 'Something went wrong. Please try again.';
+        errEl.hidden = false; show('empty');
+      })
+      .then(function () { btn.disabled = false; });
+  });
+  numbers();
 })();

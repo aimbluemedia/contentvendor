@@ -14,6 +14,11 @@ if (is_post()) {
     }
     if (!$errors) {
         $id = register_user($name, $email, $password);
+        // Carry over the website entered in the homepage calculator
+        $site = $_SESSION['signup_website'] ?? '';
+        if (is_string($site) && $site !== '') {
+            q('UPDATE business_profiles SET website = ?, updated_at = ? WHERE user_id = ?', [mb_substr($site, 0, 255), now(), $id]);
+        }
         login_user($id);
         flash('success', 'Welcome to ContentVendor! Start by filling in your business profile — every tool uses it.');
         redirect('profile');

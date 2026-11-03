@@ -35,23 +35,121 @@ $faqs = [
       </ul>
     </div>
 
-    <div class="m-hero-visual" aria-hidden="true">
-      <div class="m-card m-compare">
-        <div class="m-card-head"><b>Posts this month</b><span class="m-muted">Example · Landscaping, Phoenix</span></div>
-        <div class="m-bar-row"><span>Top competitor</span><div class="m-bar"><i style="width:90%"></i></div><b>18</b></div>
-        <div class="m-bar-row you"><span>Your business</span><div class="m-bar"><i style="width:10%"></i></div><b>2</b></div>
-        <p class="m-warn">⚠ Customers searching this week will see your competitor first.</p>
+    <?php
+    $heroPhoto = null;
+    foreach (['webp', 'jpg', 'png'] as $ext) {
+        if (is_file(ROOT . '/assets/img/hero-owner.' . $ext)) { $heroPhoto = 'img/hero-owner.' . $ext; break; }
+    }
+    ?>
+    <div class="m-stage" aria-hidden="true">
+      <div class="m-photo">
+        <img src="<?= e(asset($heroPhoto ?? 'img/hero-owner.svg')) ?>" alt="" width="640" height="520">
       </div>
-      <div class="m-card m-gen">
-        <div class="m-card-head"><b>One idea → ready-to-post content</b></div>
-        <p class="m-idea">“$200 off artificial turf installation this month”</p>
-        <ul class="m-gen-list">
-          <li><span>📝</span>Website article<em>Ready</em></li>
-          <li><span>👍</span>Facebook post<em>Ready</em></li>
-          <li><span>📍</span>Google Business update<em>Ready</em></li>
-          <li><span>📸</span>Instagram caption<em>Ready</em></li>
-          <li class="more">+ email, Pinterest, directory &amp; video script</li>
-        </ul>
+
+      <div class="m-float f-chatgpt">
+        <div class="f-head"><span class="f-logo f-gpt">✦</span><b>ChatGPT</b></div>
+        <p class="f-q">“Best turf installer near Phoenix?”</p>
+        <p class="f-a"><b>Desert Turf Pros</b> is a well-reviewed local option, with recent tips on pet-friendly turf…</p>
+      </div>
+
+      <div class="m-float f-google">
+        <div class="f-head"><span class="f-logo f-g">G</span><b>Google</b><em>Local results</em></div>
+        <p class="f-title">Desert Turf Pros</p>
+        <p class="f-meta"><span class="f-stars">★★★★★</span> 4.9 · Open now · Updated today</p>
+      </div>
+
+      <div class="m-float f-facebook">
+        <span class="f-logo f-fb">f</span>
+        <div><b>128 likes · 24 comments</b><small>“$200 off turf this month”</small></div>
+      </div>
+
+      <div class="m-float f-tiktok">
+        <span class="f-logo f-tt">♪</span>
+        <div><b>12.4K views</b><small>Before &amp; after: Mesa backyard</small></div>
+      </div>
+
+      <div class="m-float f-reddit">
+        <span class="f-logo f-rd">r/</span>
+        <div><b>▲ 86 · r/phoenix</b><small>“Who installed your turf?”</small></div>
+      </div>
+
+      <div class="m-float f-lead">
+        <span class="f-logo f-ld">✓</span>
+        <div><b>New lead: quote request</b><small>From your website · 2 min ago</small></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="m-found">
+      <span>Get found on</span>
+      <b>Google</b><b>ChatGPT</b><b>Facebook</b><b>Instagram</b><b>TikTok</b><b>Reddit</b><b>Google Maps</b>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="m-section m-alt m-calc-section" id="calculator">
+  <div class="container">
+    <div class="m-head">
+      <span class="m-eyebrow">Free content calculator</span>
+      <h2>How much content does your business need?</h2>
+      <p>Enter your website and we'll check what's working, what's missing, and how much content keeps you ahead of competitors.</p>
+    </div>
+    <div class="m-calc" data-calc data-scan-url="<?= e(url('scan')) ?>">
+      <form class="m-calc-form" novalidate>
+        <?= csrf_field() ?>
+        <div class="m-q">
+          <label class="m-q-label" for="cv-website">Your website</label>
+          <div class="m-url">
+            <span aria-hidden="true">🌐</span>
+            <input id="cv-website" name="website" type="text" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" required>
+          </div>
+          <p class="m-field-error" data-scan-error hidden></p>
+        </div>
+        <div class="m-q">
+          <span class="m-q-label">Where do you want to show up?</span>
+          <div class="m-chips">
+            <?php foreach (['facebook' => 'Facebook', 'instagram' => 'Instagram', 'google' => 'Google', 'pinterest' => 'Pinterest', 'directory' => 'Directories', 'email' => 'Email', 'video' => 'Video'] as $k => $n): ?>
+              <label class="m-chip"><input type="checkbox" name="networks" value="<?= e($k) ?>" <?= in_array($k, ['facebook', 'instagram', 'google'], true) ? 'checked' : '' ?>><span><?= e($n) ?></span></label>
+            <?php endforeach; ?>
+          </div>
+        </div>
+        <div class="m-q">
+          <label class="m-q-label" for="cv-perweek">How often should you post? <output data-out="perweek">3 / week</output></label>
+          <input id="cv-perweek" class="m-range" type="range" name="perweek" min="1" max="7" value="3">
+        </div>
+        <div class="m-q">
+          <label class="m-q-label" for="cv-articles">Website articles per month <output data-out="articles">2</output></label>
+          <input id="cv-articles" class="m-range" type="range" name="articles" min="0" max="8" value="2">
+        </div>
+        <button class="m-btn m-btn-primary m-btn-block" type="submit" data-scan-btn>Get my free content plan</button>
+      </form>
+
+      <div class="m-calc-out" aria-live="polite">
+        <div class="m-calc-empty" data-state="empty">
+          <span class="m-ic">📊</span>
+          <h3>Your content plan will appear here</h3>
+          <p>Enter your website to see what customers find today and what you need to post each month.</p>
+          <ul class="m-skel"><li></li><li></li><li></li></ul>
+        </div>
+        <div class="m-calc-loading" data-state="loading" hidden>
+          <span class="m-spin" aria-hidden="true"></span>
+          <p>Checking <b data-out="checking"></b>…</p>
+        </div>
+        <div class="m-calc-result" data-state="result" hidden>
+          <span class="m-muted m-small">Content plan for</span>
+          <h3 class="m-result-site" data-out="site"></h3>
+          <ul class="m-findings" data-out="findings"></ul>
+          <div class="m-calc-total"><b data-out="total">0</b> pieces of content / month</div>
+          <p class="m-calc-sum" data-out="summary"></p>
+          <div class="m-calc-stats">
+            <div><b data-out="diy">0h</b><span>to write it yourself</span></div>
+            <div class="hl"><b data-out="saved">0h</b><span>saved with ContentVendor</span></div>
+          </div>
+          <p class="m-gap" data-out="gap"></p>
+          <a class="m-btn m-btn-primary m-btn-block m-btn-lg" href="<?= e(url('register')) ?>">Join Free Today</a>
+          <span class="m-muted m-small m-center">Free forever plan · No credit card</span>
+        </div>
       </div>
     </div>
   </div>
@@ -112,60 +210,6 @@ $faqs = [
       <div class="m-step"><span>1</span><h3>Add your business</h3><p>Your name, services and area, entered once.</p></div>
       <div class="m-step"><span>2</span><h3>Type one idea</h3><p>“20% off spring cleanups.” Pick where it should go.</p></div>
       <div class="m-step"><span>3</span><h3>Approve and post</h3><p>Edit if you like, then copy, download or schedule.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- CALCULATOR -->
-<section class="m-section m-alt" id="calculator">
-  <div class="container">
-    <div class="m-head">
-      <span class="m-eyebrow">Free content calculator</span>
-      <h2>How much content does your business need?</h2>
-      <p>Answer three questions and see your monthly plan, and how much time it saves you.</p>
-    </div>
-    <div class="m-calc" data-calc>
-      <form class="m-calc-form" onsubmit="return false">
-        <div class="m-q">
-          <span class="m-q-label">Where do you want to show up?</span>
-          <div class="m-chips">
-            <?php foreach (['facebook' => 'Facebook', 'instagram' => 'Instagram', 'google' => 'Google', 'pinterest' => 'Pinterest', 'directory' => 'Directories', 'email' => 'Email', 'video' => 'Video'] as $k => $n): ?>
-              <label class="m-chip"><input type="checkbox" name="networks" value="<?= e($k) ?>" <?= in_array($k, ['facebook', 'instagram', 'google'], true) ? 'checked' : '' ?>><span><?= e($n) ?></span></label>
-            <?php endforeach; ?>
-          </div>
-        </div>
-        <div class="m-q">
-          <label class="m-q-label" for="cv-perweek">How often should you post? <output data-out="perweek">3 / week</output></label>
-          <input id="cv-perweek" class="m-range" type="range" name="perweek" min="1" max="7" value="3">
-        </div>
-        <div class="m-q">
-          <label class="m-q-label" for="cv-articles">Website articles per month <output data-out="articles">2</output></label>
-          <input id="cv-articles" class="m-range" type="range" name="articles" min="0" max="8" value="2">
-        </div>
-        <div class="m-q">
-          <span class="m-q-label">Who will do the work?</span>
-          <div class="m-chips">
-            <label class="m-chip"><input type="radio" name="who" value="me" checked><span>Me</span></label>
-            <label class="m-chip"><input type="radio" name="who" value="auto"><span>Automate it</span></label>
-            <label class="m-chip"><input type="radio" name="who" value="team"><span>Your team</span></label>
-          </div>
-        </div>
-      </form>
-      <div class="m-calc-out" aria-live="polite">
-        <span class="m-muted">Your monthly content plan</span>
-        <div class="m-calc-total"><b data-out="total">0</b> pieces of content</div>
-        <p class="m-calc-sum" data-out="summary"></p>
-        <div class="m-calc-stats">
-          <div><b data-out="diy">0h</b><span>to write it yourself</span></div>
-          <div class="hl"><b data-out="saved">0h</b><span>saved with ContentVendor</span></div>
-        </div>
-        <div class="m-calc-plan">
-          <div><span class="m-muted">Recommended plan</span><strong data-out="plan">Pro</strong><small data-out="planwhy"></small></div>
-          <b data-out="price">$19</b>
-        </div>
-        <a class="m-btn m-btn-primary m-btn-block" data-out-href="cta" href="<?= e(url('register')) ?>">Start free →</a>
-        <span class="m-hidden" data-out="campaigns"></span><span class="m-hidden" data-out="social"></span>
-      </div>
     </div>
   </div>
 </section>

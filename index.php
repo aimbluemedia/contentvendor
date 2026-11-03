@@ -31,6 +31,7 @@ $routes = [
     'calendar'     => 'calendar',
     'account'      => 'account',
     'admin'        => 'admin',
+    'scan'         => 'scan',
 ];
 
 if (!isset($routes[$path])) {

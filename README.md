@@ -69,6 +69,14 @@ php -S localhost:8000 index.php
 - One generation = one content item. A campaign with 8 destinations uses 8 generations.
 - The system prompt tells the AI never to invent reviews, prices or guarantees, and to write each destination as its own piece instead of duplicating text across directories.
 
+## Homepage hero photo
+
+The hero shows `assets/img/hero-owner.webp`, `.jpg` or `.png` if one exists (checked in that order). Otherwise it shows the built-in illustration `hero-owner.svg`. Upload a landscape photo of a small business owner at a computer, about 1280×1040 px, to `public_html/assets/img/hero-owner.jpg`. Make sure you have the rights to use it. The platform cards float on top automatically.
+
+## Website check (homepage calculator)
+
+`/scan` fetches one page of the website a visitor enters and looks for HTTPS, a meta description, a blog, and links to Facebook, Instagram and Google Business. To prevent abuse it only allows public IPv4 hosts on ports 80/443, pins the connection to the checked IP, re-checks redirects, caps time (9s) and size (1.5 MB), and limits each session to 12 checks an hour. The entered website is saved to the new member's business profile when they sign up.
+
 ## Changing plans and pricing
 
 Edit `app/plans.php`. Plan limits, the comparison table, done-for-you packages, goals and channel writing guides all live there. Until billing is connected, admins change a member's plan from `/admin`, and "Upgrade" buttons go to `upgrade_url` in the config (your Toutify subscription page).

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" role="img" aria-label="Small business owner working on a laptop">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3faf5"/><stop offset="1" stop-color="#e4f4e9"/></linearGradient>
+    <linearGradient id="win" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d9efe1"/></linearGradient>
+    <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9d8c3"/><stop offset="1" stop-color="#d9c2a6"/></linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fb7e6"/><stop offset="1" stop-color="#5d9fd6"/></linearGradient>
+    <linearGradient id="lap" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d7dde3"/><stop offset="1" stop-color="#b9c2cb"/></linearGradient>
+  </defs>
+  <rect width="640" height="520" fill="url(#wall)"/>
+  <!-- window -->
+  <rect x="40" y="40" width="250" height="230" rx="10" fill="url(#win)" stroke="#d3e9da" stroke-width="6"/>
+  <line x1="165" y1="40" x2="165" y2="270" stroke="#d3e9da" stroke-width="5"/>
+  <line x1="40" y1="155" x2="290" y2="155" stroke="#d3e9da" stroke-width="5"/>
+  <!-- wall chart -->
+  <rect x="440" y="60" width="160" height="110" rx="12" fill="#fff" opacity=".85"/>
+  <rect x="462" y="128" width="16" height="24" rx="3" fill="#bbe7c9"/><rect x="488" y="112" width="16" height="40" rx="3" fill="#8fd6a8"/><rect x="514" y="96" width="16" height="56" rx="3" fill="#4fbf7a"/><rect x="540" y="80" width="16" height="72" rx="3" fill="#16a34a"/>
+  <!-- shelf + plant -->
+  <rect x="330" y="200" width="90" height="8" rx="4" fill="#d9c2a6"/>
+  <path d="M350 200 h50 l-6 -34 h-38z" fill="#e7a36b"/>
+  <path d="M375 168 C360 130 340 128 332 112 C356 118 368 136 375 160 C380 128 396 112 414 106 C404 128 388 146 378 168z" fill="#3fae68"/>
+  <!-- person: hair back -->
+  <ellipse cx="330" cy="235" rx="74" ry="82" fill="#5a3a2a"/>
+  <!-- neck -->
+  <rect x="312" y="282" width="36" height="40" rx="14" fill="#e8b394"/>
+  <!-- torso -->
+  <path d="M220 470 C222 370 262 318 330 316 C398 318 438 370 440 470z" fill="url(#shirt)"/>
+  <path d="M306 318 L330 352 L354 318" fill="none" stroke="#4a8bc4" stroke-width="5" stroke-linejoin="round"/>
+  <!-- face -->
+  <ellipse cx="330" cy="240" rx="56" ry="64" fill="#f0c2a3"/>
+  <path d="M272 230 C276 176 318 160 352 168 C380 174 396 196 390 236 C378 206 352 196 330 194 C304 194 284 206 272 230z" fill="#5a3a2a"/>
+  <ellipse cx="308" cy="246" rx="5" ry="6" fill="#3a2a22"/><ellipse cx="352" cy="246" rx="5" ry="6" fill="#3a2a22"/>
+  <path d="M312 276 C322 286 340 286 350 276" fill="none" stroke="#c46d5a" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="294" cy="266" rx="10" ry="6" fill="#f2a99a" opacity=".55"/><ellipse cx="366" cy="266" rx="10" ry="6" fill="#f2a99a" opacity=".55"/>
+  <!-- desk -->
+  <rect x="0" y="430" width="640" height="90" fill="url(#desk)"/>
+  <rect x="0" y="426" width="640" height="10" fill="#f1e4d3"/>
+  <!-- laptop (back facing viewer) -->
+  <path d="M206 432 L226 330 H434 L454 432z" fill="url(#lap)"/>
+  <circle cx="330" cy="382" r="12" fill="#e9eef2"/>
+  <rect x="180" y="428" width="300" height="12" rx="6" fill="#aeb7c0"/>
+  <!-- hands -->
+  <ellipse cx="212" cy="430" rx="26" ry="14" fill="#f0c2a3"/><ellipse cx="448" cy="430" rx="26" ry="14" fill="#f0c2a3"/>
+  <!-- mug -->
+  <rect x="520" y="384" width="44" height="50" rx="8" fill="#ffffff"/>
+  <path d="M564 396 c18 0 18 26 0 26" fill="none" stroke="#ffffff" stroke-width="7"/>
+  <rect x="520" y="400" width="44" height="10" fill="#16a34a" opacity=".85"/>
+  <!-- boxes -->
+  <rect x="40" y="370" width="92" height="64" rx="6" fill="#d8b98f"/><rect x="40" y="370" width="92" height="12" fill="#c9a676"/>
+  <rect x="58" y="320" width="64" height="52" rx="6" fill="#e3c79f"/>
+</svg>
