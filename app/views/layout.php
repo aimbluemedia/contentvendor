@@ -16,7 +16,7 @@ $nav = function (string $path, string $label) use ($current) {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="<?= e(asset('css/style.css')) ?>">
 </head>
-<body class="<?= $me ? 'is-app' : 'is-public' ?><?= $current === '' ? ' is-home' : '' ?>">
+<body class="<?= $me ? 'is-app' : 'is-public' ?><?= in_array($current, ['', 'pricing', 'done-for-you'], true) ? ' is-home' : '' ?>">
 <header class="site-header">
   <div class="container nav">
     <a class="brand" href="<?= e(url($me ? 'dashboard' : '')) ?>">
