@@ -74,11 +74,11 @@ $thumbOwner = asset('img/thumb-owner.webp');
       <div class="tv-members">
         <p class="tv-members-label"><span>✓</span> Membership includes access to</p>
         <div class="tv-boxes">
-          <div class="tv-box"><span class="tv-box-ic">🔎</span><b>SearchMonster</b><small>AI search &amp; free listing</small></div>
-          <div class="tv-box"><span class="tv-box-ic">📋</span><b>MonsterList</b><small>Free listings everywhere</small></div>
-          <div class="tv-box"><span class="tv-box-ic">⭐</span><b>PromoMonster</b><small>Reviews &amp; reputation</small></div>
-          <div class="tv-box"><span class="tv-box-ic">⚡</span><b>LeadCrazy</b><small>Lead conversion</small></div>
-          <div class="tv-box"><span class="tv-box-ic">🏛️</span><b>Official Directories</b><small>Free state directory listings</small></div>
+          <div class="tv-box"><span class="tv-box-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span><b>SearchMonster</b><small>AI search &amp; free listing</small></div>
+          <div class="tv-box"><span class="tv-box-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><b>MonsterList</b><small>Free listings everywhere</small></div>
+          <div class="tv-box"><span class="tv-box-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></span><b>PromoMonster</b><small>Reviews &amp; reputation</small></div>
+          <div class="tv-box"><span class="tv-box-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6z"/></svg></span><b>LeadCrazy</b><small>Lead conversion</small></div>
+          <div class="tv-box"><span class="tv-box-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5M5 10v8M9.7 10v8M14.3 10v8M19 10v8M3 20.5h18"/></svg></span><b>Official Directories</b><small>Free state directory listings</small></div>
         </div>
       </div>
     </div>
