@@ -55,67 +55,128 @@ $thumbOwner = asset('img/thumb-owner.webp');
 <!-- Illustrative marketing data only; these mock metrics and AI answers are examples, not real results. -->
 
 <!-- CALCULATOR -->
-<section class="m-section m-alt m-calc-section" id="calculator">
+<?php
+$platforms = [
+    // key => [label, icon, color, group, default]
+    'google'     => ['Google', 'G', '#4285f4', 'social', true],
+    'facebook'   => ['Facebook', 'f', '#1877f2', 'social', true],
+    'instagram'  => ['Instagram', '◎', '#e1306c', 'social', true],
+    'tiktok'     => ['TikTok', '♪', '#111111', 'social', false],
+    'youtube'    => ['YouTube', '▶', '#ff0000', 'social', false],
+    'reddit'     => ['Reddit', '●', '#ff4500', 'social', false],
+    'pinterest'  => ['Pinterest', 'P', '#e60023', 'social', false],
+    'chatgpt'    => ['ChatGPT', '✳', '#10a37f', 'ai', true],
+    'perplexity' => ['Perplexity', '✺', '#20808d', 'ai', false],
+    'claude'     => ['Claude', '✶', '#d97757', 'ai', false],
+    'gemini'     => ['Gemini', '✦', '#4f7cff', 'ai', false],
+];
+?>
+<section class="cz" id="calculator">
   <div class="container">
-    <div class="m-head">
-      <span class="m-eyebrow">Free content calculator</span>
-      <h2>How much content does your business need?</h2>
-      <p>Enter your website and we'll check what's working, what's missing, and how much content keeps you ahead of competitors.</p>
+    <div class="cz-head">
+      <span class="m-eyebrow">Free content analysis</span>
+      <h2>See how visible your business is online</h2>
+      <p>Enter your website and get a free report: what customers find today, what's missing, and exactly how much content you need each month.</p>
     </div>
-    <div class="m-calc" data-calc data-scan-url="<?= e(url('scan')) ?>">
-      <form class="m-calc-form" novalidate>
+
+    <div class="cz-grid" data-calc data-scan-url="<?= e(url('scan')) ?>">
+      <form class="cz-form" novalidate>
         <?= csrf_field() ?>
-        <div class="m-q">
-          <label class="m-q-label" for="cv-website">Your website</label>
-          <div class="m-url">
-            <span aria-hidden="true">🌐</span>
+        <div class="cz-url-block">
+          <label class="cz-step" for="cv-website"><span>1</span> Enter your website</label>
+          <div class="cz-url">
+            <span class="cz-url-ic" aria-hidden="true">🌐</span>
             <input id="cv-website" name="website" type="text" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" required>
           </div>
           <p class="m-field-error" data-scan-error hidden></p>
+          <p class="cz-url-note">🔒 Free · No sign-up needed · Takes about 10 seconds</p>
         </div>
-        <div class="m-q">
-          <span class="m-q-label">Where do you want to show up?</span>
-          <div class="m-chips">
-            <?php foreach (['facebook' => 'Facebook', 'instagram' => 'Instagram', 'google' => 'Google', 'pinterest' => 'Pinterest', 'directory' => 'Directories', 'email' => 'Email', 'video' => 'Video'] as $k => $n): ?>
-              <label class="m-chip"><input type="checkbox" name="networks" value="<?= e($k) ?>" <?= in_array($k, ['facebook', 'instagram', 'google'], true) ? 'checked' : '' ?>><span><?= e($n) ?></span></label>
+
+        <div class="cz-q">
+          <span class="cz-step"><span>2</span> Where do you want to be found?</span>
+          <div class="cz-group-label">Search &amp; social</div>
+          <div class="cz-chips">
+            <?php foreach ($platforms as $k => [$label, $icon, $color, $group, $on]): if ($group !== 'social') continue; ?>
+              <label class="cz-chip"><input type="checkbox" name="networks" value="<?= e($k) ?>" data-label="<?= e($label) ?>" data-icon="<?= e($icon) ?>" data-color="<?= e($color) ?>" data-group="social" <?= $on ? 'checked' : '' ?>><span><i style="background:<?= e($color) ?>"><?= e($icon) ?></i><?= e($label) ?></span></label>
+            <?php endforeach; ?>
+          </div>
+          <div class="cz-group-label">AI search assistants</div>
+          <div class="cz-chips">
+            <?php foreach ($platforms as $k => [$label, $icon, $color, $group, $on]): if ($group !== 'ai') continue; ?>
+              <label class="cz-chip"><input type="checkbox" name="networks" value="<?= e($k) ?>" data-label="<?= e($label) ?>" data-icon="<?= e($icon) ?>" data-color="<?= e($color) ?>" data-group="ai" <?= $on ? 'checked' : '' ?>><span><i style="background:<?= e($color) ?>"><?= e($icon) ?></i><?= e($label) ?></span></label>
             <?php endforeach; ?>
           </div>
         </div>
-        <div class="m-q">
-          <label class="m-q-label" for="cv-perweek">How often should you post? <output data-out="perweek">3 / week</output></label>
+
+        <div class="cz-q">
+          <span class="cz-step"><span>3</span> Your posting goal</span>
+          <label class="cz-range-label" for="cv-perweek">Social posts per week <output data-out="perweek">3 / week</output></label>
           <input id="cv-perweek" class="m-range" type="range" name="perweek" min="1" max="7" value="3">
-        </div>
-        <div class="m-q">
-          <label class="m-q-label" for="cv-articles">Website articles per month <output data-out="articles">2</output></label>
+          <label class="cz-range-label" for="cv-articles">Website articles per month <output data-out="articles">2</output></label>
           <input id="cv-articles" class="m-range" type="range" name="articles" min="0" max="8" value="2">
         </div>
-        <button class="m-btn m-btn-primary m-btn-block" type="submit" data-scan-btn>Get my free content plan</button>
+
+        <button class="cz-submit" type="submit" data-scan-btn>Get Free Content Analysis <span aria-hidden="true">→</span></button>
       </form>
 
-      <div class="m-calc-out" aria-live="polite">
-        <div class="m-calc-empty" data-state="empty">
-          <span class="m-ic">📊</span>
-          <h3>Your content plan will appear here</h3>
-          <p>Enter your website to see what customers find today and what you need to post each month.</p>
-          <ul class="m-skel"><li></li><li></li><li></li></ul>
-        </div>
-        <div class="m-calc-loading" data-state="loading" hidden>
+      <div class="cz-report" data-report aria-live="polite">
+        <div class="cz-loading" data-state="loading" hidden>
           <span class="m-spin" aria-hidden="true"></span>
-          <p>Checking <b data-out="checking"></b>…</p>
+          <p>Analyzing <b data-out="checking"></b>…</p>
+          <ul class="cz-steps-list"><li>Reading your website</li><li>Checking search &amp; social links</li><li>Building your content plan</li></ul>
         </div>
-        <div class="m-calc-result" data-state="result" hidden>
-          <span class="m-muted m-small">Content plan for</span>
-          <h3 class="m-result-site" data-out="site"></h3>
-          <ul class="m-findings" data-out="findings"></ul>
-          <div class="m-calc-total"><b data-out="total">0</b> pieces of content / month</div>
-          <p class="m-calc-sum" data-out="summary"></p>
-          <div class="m-calc-stats">
-            <div><b data-out="diy">0h</b><span>to write it yourself</span></div>
-            <div class="hl"><b data-out="saved">0h</b><span>saved with ContentVendor</span></div>
+
+        <div data-state="report">
+          <div class="cz-rep-top">
+            <span class="cz-badge" data-out="badge">Sample report</span>
+            <span class="cz-rep-date" data-out="when">Example business</span>
           </div>
-          <p class="m-gap" data-out="gap"></p>
-          <a class="m-btn m-btn-primary m-btn-block m-btn-lg" href="<?= e(url('register')) ?>">Join Free Today</a>
-          <span class="m-muted m-small m-center">Free forever plan · No credit card</span>
+          <div class="cz-rep-site">
+            <div class="cz-favicon" data-out="initial">D</div>
+            <div><b data-out="site">deserturfpros.com</b><small data-out="sub">Landscaping · Phoenix, AZ</small></div>
+          </div>
+
+          <div class="cz-score-row">
+            <div class="cz-ring" data-ring style="--p:40"><b data-out="score">40</b><small>/100</small></div>
+            <div>
+              <span class="cz-score-label">Website visibility score</span>
+              <strong data-out="band">Fair: gaps competitors can use</strong>
+              <p data-out="bandtext">Missing a blog, Instagram and a Google Business Profile link.</p>
+            </div>
+          </div>
+
+          <div class="cz-box">
+            <div class="cz-box-title">What customers find today</div>
+            <ul class="cz-checks" data-out="findings">
+              <li class="ok">Secure website (HTTPS)</li>
+              <li class="ok">Search description for Google</li>
+              <li class="miss">Blog or helpful articles</li>
+              <li class="ok">Facebook page linked</li>
+              <li class="miss">Instagram linked</li>
+              <li class="miss">Google Business Profile linked</li>
+            </ul>
+          </div>
+
+          <div class="cz-box">
+            <div class="cz-box-title">Your monthly content plan</div>
+            <ul class="cz-plan" data-out="plan"></ul>
+          </div>
+
+          <div class="cz-totals">
+            <div><b data-out="total">0</b><span>pieces / month</span></div>
+            <div><b data-out="diy">0h</b><span>to write yourself</span></div>
+            <div class="hl"><b data-out="saved">0h</b><span>saved with AI</span></div>
+          </div>
+
+          <div class="cz-cta" data-cta="sample">
+            <p>This is an example. <b>See the real numbers for your business.</b></p>
+            <button type="button" class="cz-submit ghost" data-focus-url>See my own report <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="cz-cta" data-cta="real" hidden>
+            <p data-out="gap"></p>
+            <a class="cz-submit" href="<?= e(url('register')) ?>">Join Free Today <span aria-hidden="true">→</span></a>
+            <small>Free forever plan · No credit card</small>
+          </div>
         </div>
       </div>
     </div>

@@ -59,77 +59,131 @@
   });
 })();
 
-// Homepage content calculator with website check
+// Homepage content analysis (sample report -> real report)
 (function () {
   var root = document.querySelector('[data-calc]');
   if (!root) return;
   var form = root.querySelector('form');
   var scanUrl = root.getAttribute('data-scan-url');
-  var states = {};
-  root.querySelectorAll('[data-state]').forEach(function (el) { states[el.getAttribute('data-state')] = el; });
+  var input = form.querySelector('[name=website]');
+  var errEl = root.querySelector('[data-scan-error]');
+  var btn = root.querySelector('[data-scan-btn]');
+  var loading = root.querySelector('[data-state=loading]');
+  var report = root.querySelector('[data-state=report]');
+  var ctaSample = root.querySelector('[data-cta=sample]');
+  var ctaReal = root.querySelector('[data-cta=real]');
   var out = function (n) { return root.querySelector('[data-out="' + n + '"]'); };
   var setText = function (n, t) { var el = out(n); if (el) el.textContent = t; };
   var fmtH = function (h) { return (h < 10 ? Math.round(h * 10) / 10 : Math.round(h)) + 'h'; };
-  var errEl = root.querySelector('[data-scan-error]');
-  var btn = root.querySelector('[data-scan-btn]');
-  var site = null;
+  var real = false;
 
-  function show(name) { Object.keys(states).forEach(function (k) { states[k].hidden = k !== name; }); }
+  var UNITS = {
+    google: ['Google Business updates', 1, 20], facebook: ['Facebook posts', 1, 20], instagram: ['Instagram posts', 1, 20],
+    pinterest: ['Pinterest pins', 1, 15], tiktok: ['TikTok video scripts', 0.5, 45], youtube: ['YouTube Shorts scripts', 0.5, 45],
+    reddit: ['helpful Reddit posts', 0.25, 30]
+  };
 
-  function numbers() {
+  function plan() {
     var data = new FormData(form);
-    var networks = data.getAll('networks').length || 1;
     var perWeek = parseInt(data.get('perweek'), 10) || 1;
     var articles = parseInt(data.get('articles'), 10) || 0;
-    var social = Math.round(perWeek * 52 / 12) * networks;
-    var total = social + articles;
-    var diy = social * 20 / 60 + articles * 2;
-    var saved = Math.max(0, diy - total * 4 / 60);
+    var perMonth = Math.round(perWeek * 52 / 12);
+    var list = out('plan');
+    list.textContent = '';
+    var total = articles, minutes = articles * 120, ai = [];
+
+    form.querySelectorAll('input[name=networks]:checked').forEach(function (cb) {
+      if (cb.getAttribute('data-group') === 'ai') { ai.push(cb); return; }
+      var u = UNITS[cb.value]; if (!u) return;
+      var n = Math.max(1, Math.round(perMonth * u[1]));
+      total += n; minutes += n * u[2];
+      list.appendChild(row(cb, n + ' ' + u[0]));
+    });
+    if (articles) {
+      var li = document.createElement('li');
+      var ic = document.createElement('i'); ic.textContent = '📝'; ic.className = 'emoji';
+      var t = document.createElement('span'); t.textContent = 'Website';
+      var v = document.createElement('b'); v.textContent = articles + ' helpful article' + (articles === 1 ? '' : 's');
+      li.appendChild(ic); li.appendChild(t); li.appendChild(v); list.appendChild(li);
+    }
+    if (ai.length) {
+      var names = ai.map(function (cb) { return cb.getAttribute('data-label'); });
+      var li2 = row(ai[0], articles ? 'Found through your articles & updates' : 'Add articles to be found', names.length > 1 ? names[0] + ' +' + (names.length - 1) : names[0]);
+      li2.className = 'ai';
+      list.appendChild(li2);
+    }
+    if (!list.children.length) {
+      var empty = document.createElement('li'); empty.className = 'empty'; empty.textContent = 'Choose where you want to be found.'; list.appendChild(empty);
+    }
+    var diy = minutes / 60;
     setText('perweek', perWeek + ' / week');
     setText('articles', String(articles));
     setText('total', String(total));
     setText('diy', fmtH(diy));
-    setText('saved', fmtH(saved));
-    setText('summary', 'Posting ' + perWeek + '× a week on ' + networks + ' channel' + (networks === 1 ? '' : 's') +
-      (articles ? ' plus ' + articles + ' article' + (articles === 1 ? '' : 's') : '') + ' each month keeps your business active where customers search.');
+    setText('saved', fmtH(Math.max(0, diy - total * 4 / 60)));
   }
 
-  function renderSite() {
+  function row(cb, value, name) {
+    var li = document.createElement('li');
+    var ic = document.createElement('i');
+    ic.textContent = cb.getAttribute('data-icon');
+    ic.style.background = cb.getAttribute('data-color');
+    var t = document.createElement('span'); t.textContent = name || cb.getAttribute('data-label');
+    var v = document.createElement('b'); v.textContent = value;
+    li.appendChild(ic); li.appendChild(t); li.appendChild(v);
+    return li;
+  }
+
+  function showSite(site) {
+    real = true;
+    root.classList.add('is-real');
+    setText('badge', 'Your report');
+    setText('when', 'Checked just now');
     setText('site', site.name || site.domain);
-    var list = out('findings');
-    list.textContent = '';
-    var missing = [];
-    var add = function (ok, label, missingLabel) {
-      var li = document.createElement('li');
-      li.className = ok ? 'ok' : 'miss';
-      li.textContent = label;
-      list.appendChild(li);
-      if (!ok && missingLabel) missing.push(missingLabel);
-    };
+    setText('sub', site.name ? site.domain : 'Your website');
+    setText('initial', (site.name || site.domain || '?').charAt(0).toUpperCase());
+    var list = out('findings'); list.textContent = '';
+    var ring = root.querySelector('[data-ring]');
     if (site.unreachable) {
-      var li = document.createElement('li');
-      li.className = 'info';
-      li.textContent = "We couldn't read " + site.domain + ' right now, so this plan is based on your answers.';
-      list.appendChild(li);
+      setText('score', '–'); ring.style.setProperty('--p', 0);
+      setText('band', "We couldn't read your site right now");
+      setText('bandtext', 'Your content plan below is based on your answers.');
+      var li = document.createElement('li'); li.className = 'info'; li.textContent = 'Website check unavailable for ' + site.domain; list.appendChild(li);
       setText('gap', "ContentVendor's free AI tools write your posts, articles and Google updates for you.");
-      return;
+    } else {
+      var checks = [
+        [site.https, 'Secure website (HTTPS)', 'a secure website', 10],
+        [site.description, 'Search description for Google', 'a search description', 15],
+        [site.blog, 'Blog or helpful articles', 'helpful articles', 25],
+        [site.facebook, 'Facebook page linked', 'Facebook', 15],
+        [site.instagram, 'Instagram linked', 'Instagram', 10],
+        [site.google, 'Google Business Profile linked', 'a Google Business Profile link', 25]
+      ];
+      var score = 0, missing = [];
+      checks.forEach(function (c) {
+        var li = document.createElement('li'); li.className = c[0] ? 'ok' : 'miss'; li.textContent = c[1]; list.appendChild(li);
+        if (c[0]) score += c[3]; else missing.push(c[2]);
+      });
+      setText('score', String(score)); ring.style.setProperty('--p', score);
+      setText('band', score >= 70 ? 'Strong: now stay consistent' : score >= 40 ? 'Fair: gaps competitors can use' : 'Low: customers may not find you');
+      setText('bandtext', missing.length ? 'Missing ' + missing.slice(0, 3).join(', ') + (missing.length > 3 ? ' and more' : '') + '.' : 'Your website covers the basics.');
+      setText('gap', missing.length
+        ? "ContentVendor's free tools help you fill these gaps and post consistently, so customers and AI assistants find you."
+        : 'Great foundation. Fresh, regular content is what keeps you ahead. Start free and stay consistent.');
     }
-    add(site.https, 'Secure website (HTTPS)', 'a secure website');
-    add(site.description, 'Search description for Google', 'a search description');
-    add(site.blog, 'Blog or helpful articles', 'helpful articles');
-    add(site.facebook, 'Facebook page linked', 'Facebook');
-    add(site.instagram, 'Instagram linked', 'Instagram');
-    add(site.google, 'Google Business Profile linked', 'a Google Business Profile link');
-    setText('gap', missing.length
-      ? 'Missing: ' + missing.join(', ') + ". ContentVendor's free tools help you fill these gaps and post consistently."
-      : 'Great foundation. Now stay consistent, because regular fresh content is what keeps you ahead.');
+    ctaSample.hidden = true; ctaReal.hidden = false;
   }
 
-  form.addEventListener('input', function () { numbers(); });
-  form.addEventListener('change', function () { numbers(); });
+  root.querySelector('[data-focus-url]').addEventListener('click', function () {
+    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    input.focus({ preventScroll: true });
+    input.parentNode.classList.add('pulse');
+    setTimeout(function () { input.parentNode.classList.remove('pulse'); }, 1200);
+  });
+  form.addEventListener('input', plan);
+  form.addEventListener('change', plan);
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
-    var input = form.querySelector('[name=website]');
     var value = input.value.trim();
     errEl.hidden = true;
     if (!/^(https?:\/\/)?[^\s\/]+\.[a-z]{2,}(\/\S*)?$/i.test(value)) {
@@ -137,27 +191,23 @@
       errEl.hidden = false; input.focus(); return;
     }
     setText('checking', value.replace(/^https?:\/\//i, '').replace(/\/.*$/, ''));
-    show('loading');
-    btn.disabled = true;
+    loading.hidden = false; report.hidden = true; btn.disabled = true;
     var body = new FormData();
     body.append('website', value);
     body.append('_csrf', form.querySelector('[name=_csrf]').value);
-    fetch(scanUrl, { method: 'POST', body: body, credentials: 'same-origin' })
-      .then(function (r) { return r.json(); })
+    var minWait = new Promise(function (r) { setTimeout(r, 900); });
+    Promise.all([fetch(scanUrl, { method: 'POST', body: body, credentials: 'same-origin' }).then(function (r) { return r.json(); }), minWait])
       .then(function (res) {
+        res = res[0];
         if (!res || !res.site) {
           errEl.textContent = (res && res.error) || 'Something went wrong. Please try again.';
-          errEl.hidden = false; show('empty'); return;
+          errEl.hidden = false; return;
         }
-        site = res.site;
-        numbers(); renderSite(); show('result');
-        if (window.matchMedia('(max-width: 1000px)').matches) states.result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showSite(res.site); plan();
+        if (window.matchMedia('(max-width: 1000px)').matches) report.scrollIntoView({ behavior: 'smooth', block: 'start' });
       })
-      .catch(function () {
-        errEl.textContent = 'Something went wrong. Please try again.';
-        errEl.hidden = false; show('empty');
-      })
-      .then(function () { btn.disabled = false; });
+      .catch(function () { errEl.textContent = 'Something went wrong. Please try again.'; errEl.hidden = false; })
+      .then(function () { loading.hidden = true; report.hidden = false; btn.disabled = false; });
   });
-  numbers();
+  plan();
 })();
