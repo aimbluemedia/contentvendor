@@ -19,11 +19,12 @@ $faqs = [
 
 <!-- HERO -->
 <?php
-$heroPhoto = 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1300&q=85';
+$heroPhoto = asset('img/hero-owner.webp');
 foreach (['webp', 'jpg', 'png'] as $ext) {
     if (is_file(ROOT . '/assets/img/hero-owner.' . $ext)) { $heroPhoto = asset('img/hero-owner.' . $ext); break; }
 }
-$thumb = 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=180&q=75';
+$thumbSign = asset('img/thumb-sign.webp');
+$thumbOwner = asset('img/thumb-owner.webp');
 ?>
 <section class="th-hero" aria-label="ContentVendor for small businesses">
   <div class="th-wrap">
@@ -40,11 +41,11 @@ $thumb = 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=form
     </div>
     <div class="th-visual" aria-label="Illustrative example of marketing results across AI, search and social media">
       <div class="th-photo">
-        <img src="<?= e($heroPhoto) ?>" alt="Small business owners working together at a laptop" fetchpriority="high">
+        <img src="<?= e($heroPhoto) ?>" alt="Smiling small business owner at her laptop in front of a Desert Turf Pros sign" fetchpriority="high">
       </div>
       <article class="th-card th-chatgpt"><div class="th-card-head"><span class="th-logo th-logo-gpt">✳</span> ChatGPT</div><div class="th-bubble">“Best turf installer near Phoenix?”</div><div class="th-answer">✦ &nbsp;I recommend <strong>Desert Turf Pros</strong> for professional turf installation in Phoenix.</div></article>
-      <article class="th-card th-google"><div class="th-card-head"><span class="th-logo th-logo-google">G</span> Google</div><div class="th-row"><img class="th-thumb" src="<?= e($thumb) ?>" alt="" loading="lazy"><div class="th-meta"><strong>Desert Turf Pros</strong><br><span class="th-star">★</span> <strong>4.9 stars</strong><br><span class="th-status">● Open now</span></div></div></article>
-      <article class="th-card th-facebook"><div class="th-card-head"><span class="th-logo th-logo-facebook">f</span> Facebook</div><div class="th-row"><img class="th-thumb" src="<?= e($thumb) ?>" alt="" loading="lazy"><div class="th-meta"><span class="th-num">128 likes</span> and <span class="th-num">24 comments</span> on the $200-off post.</div></div></article>
+      <article class="th-card th-google"><div class="th-card-head"><span class="th-logo th-logo-google">G</span> Google</div><div class="th-row"><img class="th-thumb" src="<?= e($thumbSign) ?>" alt="" loading="lazy"><div class="th-meta"><strong>Desert Turf Pros</strong><br><span class="th-star">★</span> <strong>4.9 stars</strong><br><span class="th-status">● Open now</span></div></div></article>
+      <article class="th-card th-facebook"><div class="th-card-head"><span class="th-logo th-logo-facebook">f</span> Facebook</div><div class="th-row"><img class="th-thumb" src="<?= e($thumbOwner) ?>" alt="" loading="lazy"><div class="th-meta"><span class="th-num">128 likes</span> and <span class="th-num">24 comments</span> on the $200-off post.</div></div></article>
       <article class="th-card th-tiktok"><div class="th-card-head"><span class="th-logo th-logo-tiktok">♪</span> TikTok</div><div class="th-row"><div class="th-icon th-icon-dark">▶</div><div class="th-meta"><span class="th-num">12.4K views</span> on a before-and-after video.</div></div></article>
       <article class="th-card th-reddit"><div class="th-card-head"><span class="th-logo th-logo-reddit">●</span> Reddit</div><div class="th-row"><span class="th-upvote">↑</span><div class="th-meta"><span class="th-num">86 upvotes</span><br>on r/phoenix.</div></div></article>
       <article class="th-card th-lead"><div class="th-card-head"><span class="th-logo th-logo-lead">♙</span> New quote request</div><div class="th-row"><span class="th-icon">✉</span><p>A new quote request just came in from your website.</p></div></article>

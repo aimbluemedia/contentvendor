@@ -71,7 +71,7 @@ php -S localhost:8000 index.php
 
 ## Homepage hero photo
 
-The hero uses an Unsplash photo by default; it loads in visitors' browsers through Unsplash's image CDN. To use your own, upload a landscape photo of a small business owner at a computer (about 1300 px wide) as `public_html/assets/img/hero-owner.jpg`. `.webp` and `.png` also work. Your file takes priority automatically. The floating ChatGPT, Google, Facebook, TikTok, Reddit and lead cards are illustrative examples.
+The hero photo is `assets/img/hero-owner.webp` (1400×944, about 110 KB). The Google and Facebook card thumbnails `thumb-sign.webp` and `thumb-owner.webp` are cropped from it. To change the photo, replace `hero-owner.webp` with a landscape image of similar proportions; `.jpg` or `.png` also work if the `.webp` is removed. Keep the person's face centre-right, because the floating cards sit along the left and right edges. The card metrics are illustrative examples.
 
 ## Website check (homepage calculator)
 

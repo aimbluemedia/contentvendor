@@ -546,3 +546,33 @@ body.is-home{font-family:'DM Sans',Inter,Arial,sans-serif}
 .th-photo img,.th-thumb{color:transparent;font-size:0}
 @media(max-width:1250px){.th-hero{padding-inline:28px}}
 @media(max-width:650px){.th-hero{padding-inline:16px}}
+
+/* Hero photo: landscape frame, cards kept clear of the face and sign */
+.th-visual{height:560px}
+.th-photo{inset:78px 0 92px 36px;border-radius:36px}
+.th-photo img{object-position:60% 40%}
+.th-photo:after{background:linear-gradient(0deg,rgba(19,51,27,.10),transparent 35%)}
+.th-visual{height:600px}
+.th-photo{inset:84px 0 104px 36px}
+.th-facebook{top:0;left:-34px;right:auto;bottom:auto;width:250px}
+.th-reddit{top:156px;left:-54px;right:auto;bottom:auto;width:186px}
+.th-chatgpt{top:auto;bottom:0;left:-40px;right:auto;width:268px}
+.th-google{top:120px;right:-44px;left:auto;bottom:auto;width:214px}
+.th-tiktok{top:300px;right:-40px;left:auto;bottom:auto;width:222px}
+.th-lead{top:auto;bottom:-6px;right:-20px;left:auto;width:262px}
+@media(max-width:1250px){
+  .th-facebook{left:-8px}.th-reddit{left:-12px}.th-chatgpt{left:-8px}.th-google{right:-8px}.th-tiktok{right:-8px}
+}
+@media(max-width:1000px){
+  .th-photo{inset:84px 40px 104px 70px}
+  .th-visual{height:620px}
+}
+@media(max-width:650px){
+  .th-visual{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:20px 0 0}
+  .th-photo{position:relative;inset:auto;grid-column:1/-1;order:2;aspect-ratio:3/2;border-width:5px;border-radius:24px}
+  .th-card{position:relative;inset:auto!important;width:auto!important;transform:none}
+  .th-chatgpt{order:1;grid-column:1/-1}
+  .th-google{order:3}.th-facebook{order:4}
+  .th-tiktok{order:5}.th-lead{order:6}
+  .th-reddit{display:none}
+}
