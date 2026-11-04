@@ -697,3 +697,9 @@ body.is-home{font-family:'DM Sans',Inter,Arial,sans-serif}
 .cz-gets li:before{content:"✓ "}
 .cz-form .cz-q:last-of-type{margin-bottom:28px}
 @media(max-width:1000px){.cz-grid{align-items:start}}
+/* Analysis heading: big, two-tone */
+.cz-head{max-width:900px}
+.cz-head h2{font-size:clamp(2.3rem,5.2vw,4rem);line-height:1.05;letter-spacing:-.045em;margin-bottom:18px;color:var(--ink);text-wrap:balance}
+.cz-hl{color:#087c2c}
+.cz-head p{font-size:1.15rem;max-width:680px;margin:0 auto}
+.cz-hl{display:block}

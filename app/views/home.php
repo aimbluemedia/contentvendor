@@ -75,7 +75,7 @@ $platforms = [
   <div class="container">
     <div class="cz-head">
       <span class="m-eyebrow">Free content analysis</span>
-      <h2>See how visible your business is online</h2>
+      <h2>See how visible <span class="cz-hl">your business is online</span></h2>
       <p>Enter your website and get a free report: what customers find today, what's missing, and exactly how much content you need each month.</p>
     </div>
 
