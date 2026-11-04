@@ -82,6 +82,18 @@ $platforms = [
     <div class="cz-grid" data-calc data-scan-url="<?= e(url('scan')) ?>">
       <form class="cz-form" novalidate>
         <?= csrf_field() ?>
+        <div class="cz-form-head">
+          <span class="cz-form-ic" aria-hidden="true">📈</span>
+          <div>
+            <h3>Get your free content analysis</h3>
+            <p>See how customers and AI search find your business today, and the content that gets you found tomorrow.</p>
+          </div>
+        </div>
+        <ul class="cz-gets">
+          <li>Visibility score</li>
+          <li>What's missing</li>
+          <li>Monthly content plan</li>
+        </ul>
         <div class="cz-url-block">
           <label class="cz-step" for="cv-website"><span>1</span> Enter your website</label>
           <div class="cz-url">
