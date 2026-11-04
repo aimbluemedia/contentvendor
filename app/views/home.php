@@ -235,24 +235,8 @@ $platforms = [
   </div>
 </section>
 
-<!-- WHY -->
-<section class="m-section">
-  <div class="container">
-    <div class="m-head">
-      <span class="m-eyebrow">Why it matters</span>
-      <h2>Quiet businesses get passed over.</h2>
-      <p>When a customer compares two local businesses, the one with fresh posts, helpful answers and recent updates looks like the safer choice to people, to Google and to AI assistants.</p>
-    </div>
-    <div class="m-grid3">
-      <div class="m-feature"><span class="m-ic">🔎</span><h3>Customers search first</h3><p>Before they call, they look you up. An empty profile or a post from last year sends them to someone else.</p></div>
-      <div class="m-feature"><span class="m-ic">🤖</span><h3>AI search is the new word of mouth</h3><p>Assistants like ChatGPT and Google's AI answers draw on helpful, consistent information about your business.</p></div>
-      <div class="m-feature"><span class="m-ic">📈</span><h3>Consistency turns into leads</h3><p>Posting a little every week beats a big push once a year, and ContentVendor makes every week take minutes.</p></div>
-    </div>
-  </div>
-</section>
-
 <!-- FREE TOOLS -->
-<section class="m-section m-alt" id="tools">
+<section class="m-section" id="tools">
   <div class="container">
     <div class="m-head">
       <span class="m-eyebrow">Free AI tools</span>
@@ -267,6 +251,22 @@ $platforms = [
     <div class="m-more">
       <span>On Pro &amp; Premium:</span>
       <?php foreach ($paidTools as $t): ?><em><?= e($t) ?></em><?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="m-section m-alt">
+  <div class="container">
+    <div class="m-head">
+      <span class="m-eyebrow">Why it matters</span>
+      <h2>Quiet businesses get passed over.</h2>
+      <p>When a customer compares two local businesses, the one with fresh posts, helpful answers and recent updates looks like the safer choice to people, to Google and to AI assistants.</p>
+    </div>
+    <div class="m-grid3">
+      <div class="m-feature"><span class="m-ic">🔎</span><h3>Customers search first</h3><p>Before they call, they look you up. An empty profile or a post from last year sends them to someone else.</p></div>
+      <div class="m-feature"><span class="m-ic">🤖</span><h3>AI search is the new word of mouth</h3><p>Assistants like ChatGPT and Google's AI answers draw on helpful, consistent information about your business.</p></div>
+      <div class="m-feature"><span class="m-ic">📈</span><h3>Consistency turns into leads</h3><p>Posting a little every week beats a big push once a year, and ContentVendor makes every week take minutes.</p></div>
     </div>
   </div>
 </section>
