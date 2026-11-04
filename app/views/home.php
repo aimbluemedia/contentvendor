@@ -31,8 +31,8 @@ $thumbOwner = asset('img/thumb-owner.webp');
     <div class="th-copy">
       <div class="th-eyebrow"><span class="th-spark">✦</span> AI + Search + Social + Leads, in One Platform</div>
       <p class="th-label">FOR SMALL BUSINESSES</p>
-      <h1>Get Discovered Everywhere Your <span class="th-accent">Customers Look.</span></h1>
-      <p class="th-intro">ContentVendor creates the content that grows your visibility across AI, Google, social media and local communities, and turns that visibility into real leads and customers.</p>
+      <h1>Create Content Today That Gets&nbsp;You <span class="th-accent">Found Tomorrow.</span></h1>
+      <p class="th-intro">ContentVendor's AI writes the posts, articles and updates that keep your business visible on Google, AI search and social media, building an online presence that keeps bringing in leads.</p>
       <div class="th-actions">
         <a class="th-btn th-btn-primary" href="<?= e(url('register')) ?>">Get Started Free <span aria-hidden="true">→</span></a>
         <a class="th-btn th-btn-outline" href="#how-it-works"><span class="th-play" aria-hidden="true">▶</span> See How It Works</a>
