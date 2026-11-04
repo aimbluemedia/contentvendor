@@ -1,13 +1,4 @@
 <?php
-$freeTools = [
-    ['✨', 'AI Campaign Builder', 'Type one idea and get posts for every channel at once.'],
-    ['📝', 'Article Writer', 'Helpful local articles that answer the questions customers search for.'],
-    ['💬', 'Social Post Writer', 'Facebook, Instagram and Pinterest posts written for each network.'],
-    ['📍', 'Google Business Updates', 'Keep your Google profile fresh so customers see you\'re open and active.'],
-    ['🏷️', 'Offer Builder', 'Turn a special into a promotion with a clear call to action.'],
-    ['🎬', 'Video Script Writer', 'Short Reels and TikTok scripts: what to film and what to say.'],
-];
-$paidTools = ['Scheduling', 'Content calendar', 'Repurpose content', 'Branded images', 'AI monthly planner', 'Directory distribution'];
 $faqs = [
     ['Is it really free?', 'Yes. The Starter plan is $0 forever: 5 AI content pieces a month, the Campaign Builder and your content library. No credit card.'],
     ['How does this help me show up in Google and AI search?', 'Search engines and AI assistants favor businesses with fresh, helpful and consistent information. ContentVendor makes it easy to publish that every week. No one can guarantee rankings or AI recommendations, but staying active and useful is the foundation.'],
@@ -35,7 +26,7 @@ $thumbOwner = asset('img/thumb-owner.webp');
       <p class="th-intro">ContentVendor's AI writes the posts, articles and updates that keep your business visible on Google, AI search and social media, building an online presence that keeps bringing in leads.</p>
       <div class="th-actions">
         <a class="th-btn th-btn-primary" href="<?= e(url('register')) ?>">Get Started Free <span aria-hidden="true">→</span></a>
-        <a class="th-btn th-btn-outline" href="#how-it-works"><span class="th-play" aria-hidden="true">▶</span> See How It Works</a>
+        <a class="th-btn th-btn-outline" href="#tools"><span class="th-play" aria-hidden="true">▶</span> See How It Works</a>
       </div>
       <div class="th-proof"><span><b class="th-tick">✓</b> More Visibility</span><span><b class="th-tick">✓</b> More Engagement</span><span><b class="th-tick">✓</b> More Leads</span></div>
     </div>
@@ -235,25 +226,8 @@ $platforms = [
   </div>
 </section>
 
-<!-- FREE TOOLS -->
-<section class="m-section" id="tools">
-  <div class="container">
-    <div class="m-head">
-      <span class="m-eyebrow">Free AI tools</span>
-      <h2>Everything you need to stay visible, free.</h2>
-      <p>Each tool uses your business profile, so the content sounds like you and never needs retyping.</p>
-    </div>
-    <div class="m-grid3">
-      <?php foreach ($freeTools as [$ic, $name, $text]): ?>
-        <div class="m-tool"><span class="m-ic"><?= $ic ?></span><div><h3><?= e($name) ?> <span class="m-free">Free</span></h3><p><?= e($text) ?></p></div></div>
-      <?php endforeach; ?>
-    </div>
-    <div class="m-more">
-      <span>On Pro &amp; Premium:</span>
-      <?php foreach ($paidTools as $t): ?><em><?= e($t) ?></em><?php endforeach; ?>
-    </div>
-  </div>
-</section>
+<!-- TOOLS SHOWCASE -->
+<?php require ROOT . '/app/views/_tools_showcase.php'; ?>
 
 <!-- WHY -->
 <section class="m-section m-alt">
@@ -267,21 +241,6 @@ $platforms = [
       <div class="m-feature"><span class="m-ic">🔎</span><h3>Customers search first</h3><p>Before they call, they look you up. An empty profile or a post from last year sends them to someone else.</p></div>
       <div class="m-feature"><span class="m-ic">🤖</span><h3>AI search is the new word of mouth</h3><p>Assistants like ChatGPT and Google's AI answers draw on helpful, consistent information about your business.</p></div>
       <div class="m-feature"><span class="m-ic">📈</span><h3>Consistency turns into leads</h3><p>Posting a little every week beats a big push once a year, and ContentVendor makes every week take minutes.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="m-section" id="how-it-works">
-  <div class="container">
-    <div class="m-head">
-      <span class="m-eyebrow">How it works</span>
-      <h2>From idea to posted in three steps.</h2>
-    </div>
-    <div class="m-steps">
-      <div class="m-step"><span>1</span><h3>Add your business</h3><p>Your name, services and area, entered once.</p></div>
-      <div class="m-step"><span>2</span><h3>Type one idea</h3><p>“20% off spring cleanups.” Pick where it should go.</p></div>
-      <div class="m-step"><span>3</span><h3>Approve and post</h3><p>Edit if you like, then copy, download or schedule.</p></div>
     </div>
   </div>
 </section>
