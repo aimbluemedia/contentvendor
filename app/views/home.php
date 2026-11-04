@@ -254,16 +254,59 @@ $platforms = [
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="m-section">
+<!-- JOIN FREE -->
+<?php
+$freeBrands = [
+    ['SearchMonster', '🔎', '#16a34a', 'Your business storefront with articles, offers and updates customers can find.'],
+    ['MonsterList', '📋', '#2563eb', 'Business listings kept accurate and in sync everywhere.'],
+    ['PromoMonster', '⭐', '#f59e0b', 'Turn happy customers into reviews and testimonials.'],
+    ['LeadCrazy', '⚡', '#db2777', 'Lead forms and calls to action that capture new inquiries.'],
+];
+?>
+<section class="jf" id="join-free">
   <div class="container">
-    <div class="m-head">
-      <span class="m-eyebrow">Pricing</span>
-      <h2>Start free. Upgrade when it pays off.</h2>
-      <p>Included with your Toutify membership. No separate ContentVendor bill.</p>
+    <div class="jf-card">
+      <div class="jf-glow" aria-hidden="true"></div>
+      <div class="jf-grid">
+        <div class="jf-copy">
+          <span class="jf-pill">✦ Free forever membership</span>
+          <h2>Join free. <span>Get it all for&nbsp;$0.</span></h2>
+          <p>One free Toutify membership gives you the tools to get found, look trustworthy and turn visitors into leads, plus ContentVendor's AI content tools.</p>
+          <a class="jf-btn" href="<?= e(url('register')) ?>">Join Free Today <span aria-hidden="true">→</span></a>
+          <ul class="jf-ticks"><li>No credit card</li><li>Free forever</li><li>Set up in 2 minutes</li></ul>
+          <div class="jf-value"><b>$0</b><span>Every tool and directory listed here, included free</span></div>
+        </div>
+
+        <div class="jf-includes">
+          <span class="jf-label">Your free membership includes</span>
+          <div class="jf-brands">
+            <?php foreach ($freeBrands as [$name, $ic, $color, $text]): ?>
+              <div class="jf-brand">
+                <span class="jf-ic" style="--c:<?= e($color) ?>"><?= $ic ?></span>
+                <div><b><?= e($name) ?></b><small><?= e($text) ?></small></div>
+                <em>Free</em>
+              </div>
+            <?php endforeach; ?>
+          </div>
+          <span class="jf-label">Plus free access to</span>
+          <div class="jf-dirs">
+            <div class="jf-dir">
+              <span class="jf-ic" style="--c:#0f766e">🏛️</span>
+              <div><b>Official State Directories</b><small>Get listed on location-based directories in your state.</small></div>
+            </div>
+            <div class="jf-dir">
+              <span class="jf-ic" style="--c:#7c3aed">🏆</span>
+              <div><b>Elite Niche Directories</b><small>Stand out in directories built for your industry.</small></div>
+            </div>
+          </div>
+          <div class="jf-plus">
+            <span class="jf-ic" style="--c:#15803d">✨</span>
+            <span><b>ContentVendor AI content tools</b>: free articles, posts and Google updates every month</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <?php require ROOT . '/app/views/_plan_cards.php'; ?>
-    <p class="m-center m-muted m-small">Rather have it done for you? <a href="<?= e(url('done-for-you')) ?>">Done-for-you packages from $299/mo →</a></p>
+    <p class="jf-more"><a href="<?= e(url('pricing')) ?>">See more options →</a></p>
   </div>
 </section>
 
