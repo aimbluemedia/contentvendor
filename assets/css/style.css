@@ -748,3 +748,83 @@ body.is-home{font-family:'DM Sans',Inter,Arial,sans-serif}
   .jf-btn{width:100%;justify-content:center}
 }
 @media(prefers-reduced-motion:reduce){.jf-btn:after{animation:none}}
+
+/* =====================================================================
+   HERO v2 — Toutify layout (landscape photo, corner cards, membership boxes)
+   ===================================================================== */
+.th-wrap{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:44px;min-height:0}
+.th-hero{padding-top:72px;padding-bottom:88px}
+.th-copy h1{font-size:clamp(40px,4vw,56px)}
+.tv{min-width:0}
+.tv-stage{position:relative;padding:30px 26px 34px 40px}
+.tv-photo{position:relative;padding:6px;border-radius:30px;background:linear-gradient(135deg,#bbf7d0,#86efac 45%,#dcfce7);box-shadow:0 24px 60px rgba(21,128,61,.18)}
+.tv-photo img{display:block;width:100%;aspect-ratio:1672/941;object-fit:cover;border-radius:24px;color:transparent}
+.tv-card{position:absolute;z-index:2;background:rgba(255,255,255,.97);border:1px solid #edf2ee;border-radius:18px;padding:12px 14px;box-shadow:0 14px 34px rgba(15,76,30,.14);font-size:13px;line-height:1.4;color:#1d2b22;animation:thFloat 6s ease-in-out infinite}
+.tv-card:nth-of-type(2){animation-delay:-2s}.tv-card:nth-of-type(3){animation-delay:-4s}.tv-card:nth-of-type(4){animation-delay:-1s}
+.tv-head{display:flex;align-items:center;gap:8px;font-weight:800;font-size:13px;margin-bottom:8px;color:#101b14;text-transform:none}
+.tv-logo{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:9px;color:#fff;font-weight:800;font-size:14px}
+.tv-logo-g{background:#fff;color:#4285f4;border:1px solid #e5eae6;font-family:Arial,sans-serif;font-size:17px}
+.tv-logo-lead{background:#16a34a;border-radius:50%}
+.tv-bubble{background:#f3f5f3;border-radius:10px;padding:7px 9px;font-size:12px;margin-bottom:6px}
+.tv-answer{background:#eaf9ed;border-radius:10px;padding:7px 9px;font-size:12px}
+.tv-answer strong{color:#046a2c}
+.tv-row{display:flex;gap:10px;align-items:center}
+.tv-thumb{width:56px;height:52px;border-radius:10px;object-fit:cover;flex:none}
+.tv-row p{margin:0;font-size:12.5px}
+.tv-foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12px;color:var(--muted)}
+.tv-dots{display:flex;gap:4px}
+.tv-dots i,.tv-chip i{display:grid;place-items:center;width:18px;height:18px;border-radius:6px;color:#fff;font-style:normal;font-size:10px;font-weight:800}
+.tv-google,.tv-lead{display:flex;gap:10px;align-items:center}
+.tv-google b,.tv-lead b{display:block;font-size:13px}
+.tv-google small,.tv-lead small{display:block;color:var(--muted);font-size:11.5px}
+.tv-stars{color:#f8bb13;letter-spacing:-1px}
+.tv-chatgpt{left:-14px;top:30%;width:228px}
+.tv-facebook{top:-2px;right:-14px;width:244px}
+.tv-google{left:7%;bottom:0}
+.tv-lead{right:-10px;bottom:6px;border-color:#bbf7d0}
+.tv-chip{position:absolute;z-index:2;display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid #edf2ee;border-radius:999px;padding:6px 12px 6px 7px;font-size:12px;font-weight:700;color:#1d2b22;box-shadow:0 10px 24px rgba(15,76,30,.12)}
+.tv-tiktok{top:12px;left:26%}
+.tv-reddit{right:-18px;top:54%}
+.tv-members{margin:6px 0 0 40px}
+.tv-members-label{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#53665e}
+.tv-members-label span{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#16a34a;color:#fff;font-size:11px;letter-spacing:0}
+.tv-boxes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.tv-box{display:flex;flex-direction:column;gap:2px;background:#fff;border:1px solid #e3efe6;border-radius:16px;padding:12px;box-shadow:0 6px 18px rgba(15,76,30,.06);transition:transform .15s,box-shadow .15s}
+.tv-box:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(15,76,30,.12)}
+.tv-box-ic{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--tint);font-size:16px;margin-bottom:8px}
+.tv-box b{font-size:13px;color:#101b14}
+.tv-box small{font-size:11.5px;line-height:1.35;color:var(--muted)}
+.tv-box.on{border-color:#86efac;background:linear-gradient(180deg,#f0fdf4,#fff)}
+.tv-box.on .tv-box-ic{background:#16a34a}
+@media(max-width:1250px){.tv-chatgpt{left:0}.tv-facebook{right:0}.tv-lead{right:0}.tv-reddit{right:0}}
+@media(max-width:1000px){
+  .th-wrap{display:block}
+  .tv{max-width:760px;margin:0 auto}
+  .tv-members{margin-left:0}
+}
+@media(max-width:650px){
+  .tv-stage{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0}
+  .tv-photo{grid-column:1/-1;order:2;border-radius:22px;padding:4px}
+  .tv-photo img{border-radius:18px}
+  .tv-card{position:relative;inset:auto;width:auto;animation:none;padding:10px;font-size:11px}
+  .tv-chatgpt{order:1;grid-column:1/-1}
+  .tv-facebook{order:3;grid-column:1/-1}
+  .tv-google{order:4}.tv-lead{order:5}
+  .tv-google b,.tv-lead b{font-size:11.5px}
+  .tv-chip{display:none}
+  .tv-members{margin-top:20px}
+  .tv-boxes{grid-template-columns:1fr 1fr}
+  .tv-box:last-child{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){.tv-card{animation:none}}
+/* Hero v2: Toutify proportions (bigger photo), cards clear of the sign */
+.th-hero{padding-left:max(24px,calc((100vw - 1300px)/2));padding-right:max(24px,calc((100vw - 1300px)/2))}
+.th-wrap{max-width:1300px;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:40px}
+.tv-chatgpt{top:auto;bottom:22%;left:-18px;width:236px}
+.tv-google{left:34%;bottom:0}
+.tv-tiktok{top:14px;left:7%}
+.tv-box b{font-size:12.5px;overflow-wrap:anywhere}
+@media(max-width:1250px){.th-wrap{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}.tv-chatgpt{left:0}}
+body.is-home .site-header .container{width:min(1300px,100% - 48px)}
+@media(max-width:1250px){body.is-home .site-header .container{width:calc(100% - 48px)}}
+@media(max-width:650px){body.is-home .site-header .container{width:calc(100% - 32px)}}
