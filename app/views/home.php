@@ -100,8 +100,8 @@ $platforms = [
   <div class="container">
     <div class="cz-head">
       <span class="m-eyebrow">Free content analysis</span>
-      <h2>See how visible <span class="cz-hl">your business is online</span></h2>
-      <p>Enter your website and get a free report: what customers find today, what's missing, and exactly how much content you need each month.</p>
+      <h2>Are customers finding you, <span class="cz-hl">or your competitors?</span></h2>
+      <p>Right now, someone in your area is searching for what you do, and finding whoever posted last. Enter your website for a <b>free report</b>: what customers find today, what you're missing, and exactly how much content it takes to <b>win those customers back</b>.</p>
     </div>
 
     <div class="cz-grid" data-calc data-scan-url="<?= e(url('scan')) ?>">

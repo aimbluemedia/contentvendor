@@ -1044,3 +1044,4 @@ body.is-home .site-header .container{width:min(1300px,100% - 48px)}
 @media(max-width:1000px){.fq-grid{grid-template-columns:1fr;gap:36px}.fq-side{position:static}.fq-side>p,.fq-help{max-width:none}}
 @media(max-width:600px){.fq{padding:60px 0}.fq-item summary{padding:14px;gap:12px}.fq-ic{width:36px;height:36px}.fq-q{font-size:.98rem}.fq-a{padding:0 14px 16px 14px}}
 @media(prefers-reduced-motion:reduce){.fq-item[open] .fq-a{animation:none}.fq-toggle{transition:none}}
+.cz-head p b{color:#086b2d}
