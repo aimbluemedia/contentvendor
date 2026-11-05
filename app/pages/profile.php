@@ -15,7 +15,7 @@ if (is_post()) {
         $set = implode(', ', array_map(fn($f) => "$f = ?", $fields));
         q("UPDATE business_profiles SET $set, updated_at = ? WHERE user_id = ?", [...array_values($data), now(), $user['id']]);
         flash('success', 'Business profile saved. Every ContentVendor tool will use it.');
-        redirect(isset($_GET['next']) && $_GET['next'] === 'create' ? 'create' : 'dashboard');
+        redirect(isset($_GET['next']) && $_GET['next'] === 'create' ? 'create' : 'members');
     }
     $profile = array_merge($profile, $data);
 }

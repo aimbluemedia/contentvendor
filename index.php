@@ -22,7 +22,7 @@ $routes = [
     'register'     => 'register',
     'login'        => 'login',
     'logout'       => 'logout',
-    'dashboard'    => 'dashboard',
+    'members'      => 'dashboard',
     'profile'      => 'profile',
     'create'       => 'create',
     'campaign'     => 'campaign',
@@ -30,9 +30,16 @@ $routes = [
     'item'         => 'item',
     'calendar'     => 'calendar',
     'account'      => 'account',
-    'admin'        => 'admin',
+    'superadmin'   => 'admin',
     'scan'         => 'scan',
 ];
+
+// Old addresses keep working
+$legacy = ['dashboard' => 'members', 'admin' => 'superadmin'];
+if (isset($legacy[$path])) {
+    header('Location: ' . url($legacy[$path]), true, 301);
+    exit;
+}
 
 if (!isset($routes[$path])) {
     not_found();

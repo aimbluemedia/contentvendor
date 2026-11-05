@@ -10,7 +10,7 @@ if (is_post()) {
         q('UPDATE service_requests SET status = ? WHERE id = ?', [post('status'), (int) post('request_id')]);
         flash('success', 'Request updated.');
     }
-    redirect('admin');
+    redirect('superadmin');
 }
 $users = q(
     "SELECT u.id, u.name, u.email, u.plan, u.role, u.created_at, p.business_name,
@@ -22,4 +22,4 @@ $users = q(
 $requests = q('SELECT * FROM service_requests ORDER BY created_at DESC LIMIT 200')->fetchAll();
 $planCounts = array_fill_keys(array_keys(PLANS), 0);
 foreach ($users as $u) { $planCounts[$u['plan']] = ($planCounts[$u['plan']] ?? 0) + 1; }
-render('admin', ['title' => 'Team dashboard', 'user' => $admin, 'users' => $users, 'requests' => $requests, 'planCounts' => $planCounts]);
+render('admin', ['title' => 'Super admin', 'user' => $admin, 'users' => $users, 'requests' => $requests, 'planCounts' => $planCounts]);

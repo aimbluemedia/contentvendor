@@ -1,5 +1,5 @@
 <?php
-if (current_user()) redirect('dashboard');
+if ($me = current_user()) redirect(home_path_for($me));
 $errors = [];
 if (is_post()) {
     csrf_check();
@@ -11,7 +11,7 @@ if (is_post()) {
             q('UPDATE users SET password_hash = ? WHERE id = ?', [password_hash($password, PASSWORD_DEFAULT), $user['id']]);
         }
         login_user((int) $user['id']);
-        redirect('dashboard');
+        redirect(home_path_for($user));
     }
     usleep(300000);
     $errors[] = 'That email and password don\'t match.';

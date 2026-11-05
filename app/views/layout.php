@@ -19,20 +19,20 @@ $nav = function (string $path, string $label) use ($current) {
 <body class="<?= $me ? 'is-app' : 'is-public' ?><?= in_array($current, ['', 'pricing', 'done-for-you'], true) ? ' is-home' : '' ?>">
 <header class="site-header">
   <div class="container nav">
-    <a class="brand" href="<?= e(url($me ? 'dashboard' : '')) ?>">
+    <a class="brand" href="<?= e(url($me ? 'members' : '')) ?>">
       <span class="brand-mark">CV</span>
       <span class="brand-text">ContentVendor<small>by Toutify</small></span>
     </a>
     <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" data-nav-toggle>☰</button>
     <nav class="menu" data-nav>
       <?php if ($me): ?>
-        <?= $nav('dashboard', 'Dashboard') ?>
+        <?= $nav('members', 'Dashboard') ?>
         <?= $nav('create', 'Create') ?>
         <?= $nav('library', 'Library') ?>
         <?= $nav('calendar', 'Calendar') ?>
         <?= $nav('profile', 'Business profile') ?>
         <?= $nav('account', 'My plan') ?>
-        <?php if ($me['role'] === 'admin'): ?><?= $nav('admin', 'Team') ?><?php endif; ?>
+        <?php if ($me['role'] === 'admin'): ?><?= $nav('superadmin', 'Super admin') ?><?php endif; ?>
         <form method="post" action="<?= e(url('logout')) ?>" class="inline">
           <?= csrf_field() ?><button class="link-button" type="submit">Log out</button>
         </form>
@@ -67,7 +67,7 @@ $nav = function (string $path, string $label) use ($current) {
     <div class="footer-links">
       <a href="<?= e(url('pricing')) ?>">Pricing</a>
       <a href="<?= e(url('done-for-you')) ?>">Done-for-you packages</a>
-      <a href="<?= e(url($me ? 'dashboard' : 'register')) ?>"><?= $me ? 'Dashboard' : 'Create a free account' ?></a>
+      <a href="<?= e(url($me ? home_path_for($me) : 'register')) ?>"><?= $me ? 'Dashboard' : 'Create a free account' ?></a>
     </div>
   </div>
   <div class="container small muted">© <?= date('Y') ?> Toutify. Publishing availability depends on each network's API and permissions.</div>

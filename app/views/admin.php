@@ -1,6 +1,6 @@
 <section class="section-sm">
   <div class="container">
-    <h1>Team dashboard</h1>
+    <h1>Super admin</h1>
     <div class="stats">
       <?php foreach (PLANS as $k => $p): ?><div class="stat"><b><?= (int) $planCounts[$k] ?></b><span><?= e($p['name']) ?> members</span></div><?php endforeach; ?>
       <div class="stat"><b>$<?= number_format($planCounts['pro'] * 19 + $planCounts['premium'] * 49) ?></b><span>Membership MRR (est.)</span></div>

@@ -17,7 +17,8 @@ Plain **PHP 8.1+ / MySQL**. No Composer and no build step, so it runs on Hosting
 | Content library | Search and filter, edit, copy, download (.txt), approve, mark as published, delete |
 | Plan limits | Monthly AI generations (5 / 40 / 150), campaign channels (3 on Free, 8 on paid), scheduled posts (0 / 30 / 150) |
 | Pro / Premium | Scheduling, monthly calendar, repurposing content into other channels |
-| Team dashboard | `/admin`: members, plan changes, estimated MRR, done-for-you request pipeline |
+| Member dashboard | `/members`: where every member lands after logging in |
+| Super admin | `/superadmin`: members, plan changes, estimated MRR, done-for-you request pipeline. Only the admin account can open it; everyone else gets a 404. The admin lands here after logging in |
 | Demo mode | Without an API key you get template drafts, so the whole site works before AI is connected |
 
 Not built yet (days 31–90 on the roadmap): social network OAuth and auto-publishing, directory publishing to SearchMonster / MonsterList, image generation, the AI monthly planner, content recycling, billing, and the managed-service approval queue.
@@ -79,4 +80,4 @@ The hero photo is `assets/img/hero-owner.webp` (1400×944, about 110 KB). The Go
 
 ## Changing plans and pricing
 
-Edit `app/plans.php`. Plan limits, the comparison table, done-for-you packages, goals and channel writing guides all live there. Until billing is connected, admins change a member's plan from `/admin`, and "Upgrade" buttons go to `upgrade_url` in the config (your Toutify subscription page).
+Edit `app/plans.php`. Plan limits, the comparison table, done-for-you packages, goals and channel writing guides all live there. Until billing is connected, admins change a member's plan from `/superadmin`, and "Upgrade" buttons go to `upgrade_url` in the config (your Toutify subscription page).

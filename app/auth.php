@@ -12,6 +12,12 @@ function current_user(): ?array
     return $user;
 }
 
+/** Where a signed-in user lands: the main admin goes to /superadmin, everyone else to /members */
+function home_path_for(array $user): string
+{
+    return $user['role'] === 'admin' ? 'superadmin' : 'members';
+}
+
 function require_login(): array
 {
     $user = current_user();
