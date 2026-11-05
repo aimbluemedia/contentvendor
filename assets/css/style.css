@@ -1000,7 +1000,7 @@ body.is-home .site-header .container{width:min(1300px,100% - 48px)}
 .tl-stats span{display:inline-flex;align-items:baseline;gap:6px;padding:8px 16px;border-radius:14px;background:var(--bg);border:1px solid var(--border);font-size:.9rem;color:var(--muted)}
 .tl-stats b{font-size:1.3rem;font-weight:800;color:#086b2d;letter-spacing:-.02em}
 @media(max-width:600px){.tl-accent{white-space:normal}.tl-head h2 em{font-size:.55em}}
-.tl-head h2 .tl-accent{color:#fff;display:inline-block}
+.tl-head h2 .tl-accent{color:#fff;display:inline-block;padding:15px}
 @media(max-width:600px){.tl-stats span{padding:7px 12px;font-size:.82rem}.tl-stats b{font-size:1.1rem}}
 
 /* =====================================================================
