@@ -84,9 +84,14 @@ $svg = fn($k) => '<svg viewBox="0 0 24 24" aria-hidden="true">' . $ico[$k] . '</
 <section class="tl" id="tools">
   <div class="container">
     <div class="tl-head">
-      <span class="m-eyebrow">Free AI tools</span>
-      <h2>Try the tools that keep <span>your business visible</span></h2>
-      <p>Pick a tool to see what it creates for a real local business. Start with <?= (int) $counts['free'] ?> free tools, and unlock Pro and Premium whenever you're ready.</p>
+      <span class="tl-eyebrow"><i>✦</i> $0 forever · No credit card · No trial clock</span>
+      <h2><span class="tl-accent">Free Forever</span> Tools <em>from ContentVendor</em></h2>
+      <p>Posts, articles, Google updates and video scripts, written for your business in seconds. Get <b><?= (int) $counts['free'] ?> AI tools free for life</b>, then unlock Pro and Premium when you're ready to put it on autopilot.</p>
+      <div class="tl-stats">
+        <span><b><?= (int) $counts['free'] ?></b> free tools</span>
+        <span><b><?= count($tools) ?></b> tools in total</span>
+        <span><b>$0</b> to start</span>
+      </div>
     </div>
 
     <div class="tl-filter" role="tablist" aria-label="Filter tools by plan">
