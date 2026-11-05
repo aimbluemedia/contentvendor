@@ -1002,3 +1002,45 @@ body.is-home .site-header .container{width:min(1300px,100% - 48px)}
 @media(max-width:600px){.tl-accent{white-space:normal}.tl-head h2 em{font-size:.55em}}
 .tl-head h2 .tl-accent{color:#fff;display:inline-block}
 @media(max-width:600px){.tl-stats span{padding:7px 12px;font-size:.82rem}.tl-stats b{font-size:1.1rem}}
+
+/* =====================================================================
+   FAQ
+   ===================================================================== */
+.fq{padding:96px 0;background:radial-gradient(ellipse 45% 55% at 0% 0%,#e6f9ea 0,transparent 70%),radial-gradient(ellipse 40% 50% at 100% 100%,#eefcf1 0,transparent 70%),#f7fbf8}
+.fq-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:start}
+.fq-side{position:sticky;top:100px}
+.fq-side h2{font-size:clamp(2.3rem,4.6vw,3.6rem);font-weight:800;line-height:1.04;letter-spacing:-.045em;margin:0 0 16px;color:var(--ink)}
+.fq-side h2 span{display:block;color:#087c2c}
+.fq-side>p{color:var(--muted);font-size:1.08rem;margin:0 0 28px;max-width:400px}
+.fq-help{position:relative;background:#fff;border:1px solid #d8eedd;border-radius:24px;padding:24px;box-shadow:0 20px 50px rgba(21,128,61,.10);max-width:400px;overflow:hidden}
+.fq-help:before{content:"";position:absolute;right:-60px;top:-60px;width:160px;height:160px;border-radius:50%;background:radial-gradient(closest-side,rgba(134,239,172,.45),transparent)}
+.fq-help-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--tint);font-size:1.3rem;margin-bottom:12px}
+.fq-help b{display:block;font-size:1.15rem;margin-bottom:4px}
+.fq-help p{margin:0 0 18px;color:var(--muted);font-size:.95rem}
+.fq-link{display:block;text-align:center;margin-top:12px;font-weight:700;color:#086b2d;text-decoration:none;font-size:.92rem}
+.fq-link:hover{color:#15803d;text-decoration:underline}
+.fq-list{display:grid;gap:12px;counter-reset:fq}
+.fq-item{background:#fff;border:1px solid var(--border);border-radius:20px;transition:border-color .2s,box-shadow .2s,transform .2s}
+.fq-item:hover{border-color:#b7e4c4;transform:translateY(-1px)}
+.fq-item[open]{border-color:#16a34a;box-shadow:0 18px 40px rgba(21,128,61,.12)}
+.fq-item summary{list-style:none;display:flex;align-items:center;gap:16px;padding:18px 20px;cursor:pointer;border-radius:20px}
+.fq-item summary::-webkit-details-marker{display:none}
+.fq-item summary:focus-visible{outline:2px solid #16a34a;outline-offset:2px}
+.fq-ic{flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--tint);transition:background .2s}
+.fq-ic svg{width:21px;height:21px;fill:none;stroke:#15803d;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+.fq-item[open] .fq-ic{background:#16a34a;box-shadow:0 8px 18px rgba(22,163,74,.28)}
+.fq-item[open] .fq-ic svg{stroke:#fff}
+.fq-q{flex:1;font-weight:700;font-size:1.05rem;color:var(--ink);line-height:1.35}
+.fq-q small{display:block;font-size:.72rem;font-weight:800;letter-spacing:.12em;color:#16a34a;margin-bottom:2px}
+.fq-toggle{flex:none;position:relative;width:34px;height:34px;border-radius:50%;background:var(--bg);border:1px solid var(--border);transition:transform .25s,background .2s}
+.fq-toggle:before,.fq-toggle:after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;border-radius:2px;background:#15803d}
+.fq-toggle:after{transform:rotate(90deg)}
+.fq-item[open] .fq-toggle{transform:rotate(45deg);background:#16a34a;border-color:#16a34a}
+.fq-item[open] .fq-toggle:before,.fq-item[open] .fq-toggle:after{background:#fff}
+.fq-a{padding:0 20px 20px 78px}
+.fq-a p{margin:0;color:#4b5b53;font-size:.98rem;line-height:1.65}
+.fq-item[open] .fq-a{animation:fqIn .3s ease-out}
+@keyframes fqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media(max-width:1000px){.fq-grid{grid-template-columns:1fr;gap:36px}.fq-side{position:static}.fq-side>p,.fq-help{max-width:none}}
+@media(max-width:600px){.fq{padding:60px 0}.fq-item summary{padding:14px;gap:12px}.fq-ic{width:36px;height:36px}.fq-q{font-size:.98rem}.fq-a{padding:0 14px 16px 14px}}
+@media(prefers-reduced-motion:reduce){.fq-item[open] .fq-a{animation:none}.fq-toggle{transition:none}}

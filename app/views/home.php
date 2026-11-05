@@ -1,10 +1,12 @@
 <?php
 $faqs = [
-    ['Is it really free?', 'Yes. The Starter plan is $0 forever: 5 AI content pieces a month, the Campaign Builder and your content library. No credit card.'],
-    ['How does this help me show up in Google and AI search?', 'Search engines and AI assistants favor businesses with fresh, helpful and consistent information. ContentVendor makes it easy to publish that every week. No one can guarantee rankings or AI recommendations, but staying active and useful is the foundation.'],
-    ['I\'m not a marketer. Can I use this?', 'That\'s who it\'s built for. Pick a goal, type one sentence about your business, and approve the drafts. No prompts or SEO knowledge needed.'],
-    ['Do I pay separately from Toutify?', 'No. ContentVendor plans are part of your Toutify membership.'],
-    ['Can someone just do it for me?', 'Yes. Our team can handle everything, starting at $299/month.'],
+    ['Is it really free?', 'Yes. The Starter plan is $0 forever: 5 AI content pieces a month, the Campaign Builder for up to 3 channels and your content library. No credit card and no trial clock.'],
+    ['Which tools are free?', 'The AI Campaign Builder, Article & Blog Writer, Social Post Writer, Google Business Updates, Offer Builder, Video Script Writer and Email Promotions are all free forever. Pro and Premium add scheduling, the calendar, repurposing, branded images and automation.'],
+    ['How does this help me show up in Google and AI search?', 'Search engines and AI assistants like ChatGPT, Perplexity, Claude and Gemini favor businesses with fresh, helpful and consistent information. ContentVendor makes it easy to publish that every week. No one can guarantee rankings or AI recommendations, but staying active and useful is the foundation.'],
+    ['I\'m not a marketer. Can I use this?', 'That\'s exactly who it\'s built for. Pick a goal, type one sentence about your business, and approve the drafts. No prompts, SEO or social media know-how needed.'],
+    ['What do I need to get started?', 'Just your business name, services and service area. Add them once to your business profile and every tool uses them. Most owners publish their first campaign in a few minutes.'],
+    ['Do I pay separately from Toutify?', 'No. ContentVendor plans are part of your Toutify membership, so there is no separate ContentVendor bill.'],
+    ['Can someone just do it for me?', 'Yes. Our team can plan, write, schedule and report on your content for you, starting at $299/month with the Premium membership included.'],
 ];
 ?>
 
@@ -286,15 +288,31 @@ $freeBrands = [
 </section>
 
 <!-- FAQ -->
-<section class="m-section m-alt">
-  <div class="container m-faq">
-    <div class="m-head left">
-      <span class="m-eyebrow">FAQ</span>
-      <h2>Questions, answered.</h2>
+<?php $faqIcons = ['<path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4l-4.8 2.5.9-5.4L4.2 7.7l5.4-.8z"/>', '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>', '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/>', '<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/>', '<path d="M5 13l4 4L19 7"/>', '<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/>', '<path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>']; ?>
+<section class="fq" id="faq">
+  <div class="container fq-grid">
+    <div class="fq-side">
+      <span class="tl-eyebrow"><i>?</i> FAQ</span>
+      <h2>Questions? <span>We've got answers.</span></h2>
+      <p>Everything small business owners ask before they join, answered in plain English.</p>
+      <div class="fq-help">
+        <div class="fq-help-ic" aria-hidden="true">💬</div>
+        <b>Still deciding?</b>
+        <p>Join free and try every free tool yourself. No credit card, cancel anytime.</p>
+        <a class="tl-cta" href="#join-free">Join Free Today <span aria-hidden="true">→</span></a>
+        <a class="fq-link" href="<?= e(url('pricing')) ?>">Compare all plans →</a>
+      </div>
     </div>
-    <div class="m-faq-list">
+    <div class="fq-list">
       <?php foreach ($faqs as $i => [$q, $a]): ?>
-        <details<?= $i === 0 ? ' open' : '' ?>><summary><?= e($q) ?></summary><p><?= e($a) ?></p></details>
+        <details class="fq-item"<?= $i === 0 ? ' open' : '' ?>>
+          <summary>
+            <span class="fq-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><?= $faqIcons[$i % count($faqIcons)] ?></svg></span>
+            <span class="fq-q"><small><?= sprintf('%02d', $i + 1) ?></small><?= e($q) ?></span>
+            <span class="fq-toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="fq-a"><p><?= e($a) ?></p></div>
+        </details>
       <?php endforeach; ?>
     </div>
   </div>
