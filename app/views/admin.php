@@ -1,18 +1,28 @@
 <section class="section-sm">
   <div class="container">
-    <h1>Super admin</h1>
+    <div class="dash-head">
+      <div>
+        <p class="kicker">Super admin</p>
+        <h1><?= e(['overview' => 'Overview', 'members' => 'Members', 'requests' => 'Done-for-you requests'][$tab]) ?></h1>
+      </div>
+    </div>
+    <?php if ($tab === 'overview'): ?>
     <div class="stats">
+      <div class="stat"><b><?= count($users) ?></b><span>Total members</span></div>
       <?php foreach (PLANS as $k => $p): ?><div class="stat"><b><?= (int) $planCounts[$k] ?></b><span><?= e($p['name']) ?> members</span></div><?php endforeach; ?>
       <div class="stat"><b>$<?= number_format($planCounts['pro'] * 19 + $planCounts['premium'] * 49) ?></b><span>Membership MRR (est.)</span></div>
+      <div class="stat"><b><?= (int) $newCount ?></b><span>New done-for-you requests</span></div>
     </div>
+    <?php endif; ?>
 
-    <h2>Done-for-you requests</h2>
+    <?php if ($tab !== 'members'): ?>
+<?php if ($tab === 'overview'): ?><div class="sec-head"><h2>Latest done-for-you requests</h2><a href="<?= e(url('superadmin?view=requests')) ?>">View all →</a></div><?php endif; ?>
     <div class="table-wrap">
       <table class="data">
         <thead><tr><th>Date</th><th>Package</th><th>Contact</th><th>Business</th><th>Message</th><th>Status</th></tr></thead>
         <tbody>
         <?php if (!$requests): ?><tr><td colspan="6" class="muted">No requests yet.</td></tr><?php endif; ?>
-        <?php foreach ($requests as $r): ?>
+        <?php foreach ($tab === 'overview' ? array_slice($requests, 0, 5) : $requests as $r): ?>
           <tr>
             <td><?= e(date('M j', strtotime($r['created_at']))) ?></td>
             <td><?= e(PACKAGES[$r['package']]['name'] ?? $r['package']) ?></td>
@@ -31,12 +41,15 @@
       </table>
     </div>
 
-    <h2>Members</h2>
+    <?php endif; ?>
+
+    <?php if ($tab !== 'requests'): ?>
+    <?php if ($tab === 'overview'): ?><div class="sec-head"><h2>Newest members</h2><a href="<?= e(url('superadmin?view=members')) ?>">View all →</a></div><?php endif; ?>
     <div class="table-wrap">
       <table class="data">
         <thead><tr><th>Member</th><th>Business</th><th>Joined</th><th>Content</th><th>Used this month</th><th>Plan</th></tr></thead>
         <tbody>
-        <?php foreach ($users as $u): ?>
+        <?php foreach ($tab === 'overview' ? array_slice($users, 0, 8) : $users as $u): ?>
           <tr>
             <td><?= e($u['name']) ?><?= $u['role'] === 'admin' ? ' <span class="chip">admin</span>' : '' ?><br><span class="small muted"><?= e($u['email']) ?></span></td>
             <td><?= e($u['business_name']) ?></td>
@@ -54,5 +67,6 @@
         </tbody>
       </table>
     </div>
+    <?php endif; ?>
   </div>
 </section>

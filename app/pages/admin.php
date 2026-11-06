@@ -10,7 +10,8 @@ if (is_post()) {
         q('UPDATE service_requests SET status = ? WHERE id = ?', [post('status'), (int) post('request_id')]);
         flash('success', 'Request updated.');
     }
-    redirect('superadmin');
+    $v = (string) ($_GET['view'] ?? '');
+    redirect('superadmin' . (in_array($v, ['members', 'requests'], true) ? '?view=' . $v : ''));
 }
 $users = q(
     "SELECT u.id, u.name, u.email, u.plan, u.role, u.created_at, p.business_name,
@@ -22,4 +23,6 @@ $users = q(
 $requests = q('SELECT * FROM service_requests ORDER BY created_at DESC LIMIT 200')->fetchAll();
 $planCounts = array_fill_keys(array_keys(PLANS), 0);
 foreach ($users as $u) { $planCounts[$u['plan']] = ($planCounts[$u['plan']] ?? 0) + 1; }
-render('admin', ['title' => 'Super admin', 'user' => $admin, 'users' => $users, 'requests' => $requests, 'planCounts' => $planCounts]);
+$view = in_array($_GET['view'] ?? '', ['members', 'requests'], true) ? $_GET['view'] : 'overview';
+$newCount = count(array_filter($requests, fn($r) => $r['status'] === 'new'));
+render('admin', ['tab' => $view, 'newCount' => $newCount, 'title' => ['overview' => 'Super admin', 'members' => 'Members', 'requests' => 'Done-for-you requests'][$view], 'user' => $admin, 'users' => $users, 'requests' => $requests, 'planCounts' => $planCounts]);

@@ -266,3 +266,17 @@
     }, { threshold: 0.35 }).observe(root);
   }
 })();
+
+// App sidebar (mobile open/close)
+(function () {
+  var openBtn = document.querySelector('[data-sb-open]');
+  if (!openBtn) return;
+  var set = function (open) {
+    document.body.classList.toggle('sb-open', open);
+    openBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) { var first = document.querySelector('#sidebar .sb-link, #sidebar .sb-cta'); if (first) first.focus(); }
+  };
+  openBtn.addEventListener('click', function () { set(true); });
+  document.querySelectorAll('[data-sb-close]').forEach(function (el) { el.addEventListener('click', function () { set(false); openBtn.focus(); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.body.classList.contains('sb-open')) { set(false); openBtn.focus(); } });
+})();
