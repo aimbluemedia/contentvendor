@@ -1,5 +1,5 @@
 <?php
-$admin = require_admin();
+$admin = require_admin('superadmin');
 if (is_post()) {
     csrf_check();
     if (post('action') === 'plan' && isset(PLANS[post('plan')])) {
