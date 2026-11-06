@@ -24,6 +24,7 @@ $routes = [
     'logout'       => 'logout',
     'members'      => 'dashboard',
     'planner'      => 'planner',
+    'platforms'    => 'platforms',
     'profile'      => 'profile',
     'create'       => 'create',
     'campaign'     => 'campaign',

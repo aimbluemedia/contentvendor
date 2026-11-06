@@ -7,7 +7,7 @@
       <div class="flash flash-info">First, <a href="<?= e(url('profile?next=create')) ?>">complete your business profile</a> so the drafts include your name, services and service area.</div>
     <?php endif; ?>
     <?php require ROOT . '/app/views/_errors.php'; ?>
-    <form method="post" action="<?= e(url('create')) ?>" class="form card" data-builder data-max="<?= (int) $plan['campaign_channels'] ?>">
+    <form method="post" action="<?= e(url('create')) ?>" class="form card" data-builder data-max="<?= count($allowed) ?>">
       <?= csrf_field() ?>
       <?php if (!empty($task)): ?><input type="hidden" name="task_id" value="<?= (int) $task['id'] ?>"><?php endif; ?>
       <fieldset>
@@ -24,13 +24,14 @@
       <fieldset>
         <legend>Where should it go? <span class="hint" data-count></span></legend>
         <div class="channel-picks">
-          <?php foreach (CHANNELS as $k => $c): ?>
+          <?php foreach (CHANNELS as $k => $c): if (!in_array($k, $allowed, true)) continue; ?>
             <label class="pick"><input type="checkbox" name="channels[]" value="<?= e($k) ?>" <?= in_array($k, $selected, true) ? 'checked' : '' ?>><span><?= $c['icon'] ?> <?= e($c['label']) ?></span></label>
           <?php endforeach; ?>
+          <?php foreach (CHANNELS as $k => $c): if (in_array($k, $allowed, true)) continue; ?>
+            <a class="pick-locked" href="<?= e(url('platforms')) ?>" title="Switch on in My platforms">🔒 <?= e($c['label']) ?></a>
+          <?php endforeach; ?>
         </div>
-        <?php if ($plan['campaign_channels'] < 8): ?>
-          <p class="small muted">Free campaigns cover up to <?= (int) $plan['campaign_channels'] ?> destinations at once. <a href="<?= e(url('account')) ?>">Pro unlocks all 8.</a></p>
-        <?php endif; ?>
+        <p class="small muted">Content posts are always on. Social destinations follow <a href="<?= e(url('platforms')) ?>">My platforms</a> (<?= count(enabled_platforms($user)) ?> of <?= platform_limit($user) ?> switched on).</p>
       </fieldset>
       <button class="btn btn-primary btn-lg" type="submit" data-loading="Writing your campaign… this can take up to a minute">Create my campaign</button>
     </form>

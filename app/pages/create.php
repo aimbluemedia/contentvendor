@@ -7,7 +7,8 @@ $errors = [];
 
 $goal = $_POST['goal'] ?? $_GET['goal'] ?? 'special';
 $idea = is_post() ? post('idea') : trim((string) ($_GET['idea'] ?? ''));
-$selected = is_post() ? (array) ($_POST['channels'] ?? []) : ($plan['campaign_channels'] >= 8 ? array_keys(CHANNELS) : ['facebook', 'instagram', 'google_business']);
+$allowed = allowed_channels($user);
+$selected = is_post() ? (array) ($_POST['channels'] ?? []) : array_values(array_diff($allowed, ['email', 'directory']));
 $selected = array_values(array_intersect(array_keys(CHANNELS), array_map('strval', $selected)));
 
 // Opened from a daily task ("Do it now"): pre-fill goal, idea and the task's channel
@@ -18,7 +19,7 @@ if ($taskId) {
     if ($task && !is_post()) {
         $goal = $task['goal'];
         $idea = $task['idea'];
-        $selected = [platform_channel($task['platform'])];
+        $selected = array_values(array_intersect([platform_channel($task['platform'])], $allowed)) ?: [$allowed[0]];
     }
 }
 
@@ -31,8 +32,9 @@ if (is_post()) {
     if (mb_strlen($idea) < 8) $errors[] = 'Tell us a little more about what you want to promote.';
     if (mb_strlen($idea) > 2000) $errors[] = 'Keep your idea under 2,000 characters.';
     if (!$selected) $errors[] = 'Choose at least one destination.';
-    if (count($selected) > $plan['campaign_channels']) {
-        $errors[] = "Your {$plan['name']} plan builds campaigns for up to {$plan['campaign_channels']} destinations at a time. Upgrade to Pro for all 8.";
+    if (array_diff($selected, $allowed)) {
+        $errors[] = 'One of those destinations is switched off. Turn it on in My platforms first.';
+        $selected = array_values(array_intersect($selected, $allowed));
     }
     $left = generations_left($user);
     if (count($selected) > $left) {
@@ -74,4 +76,5 @@ render('create', [
     'errors' => $errors, 'goal' => $goal, 'idea' => $idea, 'selected' => $selected,
     'left' => generations_left($user),
     'task' => $task,
+    'allowed' => $allowed,
 ]);

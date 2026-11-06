@@ -52,7 +52,7 @@ if (is_post()) {
             redirect('item?id=' . $id);
         case 'repurpose':
             if (!$plan['scheduling']) { $errors[] = 'Turning content into social posts is included with Pro and Premium.'; break; }
-            $channels = array_values(array_intersect(array_keys(CHANNELS), (array) ($_POST['channels'] ?? [])));
+            $channels = array_values(array_intersect(allowed_channels($user), (array) ($_POST['channels'] ?? [])));
             $channels = array_values(array_diff($channels, [$item['channel']]));
             if (!$channels) { $errors[] = 'Choose at least one destination.'; break; }
             if (count($channels) > generations_left($user)) { $errors[] = 'Not enough AI generations left this month for that many destinations.'; break; }

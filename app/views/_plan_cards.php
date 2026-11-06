@@ -1,8 +1,8 @@
 <?php
 $planPoints = [
-    'starter' => ['5 AI content pieces / month', 'Campaigns for up to 3 channels', 'Copy & download everything'],
-    'pro'     => ['40 AI content pieces / month', 'All 8 channels', 'Schedule 30 posts / month', 'Turn articles into posts'],
-    'premium' => ['150 AI content pieces / month', 'Schedule 150 posts / month', 'AI monthly content planner', 'Automatic content recycling'],
+    'starter' => ['5 AI content pieces / month', 'Content posts + 1 social platform', 'Copy & download everything'],
+    'pro'     => ['40 AI content pieces / month', 'Content posts + 3 social platforms', 'Schedule 30 posts / month', 'Turn articles into posts'],
+    'premium' => ['150 AI content pieces / month', 'Content posts + all 6 social platforms', 'Schedule 150 posts / month', 'AI monthly content planner', 'Automatic content recycling'],
 ];
 ?>
 <div class="m-plans">

@@ -1282,3 +1282,42 @@ i.tk-pl-facebook{background:#1877f2}i.tk-pl-instagram{background:#d6246e}i.tk-pl
   .td-start{padding:20px}
 }
 .ap-time{flex-direction:column;align-items:flex-start;gap:8px}.ap-time b{font-size:.92rem}
+
+/* =====================================================================
+   MY PLATFORMS — toggle switches
+   ===================================================================== */
+.pf-count{background:#fff;border:1px solid var(--border);border-radius:16px;padding:12px 18px;text-align:right}
+.pf-count b{display:block;font-size:1.6rem;font-weight:800;color:#086b2d;letter-spacing:-.02em}
+.pf-count small{color:var(--muted)}
+.pf{max-width:860px}
+.pf-group{background:#fff;border:1px solid var(--border);border-radius:22px;padding:10px 10px 6px;margin-bottom:16px;box-shadow:var(--shadow)}
+.pf-group-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px 8px}
+.pf-group-head h2{margin:0;font-size:1.1rem}
+.pf-tag{font-size:.74rem;font-weight:800;color:#086b2d;background:var(--tint);padding:4px 10px;border-radius:999px}
+.pf-row{position:relative;display:flex;align-items:center;gap:14px;padding:14px 12px;border-top:1px solid #eef3ef;cursor:pointer;border-radius:14px;transition:background .15s}
+.pf-group-head+.pf-row{border-top:0}
+.pf-row:hover{background:#f7fbf8}
+.pf-row.is-locked-on{cursor:default}
+.pf-row.is-disabled{cursor:not-allowed}
+.pf-row.is-disabled .pf-ic,.pf-row.is-disabled .pf-txt{opacity:.5}
+.pf-ic{flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:12px;color:#fff;font-weight:800;font-size:1.05rem}
+.pf-txt{flex:1;min-width:0}
+.pf-txt b{display:block;font-size:1rem}
+.pf-txt small{display:block;color:var(--muted);font-size:.86rem}
+.pf-lock{font-size:.76rem;font-weight:700;color:#92400e;background:#fef3c7;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.pf-input{position:absolute;opacity:0;width:1px;height:1px;margin:0;right:30px;top:50%}
+.pf-switch{flex:none;position:relative;width:52px;height:30px;border-radius:999px;background:#d3ddd7;transition:background .2s}
+.pf-switch i{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2);transition:transform .2s}
+.pf-input:checked+.pf-switch,.pf-switch.on{background:#16a34a}
+.pf-input:checked+.pf-switch i,.pf-switch.on i{transform:translateX(22px)}
+.pf-input:focus-visible+.pf-switch{outline:2px solid #16a34a;outline-offset:3px}
+.pf-row.is-locked-on .pf-switch{opacity:.7}
+.pf-upsell{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:16px 20px;border-radius:18px;background:linear-gradient(135deg,#064e3b,#15803d);color:#fff}
+.pf-upsell b{color:#fff}.pf-upsell a{flex:none;padding:10px 16px;border-radius:12px;background:#fff;color:#15803d;font-weight:800;text-decoration:none}
+.pf-count.is-full b{color:#b45309}
+.pick-locked{display:inline-block;padding:9px 14px;border:1px dashed #cbd5ce;border-radius:999px;font-weight:600;font-size:.9rem;color:#8a9890;text-decoration:none;background:#fafcfb}
+.pick-locked:hover{border-color:#16a34a;color:#086b2d}
+.pc-note{margin:10px 0 0}
+.tk-pl-reddit{background:#fff0e9;color:#ff4500}i.tk-pl-reddit{background:#ff4500}
+@media(max-width:600px){.pf-lock{display:none!important}.pf-count{text-align:left;width:100%}}
+.pf-hint{margin:6px 12px 10px;font-size:.86rem;color:#92400e}

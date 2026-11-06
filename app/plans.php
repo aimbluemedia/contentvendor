@@ -8,19 +8,19 @@ const PLANS = [
         'name' => 'Free', 'price' => 0, 'verb' => 'Create',
         'tagline' => 'Free AI content creation for business owners getting started.',
         'generations' => 5, 'scheduling' => false, 'scheduled_posts' => 0,
-        'images' => 0, 'social_accounts' => 0, 'campaign_channels' => 3,
+        'images' => 0, 'social_accounts' => 0, 'social_platforms' => 1,
     ],
     'pro' => [
         'name' => 'Pro', 'price' => 19, 'verb' => 'Schedule',
         'tagline' => 'Consistent content and social publishing with less work.',
         'generations' => 40, 'scheduling' => true, 'scheduled_posts' => 30,
-        'images' => 10, 'social_accounts' => 3, 'campaign_channels' => 8,
+        'images' => 10, 'social_accounts' => 3, 'social_platforms' => 3,
     ],
     'premium' => [
         'name' => 'Premium', 'price' => 49.99, 'verb' => 'Automate',
         'tagline' => 'A complete AI-powered content and promotion system.',
         'generations' => 150, 'scheduling' => true, 'scheduled_posts' => 150,
-        'images' => 40, 'social_accounts' => 7, 'campaign_channels' => 8,
+        'images' => 40, 'social_accounts' => 7, 'social_platforms' => 6,
     ],
 ];
 
@@ -29,7 +29,8 @@ const PLAN_FEATURES = [
     ['AI content generations / month', '5', '40', '150'],
     ['Blog and article writer', 'Basic', 'Full', 'Full'],
     ['Social media caption writer', true, true, true],
-    ['One idea → full campaign builder', 'Up to 3 channels', 'All 8 channels', 'All 8 channels'],
+    ['Content posts (website, Google Business, email, directories)', true, true, true],
+    ['Social platforms you can switch on', '1', '3', 'All 6'],
     ['Business-branded images / month', false, '10', '40'],
     ['Connected social accounts', false, '3', '7'],
     ['Scheduled posts / month', false, '30', '150'],
@@ -78,6 +79,7 @@ const CHANNELS = [
     'google_business' => ['label' => 'Google Business update', 'icon' => '📍', 'guide' => 'A Google Business Profile update, under 1,000 characters (aim for 80-150 words), factual, no hashtags, with a call to action such as "Call now".'],
     'directory'       => ['label' => 'Directory promotion',    'icon' => '📇', 'guide' => 'A promotion for Toutify directory listings (SearchMonster storefront, MonsterList, state directories): concise, factual, 50-100 words, including service area and contact details. Write it to be useful to someone browsing a local directory, not a copy of the article.'],
     'email'           => ['label' => 'Email promotion',        'icon' => '✉️', 'guide' => 'A short customer email: the title is the subject line; the body starts with a preview line, then a greeting, 2-3 short paragraphs and a single call to action.'],
+    'reddit'          => ['label' => 'Reddit post',            'icon' => '💬', 'guide' => 'A genuinely helpful post for a local community subreddit (for example r/phoenix). The title is the post title. Lead with useful, specific advice; mention the business only briefly and transparently at the end; no hard selling, no hashtags, no emojis; 80-150 words.'],
     'video_script'    => ['label' => 'Video script',           'icon' => '🎬', 'guide' => 'A 30-45 second vertical video script (Reels/TikTok/Shorts) with HOOK, SCENES (numbered, each with what to film and what to say) and CALL TO ACTION sections.'],
 ];
 
@@ -87,6 +89,19 @@ function money($amount, bool $cents = false): string
     $amount = (float) $amount;
     return '$' . ($cents || floor($amount) != $amount ? number_format($amount, 2) : number_format($amount));
 }
+
+/** Social platforms a member can switch on => [label, icon, colour, what the tools create, Campaign Builder channel] */
+const SOCIAL_PLATFORMS = [
+    'facebook'  => ['Facebook', 'f', '#1877f2', 'Posts for your Facebook Page', 'facebook'],
+    'instagram' => ['Instagram', '◎', '#e1306c', 'Captions with local hashtags', 'instagram'],
+    'tiktok'    => ['TikTok', '♪', '#111111', 'Short video scripts', 'video_script'],
+    'youtube'   => ['YouTube', '▶', '#ff0000', 'YouTube Shorts scripts', 'video_script'],
+    'reddit'    => ['Reddit', '●', '#ff4500', 'Helpful local community posts', 'reddit'],
+    'pinterest' => ['Pinterest', 'P', '#e60023', 'Pins that send people to your site', 'pinterest'],
+];
+
+/** Content posts: always on for every plan */
+const CONTENT_CHANNELS = ['article', 'google_business', 'email', 'directory'];
 
 function plan_of(array $user): array
 {

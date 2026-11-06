@@ -13,6 +13,7 @@ const PLAN_PLATFORMS = [
     'tiktok'          => ['TikTok', 'video_script', 15],
     'youtube'         => ['YouTube Shorts', 'video_script', 15],
     'pinterest'       => ['Pinterest', 'pinterest', 5],
+    'reddit'          => ['Reddit', 'reddit', 10],
     'article'         => ['Website blog', 'article', 20],
     'email'           => ['Email', 'email', 10],
 ];
@@ -78,7 +79,7 @@ function create_content_plan(array $user, array $profile, array $platforms, int 
 {
     planner_install();
     $uid = (int) $user['id'];
-    $platforms = array_values(array_intersect(array_keys(PLAN_PLATFORMS), $platforms));
+    $platforms = array_values(array_intersect(planner_allowed_platforms($user), $platforms));
     $days = array_values(array_intersect(array_keys(WEEKDAYS), array_map('intval', $days)));
     if (!$platforms || !$days || !isset(PLAN_EFFORT[$minutes])) {
         throw new InvalidArgumentException('Choose at least one platform, a time budget and one day.');
@@ -200,6 +201,16 @@ function claude_plan_ideas(array $profile, int $count): array
         }
     }
     return $out;
+}
+
+/** Planner platforms the member may pick: content (blog, Google, email) + switched-on social platforms */
+function planner_allowed_platforms(array $user): array
+{
+    $allowed = ['google_business', 'article', 'email'];
+    foreach (enabled_platforms($user) as $p) {
+        if (isset(PLAN_PLATFORMS[$p])) $allowed[] = $p;
+    }
+    return array_values(array_intersect(array_keys(PLAN_PLATFORMS), $allowed));
 }
 
 function platform_label(string $key): string

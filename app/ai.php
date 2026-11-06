@@ -250,6 +250,7 @@ function demo_campaign(array $p, string $goal, string $idea, array $channels): a
         'google_business' => ["{$idea}", "{$idea}. {$name} provides {$svc} throughout {$area}. {$cta}"],
         'directory' => ["{$idea}", "{$name} — {$svc} in {$area}.\n{$idea}.\n" . ($p['service_areas'] ? "Serving: {$p['service_areas']}.\n" : '') . $cta],
         'email' => ["{$idea}", "Preview: A quick note from {$name}.\n\nHi there,\n\n{$idea}. If you have been putting off your project, now is a great time.\n\nOur team serves {$area} and would love to help.\n\n{$cta}\n\nThanks,\n{$name}"],
+        'reddit' => ["Tips from a local {$svc} pro: what to know before you hire", "A few things I wish every homeowner in {$area} knew about {$svc}:\n\n1. Get a written quote before any work starts.\n2. Ask what is included and what is extra.\n3. Check recent reviews and photos of real jobs.\n\nHappy to answer questions here. (Full disclosure: I run {$name}.)"],
         'video_script' => ["{$idea}", "HOOK\n\"{$idea}!\"\n\nSCENES\n1. Film: your team arriving at a job. Say: \"Hi, we're {$name}.\"\n2. Film: before-and-after of recent work. Say: \"We help {$area} with {$svc}.\"\n3. Film: a happy wave from the truck. Say: \"Don't wait—spots are limited.\"\n\nCALL TO ACTION\n{$cta}"],
     ];
     $items = [];

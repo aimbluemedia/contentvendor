@@ -50,7 +50,7 @@
         <form method="post" data-builder data-max="8">
           <?= csrf_field() ?><input type="hidden" name="action" value="repurpose">
           <div class="channel-picks">
-            <?php foreach (CHANNELS as $k => $c): if ($k === $item['channel']) continue; ?>
+            <?php $allowedCh = allowed_channels($user); foreach (CHANNELS as $k => $c): if ($k === $item['channel'] || !in_array($k, $allowedCh, true)) continue; ?>
               <label class="pick"><input type="checkbox" name="channels[]" value="<?= e($k) ?>" <?= in_array($k, ['facebook', 'instagram', 'google_business'], true) ? 'checked' : '' ?>><span><?= $c['icon'] ?> <?= e($c['label']) ?></span></label>
             <?php endforeach; ?>
           </div>

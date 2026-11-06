@@ -5,12 +5,13 @@ $nav = function (string $path, string $label) use ($current) {
     $active = $current === $path ? ' class="active"' : '';
     return '<a href="' . e(url($path)) . '"' . $active . '>' . e($label) . '</a>';
 };
-$appRoutes = ['members', 'planner', 'create', 'campaign', 'library', 'item', 'calendar', 'profile', 'account', 'superadmin'];
+$appRoutes = ['members', 'planner', 'platforms', 'create', 'campaign', 'library', 'item', 'calendar', 'profile', 'account', 'superadmin'];
 $isApp = $me && in_array($current, $appRoutes, true);
 $isSuper = $isApp && $current === 'superadmin';
 $view = (string) ($_GET['view'] ?? '');
 $ic = [
     'plan2'    => '<path d="M9 5h10M9 12h10M9 19h10"/><path d="M4 5l1 1 2-2M4 12l1 1 2-2M4 19l1 1 2-2"/>',
+    'toggle'   => '<rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="16" cy="12" r="3"/>',
     'home'     => '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
     'create'   => '<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3"/>',
     'library'  => '<path d="M4 4h5v16H4zM10 4h5v16h-5z"/><path d="M16 5l4 1-3 14-4-1"/>',
@@ -76,6 +77,7 @@ $side = function (string $href, string $icon, string $label, bool $active, strin
       <?= $side(url('members'), 'home', 'Dashboard', $current === 'members') ?>
       <?php $todayTodo = 0; if (active_plan((int) $me['id'])) { $todayTodo = count(array_filter(tasks_between((int) $me['id'], date('Y-m-d'), date('Y-m-d')), fn($t) => $t['status'] === 'todo')); } ?>
       <?= $side(url('planner'), 'plan2', 'My content plan', $current === 'planner', $todayTodo ? (string) $todayTodo : '') ?>
+      <?= $side(url('platforms'), 'toggle', 'My platforms', $current === 'platforms', count(enabled_platforms($me)) . '/' . platform_limit($me)) ?>
       <?= $side(url('library'), 'library', 'Content library', in_array($current, ['library', 'item', 'campaign'], true)) ?>
       <?= $side(url('calendar'), 'calendar', 'Calendar', $current === 'calendar') ?>
       <span class="sb-label">Account</span>

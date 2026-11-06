@@ -21,10 +21,14 @@ $planUser = plan_of($user);
       <div class="pc-q">
         <div class="pc-q-head"><span>1</span><div><h2>Where do you want to show up?</h2><p>Pick the places your customers spend time. Start small. You can change this anytime.</p></div></div>
         <div class="pc-chips">
-          <?php foreach (PLAN_PLATFORMS as $k => [$label]): ?>
+          <?php $okPl = planner_allowed_platforms($user); foreach (PLAN_PLATFORMS as $k => [$label]): if (!in_array($k, $okPl, true)) continue; ?>
             <label class="pc-chip"><input type="checkbox" name="platforms[]" value="<?= e($k) ?>" <?= in_array($k, $cur['platforms'], true) ? 'checked' : '' ?>><span><i class="tk-pl tk-pl-<?= e($k) ?>"></i><?= e($label) ?></span></label>
           <?php endforeach; ?>
+          <?php foreach (PLAN_PLATFORMS as $k => [$label]): if (in_array($k, $okPl, true)) continue; ?>
+            <a class="pick-locked" href="<?= e(url('platforms')) ?>">🔒 <?= e($label) ?></a>
+          <?php endforeach; ?>
         </div>
+        <p class="small muted pc-note">Social platforms follow <a href="<?= e(url('platforms')) ?>">My platforms</a>. Your plan lets you switch on <?= platform_limit($user) >= count(SOCIAL_PLATFORMS) ? 'all of them' : platform_limit($user) ?>.</p>
       </div>
 
       <div class="pc-q">

@@ -3,19 +3,19 @@ $tiers = [
     'starter' => [
         'label' => 'Free', 'verb' => 'Create it', 'best' => 'Getting started and posting a few times a month.',
         'lead' => 'Includes',
-        'items' => [['5 AI drafts a month', false], ['7 free AI tools: posts, articles, Google updates, offers, video scripts, email', false], ['AI content plan with daily tasks', false], ['Copy & download everything', false]],
+        'items' => [['Content posts + 1 social platform', false], ['5 AI drafts a month', false], ['7 free AI tools: posts, articles, Google updates, offers, video scripts, email', false], ['AI content plan with daily tasks', false], ['Copy & download everything', false]],
         'time' => ['Every day', 'You write and post each task yourself', '~15 min a day'],
     ],
     'pro' => [
         'label' => 'Pro', 'verb' => 'Schedule it', 'best' => 'Posting consistently every week without the daily scramble.',
         'lead' => 'Everything in Free, plus',
-        'items' => [['40 AI drafts a month (8× more)', false], ['Schedule 30 posts a month', false], ['Full content calendar', false], ['Turn one article into many posts', false], ['10 branded images a month', true]],
+        'items' => [['3 social platforms (Facebook, Instagram, TikTok, YouTube, Reddit or Pinterest)', false], ['40 AI drafts a month (8× more)', false], ['Schedule 30 posts a month', false], ['Full content calendar', false], ['Turn one article into many posts', false], ['10 branded images a month', true]],
         'time' => ['Once a week', 'Batch your week in one sitting', 'Save ~10 hrs a month'],
     ],
     'premium' => [
         'label' => 'Premium', 'verb' => 'Automate it', 'best' => 'Owners who want their marketing planned and scheduled for them.',
         'lead' => 'Everything in Pro, plus',
-        'items' => [['150 AI drafts a month', false], ['Schedule 150 posts a month', false], ['AI monthly planner fills your month', true], ['Automatic recycling of your best posts', true], ['40 branded images a month', true], ['Advanced performance reports', false]],
+        'items' => [['All 6 social platforms', false], ['150 AI drafts a month', false], ['Schedule 150 posts a month', false], ['AI monthly planner fills your month', true], ['Automatic recycling of your best posts', true], ['40 branded images a month', true], ['Advanced performance reports', false]],
         'time' => ['Once a month', 'Approve your whole month at once', 'Save 30+ hrs a month'],
     ],
 ];

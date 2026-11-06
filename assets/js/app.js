@@ -298,3 +298,31 @@
   }
   form.addEventListener('change', upd); upd();
 })();
+
+// My platforms: enforce plan limit and save as soon as a switch changes
+(function () {
+  var form = document.querySelector('[data-pf]');
+  if (!form) return;
+  var limit = parseInt(form.getAttribute('data-limit'), 10) || 1;
+  var inputs = Array.prototype.slice.call(form.querySelectorAll('.pf-input'));
+  var used = document.querySelector('[data-pf-used]');
+  var count = document.querySelector('[data-pf-count]');
+  function refresh() {
+    var on = inputs.filter(function (i) { return i.checked; }).length;
+    if (used) used.textContent = on;
+    if (count) count.classList.toggle('is-full', on >= limit && limit < inputs.length);
+    var hint = form.querySelector('[data-pf-hint]');
+    if (hint) hint.hidden = !(on >= limit && limit < inputs.length);
+    inputs.forEach(function (i) {
+      var row = i.closest('.pf-row'), lock = row.querySelector('.pf-lock');
+      var blocked = !i.checked && on >= limit;
+      i.disabled = blocked;
+      row.classList.toggle('is-disabled', blocked);
+      if (lock) lock.hidden = !blocked;
+    });
+  }
+  inputs.forEach(function (i) {
+    i.addEventListener('change', function () { refresh(); form.submit(); });
+  });
+  refresh();
+})();

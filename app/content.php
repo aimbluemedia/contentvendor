@@ -77,3 +77,59 @@ function channel_icon(string $channel): string
 const STATUS_LABELS = [
     'draft' => 'Draft', 'approved' => 'Approved', 'scheduled' => 'Scheduled', 'published' => 'Published',
 ];
+
+/* ---------- Member platform switches ---------- */
+
+function platforms_install(): void
+{
+    static $done = false;
+    if ($done) return;
+    $done = true;
+    $tail = db()->getAttribute(PDO::ATTR_DRIVER_NAME) === 'sqlite' ? '' : ' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci';
+    db()->exec("CREATE TABLE IF NOT EXISTS member_platforms (user_id INT NOT NULL PRIMARY KEY, platforms VARCHAR(255) NOT NULL, updated_at DATETIME NOT NULL)$tail");
+}
+
+/** How many social platforms the member's plan allows */
+function platform_limit(array $user): int
+{
+    return (int) (plan_of($user)['social_platforms'] ?? 1);
+}
+
+/** Social platforms the member has switched on (trimmed to their plan's limit) */
+function enabled_platforms(array $user): array
+{
+    platforms_install();
+    $limit = platform_limit($user);
+    $row = q('SELECT platforms FROM member_platforms WHERE user_id = ?', [$user['id']])->fetch();
+    if ($row) {
+        $list = array_values(array_intersect(explode(',', (string) $row['platforms']), array_keys(SOCIAL_PLATFORMS)));
+    } else {
+        $list = $limit >= count(SOCIAL_PLATFORMS) ? array_keys(SOCIAL_PLATFORMS) : array_slice(['facebook', 'instagram', 'tiktok'], 0, $limit);
+    }
+    return array_slice($list, 0, $limit);
+}
+
+function save_platforms(array $user, array $platforms): void
+{
+    platforms_install();
+    $platforms = array_values(array_intersect(array_keys(SOCIAL_PLATFORMS), $platforms));
+    if (count($platforms) > platform_limit($user)) {
+        throw new InvalidArgumentException('Your plan allows ' . platform_limit($user) . ' social platform' . (platform_limit($user) === 1 ? '' : 's') . '. Upgrade to switch on more.');
+    }
+    $exists = q('SELECT user_id FROM member_platforms WHERE user_id = ?', [$user['id']])->fetch();
+    if ($exists) {
+        q('UPDATE member_platforms SET platforms = ?, updated_at = ? WHERE user_id = ?', [implode(',', $platforms), now(), $user['id']]);
+    } else {
+        q('INSERT INTO member_platforms (user_id, platforms, updated_at) VALUES (?, ?, ?)', [$user['id'], implode(',', $platforms), now()]);
+    }
+}
+
+/** Campaign Builder channels the member can use: content posts + their switched-on social platforms */
+function allowed_channels(array $user): array
+{
+    $allowed = CONTENT_CHANNELS;
+    foreach (enabled_platforms($user) as $p) {
+        $allowed[] = SOCIAL_PLATFORMS[$p][4];
+    }
+    return array_values(array_intersect(array_keys(CHANNELS), array_unique($allowed)));
+}
