@@ -33,3 +33,4 @@ require ROOT . '/app/plans.php';
 require ROOT . '/app/auth.php';
 require ROOT . '/app/content.php';
 require ROOT . '/app/ai.php';
+require ROOT . '/app/planner.php';

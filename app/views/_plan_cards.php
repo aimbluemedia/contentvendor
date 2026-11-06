@@ -11,7 +11,7 @@ $planPoints = [
       <?php if ($hero): ?><span class="m-plan-badge">Most time saved</span><?php endif; ?>
       <h3><?= e($p['name']) ?></h3>
       <p class="m-plan-tag"><?= e($p['tagline']) ?></p>
-      <div class="m-price">$<?= (int) $p['price'] ?><small>/month</small></div>
+      <div class="m-price"><?= e(money($p['price'])) ?><small>/month</small></div>
       <a class="m-btn <?= $hero ? 'm-btn-primary' : 'm-btn-light' ?> m-btn-block" href="<?= e(url('register')) ?>"><?= $p['price'] ? 'Choose ' . e($p['name']) : 'Start free' ?></a>
       <ul><?php foreach ($planPoints[$key] as $pt): ?><li><?= e($pt) ?></li><?php endforeach; ?></ul>
     </div>

@@ -280,3 +280,21 @@
   document.querySelectorAll('[data-sb-close]').forEach(function (el) { el.addEventListener('click', function () { set(false); openBtn.focus(); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.body.classList.contains('sb-open')) { set(false); openBtn.focus(); } });
 })();
+
+// Plan creator: live summary
+(function () {
+  var form = document.querySelector('[data-plan-form]');
+  if (!form) return;
+  var out = form.querySelector('[data-plan-sum]');
+  var per = { 5: 1, 15: 1, 30: 2, 60: 3 };
+  function upd() {
+    var days = form.querySelectorAll('input[name="days[]"]:checked').length;
+    var plats = form.querySelectorAll('input[name="platforms[]"]:checked').length;
+    var m = parseInt((form.querySelector('input[name=minutes]:checked') || {}).value || '15', 10);
+    var perWeek = days * per[m];
+    if (m === 5 && days > 3) perWeek = Math.ceil(days / 2);
+    out.textContent = (!plats || !days) ? 'Pick at least one platform and one day'
+      : 'About ' + perWeek + ' task' + (perWeek === 1 ? '' : 's') + ' a week across ' + plats + ' platform' + (plats === 1 ? '' : 's');
+  }
+  form.addEventListener('change', upd); upd();
+})();

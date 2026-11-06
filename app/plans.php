@@ -5,7 +5,7 @@
  */
 const PLANS = [
     'starter' => [
-        'name' => 'Starter', 'price' => 0, 'verb' => 'Create',
+        'name' => 'Free', 'price' => 0, 'verb' => 'Create',
         'tagline' => 'Free AI content creation for business owners getting started.',
         'generations' => 5, 'scheduling' => false, 'scheduled_posts' => 0,
         'images' => 0, 'social_accounts' => 0, 'campaign_channels' => 3,
@@ -17,7 +17,7 @@ const PLANS = [
         'images' => 10, 'social_accounts' => 3, 'campaign_channels' => 8,
     ],
     'premium' => [
-        'name' => 'Premium', 'price' => 49, 'verb' => 'Automate',
+        'name' => 'Premium', 'price' => 49.99, 'verb' => 'Automate',
         'tagline' => 'A complete AI-powered content and promotion system.',
         'generations' => 150, 'scheduling' => true, 'scheduled_posts' => 150,
         'images' => 40, 'social_accounts' => 7, 'campaign_channels' => 8,
@@ -80,6 +80,13 @@ const CHANNELS = [
     'email'           => ['label' => 'Email promotion',        'icon' => '✉️', 'guide' => 'A short customer email: the title is the subject line; the body starts with a preview line, then a greeting, 2-3 short paragraphs and a single call to action.'],
     'video_script'    => ['label' => 'Video script',           'icon' => '🎬', 'guide' => 'A 30-45 second vertical video script (Reels/TikTok/Shorts) with HOOK, SCENES (numbered, each with what to film and what to say) and CALL TO ACTION sections.'],
 ];
+
+/** Format a price: money(49.99) = "$49.99", money(19) = "$19", money(19, true) = "$19.00" */
+function money($amount, bool $cents = false): string
+{
+    $amount = (float) $amount;
+    return '$' . ($cents || floor($amount) != $amount ? number_format($amount, 2) : number_format($amount));
+}
 
 function plan_of(array $user): array
 {

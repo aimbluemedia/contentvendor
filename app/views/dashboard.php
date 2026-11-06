@@ -3,6 +3,32 @@
   <div class="container">
     <?php require ROOT . '/app/views/_plan_banner.php'; ?>
 
+    <?php $myPlan = active_plan((int) $user['id']); ?>
+    <?php if (!$myPlan): ?>
+      <div class="td-start">
+        <div class="td-start-copy">
+          <span class="pc-step">Step 1 · Start here</span>
+          <h2>Build your AI content plan</h2>
+          <p>Tell us where you want to show up and how much time you have. We'll give you a simple to-do list every day, with the AI tool to finish each task in minutes.</p>
+        </div>
+        <ol class="td-steps"><li><b>Pick your platforms</b><small>Facebook, Google, TikTok…</small></li><li><b>Choose your time</b><small>5 to 60 minutes a day</small></li><li><b>Follow daily tasks</b><small>AI drafts every post</small></li></ol>
+        <a class="pc-submit" href="<?= e(url('planner')) ?>">Create my plan · 2 minutes <span aria-hidden="true">→</span></a>
+      </div>
+    <?php else: ?>
+      <?php $todayList = tasks_between((int) $user['id'], date('Y-m-d'), date('Y-m-d')); $todayDone = count(array_filter($todayList, fn($t) => $t['status'] !== 'todo')); ?>
+      <div class="td-card">
+        <div class="td-head">
+          <div><span class="pc-step">Today's marketing tasks</span><h2><?= $todayList ? ($todayDone === count($todayList) ? 'All done for today 🎉' : (count($todayList) - $todayDone) . ' task' . (count($todayList) - $todayDone === 1 ? '' : 's') . ' left today') : 'No tasks today' ?></h2></div>
+          <a href="<?= e(url('planner')) ?>">See full plan →</a>
+        </div>
+        <?php if ($todayList): ?><div class="pv-bar"><i style="width:<?= round($todayDone / count($todayList) * 100) ?>%"></i></div><?php endif; ?>
+        <div class="tk-list">
+          <?php $back = 'members'; foreach ($todayList as $t) require ROOT . '/app/views/_task_row.php'; ?>
+          <?php if (!$todayList): ?><div class="tk-empty">Enjoy the break. <a href="<?= e(url('planner')) ?>">See what's next →</a></div><?php endif; ?>
+        </div>
+      </div>
+    <?php endif; ?>
+
     <?php if (!profile_is_complete($profile)): ?>
       <div class="flash flash-info">Finish your <a href="<?= e(url('profile')) ?>">business profile</a> (name, services and location) so ContentVendor can write about your business.</div>
     <?php endif; ?>

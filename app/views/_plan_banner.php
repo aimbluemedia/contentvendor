@@ -4,7 +4,7 @@ $firstName = trim(strtok((string) $user['name'], ' ')) ?: 'there';
 $steps = [
     'starter' => ['Free', '$0/month'],
     'pro'     => ['Pro', '$19/month'],
-    'premium' => ['Premium', '$49/month'],
+    'premium' => ['Premium', '$49.99/month'],
     'dfy'     => ['Done For You', 'From $299/month'],
 ];
 $order = array_keys($steps);
@@ -26,7 +26,7 @@ $cur = plan_of($user);
     <div class="pb-current">
       <span class="pb-kicker"><i></i> Current plan</span>
       <b><?= e($cur['name'] === 'Starter' ? 'Free' : $cur['name']) ?></b>
-      <span>$<?= (int) $cur['price'] ?> <small>/month</small></span>
+      <span><?= e(money($cur['price'])) ?> <small>/month</small></span>
     </div>
   </div>
 

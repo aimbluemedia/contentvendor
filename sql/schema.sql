@@ -87,3 +87,27 @@ CREATE TABLE IF NOT EXISTS service_requests (
   created_at DATETIME     NOT NULL,
   CONSTRAINT fk_request_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- AI content plan + daily tasks (also created automatically on first use)
+CREATE TABLE IF NOT EXISTS content_plans (
+  id         INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id    INT NOT NULL,
+  platforms  VARCHAR(255) NOT NULL,
+  minutes    INT NOT NULL,
+  days       VARCHAR(20) NOT NULL,
+  active     TINYINT NOT NULL DEFAULT 1,
+  created_at DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS plan_tasks (
+  id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  plan_id      INT NOT NULL,
+  user_id      INT NOT NULL,
+  due_date     DATE NOT NULL,
+  platform     VARCHAR(40) NOT NULL,
+  goal         VARCHAR(40) NOT NULL,
+  idea         TEXT NOT NULL,
+  status       VARCHAR(20) NOT NULL DEFAULT 'todo',  -- todo | done | skipped
+  item_id      INT NULL,
+  completed_at DATETIME NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

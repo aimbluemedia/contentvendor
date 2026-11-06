@@ -5,7 +5,7 @@ $cell = function ($v) {
     return e($v);
 };
 $billingFaqs = [
-    ['Do I pay separately for ContentVendor?', 'No. The $0, $19 and $49 plans are part of your main Toutify subscription.'],
+    ['Do I pay separately for ContentVendor?', 'No. The $0, $19 and $49.99 plans are part of your main Toutify subscription.'],
     ['What counts as one AI content piece?', 'One requested item, such as one Facebook post or one article. A campaign for 4 channels uses 4. Fair-use limits apply to length and revisions.'],
     ['What happens when I reach my monthly limit?', 'Your library, calendar and downloads keep working. New AI content resets on the 1st, or you can upgrade any time.'],
     ['Can I change or cancel my plan?', 'Yes. Plans are month to month, and everything you created stays in your library.'],
@@ -34,7 +34,7 @@ $billingFaqs = [
     </div>
     <div class="m-table-wrap">
       <table class="m-table">
-        <thead><tr><th>Feature</th><?php foreach (PLANS as $key => $p): ?><th class="<?= $key === 'premium' ? 'hl' : '' ?>"><?= e($p['name']) ?><small>$<?= (int) $p['price'] ?>/mo</small></th><?php endforeach; ?></tr></thead>
+        <thead><tr><th>Feature</th><?php foreach (PLANS as $key => $p): ?><th class="<?= $key === 'premium' ? 'hl' : '' ?>"><?= e($p['name']) ?><small><?= e(money($p['price'])) ?>/mo</small></th><?php endforeach; ?></tr></thead>
         <tbody>
           <?php foreach (PLAN_FEATURES as $row): ?>
             <tr><td><?= e($row[0]) ?></td><td><?= $cell($row[1]) ?></td><td><?= $cell($row[2]) ?></td><td class="hl"><?= $cell($row[3]) ?></td></tr>

@@ -10,6 +10,18 @@ $idea = is_post() ? post('idea') : trim((string) ($_GET['idea'] ?? ''));
 $selected = is_post() ? (array) ($_POST['channels'] ?? []) : ($plan['campaign_channels'] >= 8 ? array_keys(CHANNELS) : ['facebook', 'instagram', 'google_business']);
 $selected = array_values(array_intersect(array_keys(CHANNELS), array_map('strval', $selected)));
 
+// Opened from a daily task ("Do it now"): pre-fill goal, idea and the task's channel
+$task = null;
+$taskId = (int) ($_POST['task_id'] ?? $_GET['task'] ?? 0);
+if ($taskId) {
+    $task = find_task($uid, $taskId);
+    if ($task && !is_post()) {
+        $goal = $task['goal'];
+        $idea = $task['idea'];
+        $selected = [platform_channel($task['platform'])];
+    }
+}
+
 if (is_post()) {
     csrf_check();
     if (!profile_is_complete($profile)) {
@@ -41,6 +53,11 @@ if (is_post()) {
             }
             record_usage($uid, count($result['items']));
             $pdo->commit();
+            if ($task) {
+                $firstItem = (int) q('SELECT MIN(id) FROM content_items WHERE campaign_id = ?', [$campaignId])->fetchColumn();
+                complete_task($uid, (int) $task['id'], 'done', $firstItem ?: null);
+                flash('success', 'Task done! Your draft is ready below. Review it, then copy or schedule it.');
+            }
             if ($result['source'] === 'demo') {
                 flash('info', 'Demo mode: these are template drafts. Add a Claude API key in config/config.php for fully written AI content.');
             }
@@ -56,4 +73,5 @@ render('create', [
     'title' => 'Create a campaign', 'user' => $user, 'plan' => $plan, 'profile' => $profile,
     'errors' => $errors, 'goal' => $goal, 'idea' => $idea, 'selected' => $selected,
     'left' => generations_left($user),
+    'task' => $task,
 ]);

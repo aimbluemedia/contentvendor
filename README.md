@@ -17,7 +17,8 @@ Plain **PHP 8.1+ / MySQL**. No Composer and no build step, so it runs on Hosting
 | Content library | Search and filter, edit, copy, download (.txt), approve, mark as published, delete |
 | Plan limits | Monthly AI generations (5 / 40 / 150), campaign channels (3 on Free, 8 on paid), scheduled posts (0 / 30 / 150) |
 | Pro / Premium | Scheduling, monthly calendar, repurposing content into other channels |
-| Member dashboard | `/members`: where every member lands after logging in |
+| Member dashboard | `/members`: where every member lands after logging in. Shows the plan banner and today's marketing tasks |
+| AI Content Plan Creator | `/planner`: members pick platforms, daily time and working days, and get 4 weeks of small daily tasks. Each task's "Do it now" opens the Campaign Builder pre-filled and marks the task done. Post ideas come from Claude when an API key is set, otherwise from templates built from the business profile. Tables `content_plans` and `plan_tasks` are created automatically on first use (also in `sql/schema.sql`) |
 | Super admin | `/superadmin`: members, plan changes, estimated MRR, done-for-you request pipeline. Only the admin account can open it; everyone else gets a 404. The admin lands here after logging in |
 | Demo mode | Without an API key you get template drafts, so the whole site works before AI is connected |
 

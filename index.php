@@ -23,6 +23,7 @@ $routes = [
     'login'        => 'login',
     'logout'       => 'logout',
     'members'      => 'dashboard',
+    'planner'      => 'planner',
     'profile'      => 'profile',
     'create'       => 'create',
     'campaign'     => 'campaign',

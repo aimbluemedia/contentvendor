@@ -10,7 +10,7 @@
     <div class="stats">
       <div class="stat"><b><?= count($users) ?></b><span>Total members</span></div>
       <?php foreach (PLANS as $k => $p): ?><div class="stat"><b><?= (int) $planCounts[$k] ?></b><span><?= e($p['name']) ?> members</span></div><?php endforeach; ?>
-      <div class="stat"><b>$<?= number_format($planCounts['pro'] * 19 + $planCounts['premium'] * 49) ?></b><span>Membership MRR (est.)</span></div>
+      <div class="stat"><b><?= e(money($planCounts['pro'] * PLANS['pro']['price'] + $planCounts['premium'] * PLANS['premium']['price'])) ?></b><span>Membership MRR (est.)</span></div>
       <div class="stat"><b><?= (int) $newCount ?></b><span>New done-for-you requests</span></div>
     </div>
     <?php endif; ?>

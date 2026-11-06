@@ -38,7 +38,7 @@ $dfyFaqs = [
     <div class="m-head">
       <span class="m-eyebrow">Packages</span>
       <h2>Pick your pace. We do the rest.</h2>
-      <p>Every package includes the $49 Premium membership.</p>
+      <p>Every package includes the $49.99 Premium membership.</p>
     </div>
     <div class="m-plans">
       <?php foreach (PACKAGES as $key => $pkg): $hero = !empty($pkg['featured']); ?>

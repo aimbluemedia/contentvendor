@@ -1,5 +1,6 @@
 <section class="section-sm">
   <div class="container narrow">
+    <?php if (!empty($task)): ?><div class="td-taskbar"><span class="pc-step">Today's task · <?= e(platform_label($task['platform'])) ?></span><p><?= e($task['idea']) ?></p><a href="<?= e(url('planner')) ?>">← Back to my plan</a></div><?php endif; ?>
     <h1>Campaign Builder</h1>
     <p class="muted">One idea becomes drafts for every destination you choose. Each destination uses one AI generation — you have <strong><?= (int) $left ?></strong> left this month.</p>
     <?php if (!profile_is_complete($profile)): ?>
@@ -8,6 +9,7 @@
     <?php require ROOT . '/app/views/_errors.php'; ?>
     <form method="post" action="<?= e(url('create')) ?>" class="form card" data-builder data-max="<?= (int) $plan['campaign_channels'] ?>">
       <?= csrf_field() ?>
+      <?php if (!empty($task)): ?><input type="hidden" name="task_id" value="<?= (int) $task['id'] ?>"><?php endif; ?>
       <fieldset>
         <legend>What's your goal?</legend>
         <div class="radio-pills">
