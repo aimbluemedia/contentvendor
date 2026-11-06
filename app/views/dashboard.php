@@ -1,13 +1,7 @@
 <?php $plan = plan_of($user); ?>
 <section class="section-sm">
   <div class="container">
-    <div class="dash-head">
-      <div>
-        <h1><?= e($profile['business_name'] !== '' ? $profile['business_name'] : 'Your business') ?></h1>
-        <p class="muted">Your business marketing workspace</p>
-      </div>
-      <span class="plan-pill plan-<?= e($user['plan']) ?>"><?= e($plan['name']) ?></span>
-    </div>
+    <?php require ROOT . '/app/views/_plan_banner.php'; ?>
 
     <?php if (!profile_is_complete($profile)): ?>
       <div class="flash flash-info">Finish your <a href="<?= e(url('profile')) ?>">business profile</a> (name, services and location) so ContentVendor can write about your business.</div>
