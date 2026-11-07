@@ -1,7 +1,7 @@
 <?php $plan = plan_of($user); ?>
 <section class="section-sm">
   <div class="container">
-    <?php require ROOT . '/app/views/_plan_banner.php'; ?>
+    <?php require ROOT . '/app/views/_toutify_banner.php'; ?>
 
     <?php $myPlan = active_plan((int) $user['id']); ?>
     <?php if (!$myPlan): ?>

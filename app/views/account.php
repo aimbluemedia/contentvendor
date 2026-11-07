@@ -25,14 +25,15 @@ $upgradeUrl = config('upgrade_url') ?: url('done-for-you');
 ?>
 <section class="section-sm">
   <div class="container">
-    <div class="ap-head">
+    <?php require ROOT . '/app/views/_plan_banner.php'; ?>
+
+    <div class="ap-head" id="plans">
       <div>
-        <span class="pc-step">My plan</span>
-        <h1>Pick the plan that fits your time</h1>
+        <span class="pc-step">Compare plans</span>
+        <h2>Pick the plan that fits your time</h2>
         <p class="muted">Every plan is part of your Toutify membership. Upgrade, downgrade or cancel anytime.</p>
       </div>
       <div class="ap-usage">
-        <div><span>Current plan</span><b><?= e($tiers[$user['plan']]['label'] ?? $plan['name']) ?> · <?= e(money($plan['price'], true)) ?>/mo</b></div>
         <div><span>AI drafts this month</span><b><?= (int) $used ?> / <?= (int) $plan['generations'] ?></b></div>
         <div><span>Scheduled this month</span><b><?= (int) $scheduled ?> / <?= (int) $plan['scheduled_posts'] ?></b></div>
       </div>

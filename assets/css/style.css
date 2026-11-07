@@ -1358,3 +1358,22 @@ i.tk-pl-facebook{background:#1877f2}i.tk-pl-instagram{background:#d6246e}i.tk-pl
 .tx-site-list a{font-size:.88rem;color:#15803d;font-weight:600;text-decoration:none}
 .tx-tier{flex:none;font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
 .tx-tier.tier-pro{background:#ccfbf1;color:#0f766e}.tx-tier.tier-premium{background:#0f1f17;color:#86efac}.tx-tier.tier-starter{background:var(--tint-2);color:#086b2d}
+
+/* Dashboard: compact Toutify membership banner */
+.tb{position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;border-radius:22px;padding:24px 28px;margin-bottom:24px;color:#fff;background:linear-gradient(135deg,#064e3b 0%,#065f46 50%,#15803d 100%);box-shadow:0 16px 40px rgba(6,78,59,.22)}
+.tb:after{content:"";position:absolute;width:320px;height:320px;right:-100px;top:-170px;border-radius:50%;background:radial-gradient(closest-side,rgba(134,239,172,.3),transparent);pointer-events:none}
+.tb-main{min-width:0;flex:1 1 420px}
+.tb-kicker{display:flex;align-items:center;gap:8px;font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#bbf7d0}
+.tb-kicker i{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 4px rgba(74,222,128,.25)}
+.tb h1{font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin:6px 0 4px;color:#fff}
+.tb p{margin:0 0 14px;color:rgba(255,255,255,.78);font-size:.98rem}
+.tb-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.tb-chips li{display:flex;align-items:baseline;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);font-size:.86rem}
+.tb-chips span{color:#bbf7d0;font-weight:600}.tb-chips b{color:#fff}
+.tb-actions{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px;flex:none}
+.tb-btn{display:inline-flex;justify-content:center;align-items:center;gap:6px;padding:11px 20px;border-radius:12px;background:#fff;color:#15803d;font-weight:800;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.14)}
+.tb-btn:hover{color:#065f46}
+.tb-btn.ghost{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:none}
+.tb-btn.ghost:hover{background:rgba(255,255,255,.16);color:#fff}
+@media (max-width:640px){.tb{padding:20px}.tb-actions{width:100%}}
+.ap-head h2{margin:0 0 6px}

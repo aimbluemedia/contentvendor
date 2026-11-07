@@ -1,5 +1,5 @@
 <?php
-/** Members dashboard: welcome + plan journey banner (Free → Pro → Premium → Done For You) */
+/** My plan page: plan journey banner (Free → Pro → Premium → Done For You) */
 $firstName = trim(strtok((string) $user['name'], ' ')) ?: 'there';
 $steps = [
     'starter' => ['Free', '$0/month'],
@@ -50,6 +50,6 @@ $cur = plan_of($user);
 
   <div class="pb-foot">
     <span><b><?= (int) $toolsActive ?> of 15</b> tools active on your account</span>
-    <a class="pb-compare" href="<?= e(url('pricing')) ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg> Compare plans</a>
+    <a class="pb-compare" href="#plans"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg> Compare plans</a>
   </div>
 </section>
