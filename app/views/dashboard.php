@@ -8,7 +8,7 @@
       <section class="cp cp-new" aria-labelledby="cp-title">
         <div class="cp-copy">
           <span class="cp-kicker cp-first"><i></i> Start here first</span>
-          <h2 id="cp-title">Build your <span>AI content plan</span></h2>
+          <h2 id="cp-title">Plan Your <span>Daily Content and Social Media</span></h2>
           <p>Tell us where you want to show up and how much time you have. Every day you get a short to-do list, and the AI writes each post for you in minutes.</p>
           <div class="cp-cta">
             <a class="cp-btn" href="<?= e(url('planner')) ?>">Create my plan <span aria-hidden="true">→</span></a>
