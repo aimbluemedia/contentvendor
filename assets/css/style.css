@@ -1411,3 +1411,11 @@ i.tk-pl-facebook{background:#1877f2}i.tk-pl-instagram{background:#d6246e}i.tk-pl
 .cp-count{font-weight:700;color:#086b2d;font-size:.9rem}
 @media (max-width:1000px){.cp-new{grid-template-columns:1fr}}
 @media (max-width:640px){.cp-new{padding:24px 20px}.cp-btn{width:100%}.cp-active{padding:0 16px 18px}.cp-bar{margin:0 -16px 16px;padding:14px 16px}.cp-bar-actions{width:100%;justify-content:space-between}}
+/* No plan yet: light red attention state (card turns white once a plan is set) */
+.cp-new{background:radial-gradient(600px 300px at 100% 0%,#fee2e2 0%,transparent 70%),linear-gradient(180deg,#fff5f5,#fef2f2);border-color:#fca5a5;box-shadow:0 22px 50px rgba(220,38,38,.12)}
+.cp-new:before{background-image:radial-gradient(rgba(220,38,38,.09) 1px,transparent 1px)}
+.cp-new .cp-kicker{background:#fee2e2;color:#b91c1c}
+.cp-new .cp-kicker i{background:#ef4444;animation-name:cpPulseRed}
+@keyframes cpPulseRed{0%{box-shadow:0 0 0 0 rgba(239,68,68,.5)}70%{box-shadow:0 0 0 8px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.cp-new .cp-steps li{border-color:#fecaca}
+.cp-new .cp-steps:before{background:linear-gradient(#fca5a5,#fee2e2)}
