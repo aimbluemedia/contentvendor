@@ -6,6 +6,15 @@ if (is_post()) {
         q('UPDATE users SET plan = ? WHERE id = ?', [post('plan'), (int) post('user_id')]);
         flash('success', 'Plan updated.');
     }
+    if (post('action') === 'refresh_websites') {
+        try {
+            [$sites, $owners] = toutify_refresh_all_websites();
+            flash('success', "Refreshed {$sites} website(s) for {$owners} member(s) from Toutify.");
+        } catch (Throwable $e) {
+            error_log('Toutify websites refresh failed: ' . $e->getMessage());
+            flash('error', 'Could not refresh websites from Toutify. Check the client secret and try again.');
+        }
+    }
     if (post('action') === 'request' && in_array(post('status'), ['new', 'contacted', 'active', 'closed'], true)) {
         q('UPDATE service_requests SET status = ? WHERE id = ?', [post('status'), (int) post('request_id')]);
         flash('success', 'Request updated.');

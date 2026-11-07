@@ -85,7 +85,7 @@ Members' accounts live on Toutify. ContentVendor signs them in with OpenID Conne
 | `TOUTIFY_CLIENT_SECRET` | from Toutify → Superadmin → Sites → ContentVendor |
 | `TOUTIFY_WEBHOOK_SECRET` | from Toutify → Superadmin → Sites → ContentVendor |
 | `toutify.admin_subs` (config) | Toutify member IDs (26-character `sub`) that get the super admin role |
-| `toutify.tier_map` (config, optional) | extra tier → plan mappings; `free`, `pro`, `premium` are built in |
+| `toutify.tier_map` (config, optional) | extra website tier → plan mappings; `free`, `pro`, `premium` are built in |
 
 `app_url` in the config must be exactly the site address registered on Toutify (for example `https://www.contentvendor.com`).
 
@@ -98,6 +98,8 @@ Members' accounts live on Toutify. ContentVendor signs them in with OpenID Conne
 | Initiate login | `SITE/auth/toutify/initiate` |
 | Back-channel logout | `SITE/auth/toutify/backchannel-logout` |
 | Webhook | `SITE/auth/toutify/webhook` |
+
+**Websites:** scope includes `websites`. Each member's websites on ContentVendor are kept in `toutify_websites` (from the `websites` claim at sign-in, and `website.joined` / `website.updated` / `website.removed` / `website.deleted` webhooks; removed websites are marked `removed`, never deleted). A member's plan is the highest tier among their active websites (Free if none); the member-level `tier` claim is ignored. The member's main website is in `users.website`. Super admin → **Refresh websites from Toutify** pulls every website and owner from `GET /api/v1/sites/websites`.
 
 **Routes:** `/auth/toutify/login` (`?signup=1` adds `prompt=create`), `/callback`, `/initiate?iss=…`, `/logout`, `POST /backchannel-logout`, `POST /webhook`. Sign-up happens in Toutify's embedded form on the home page and `/signup`. The old `/login`, `/register`, `/forgot`, `/reset` and `/logout` addresses redirect to the Toutify equivalents.
 

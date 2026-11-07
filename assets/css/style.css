@@ -1347,3 +1347,14 @@ i.tk-pl-facebook{background:#1877f2}i.tk-pl-instagram{background:#d6246e}i.tk-pl
 .tx-grid .tx-wide{grid-column:1/-1}
 .tx-grid dd a{color:#15803d;font-weight:700;text-decoration:none}
 .tx-grid dd a:hover{text-decoration:underline}
+/* Profile: websites from Toutify */
+.tx-sites{margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
+.tx-sites-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.tx-sites-head h3{margin:0;font-size:1rem}
+.tx-sites-head a{font-size:.88rem;font-weight:700;color:#15803d;text-decoration:none}
+.tx-site-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.tx-site-list li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:var(--bg)}
+.tx-site-list b{display:block}
+.tx-site-list a{font-size:.88rem;color:#15803d;font-weight:600;text-decoration:none}
+.tx-tier{flex:none;font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
+.tx-tier.tier-pro{background:#ccfbf1;color:#0f766e}.tx-tier.tier-premium{background:#0f1f17;color:#86efac}.tx-tier.tier-starter{background:var(--tint-2);color:#086b2d}

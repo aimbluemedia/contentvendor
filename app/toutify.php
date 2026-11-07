@@ -9,7 +9,7 @@
 
 use Jumbojett\OpenIDConnectClient;
 
-const TOUTIFY_SCOPE = 'openid profile email phone toutify';
+const TOUTIFY_SCOPE = 'openid profile email phone toutify websites';
 const TOUTIFY_BCL_EVENT = 'http://schemas.openid.net/event/backchannel-logout';
 
 function toutify_setting(string $name): string
@@ -47,8 +47,17 @@ function toutify_install(): void
     db()->exec("CREATE TABLE IF NOT EXISTS toutify_events (
         event_id VARCHAR(40) NOT NULL PRIMARY KEY, type VARCHAR(40) NOT NULL, received_at DATETIME NOT NULL)$tail");
     try { db()->exec('CREATE INDEX idx_toutify_sessions_sid ON toutify_sessions (sid)'); } catch (PDOException $e) {}
-    // Added after launch: the member's website from Toutify
-    try { db()->query('SELECT website FROM users LIMIT 0'); } catch (PDOException $e) { db()->exec('ALTER TABLE users ADD COLUMN website VARCHAR(255) NULL'); }
+    db()->exec("CREATE TABLE IF NOT EXISTS toutify_websites (
+        id CHAR(26) NOT NULL PRIMARY KEY, owner CHAR(26) NOT NULL, url VARCHAR(255) NOT NULL DEFAULT '',
+        business_name VARCHAR(150) NOT NULL DEFAULT '', phone VARCHAR(40) NULL, street VARCHAR(150) NULL,
+        city VARCHAR(120) NULL, state VARCHAR(60) NULL, zip VARCHAR(20) NULL, country VARCHAR(60) NULL,
+        tier VARCHAR(20) NOT NULL DEFAULT '', status VARCHAR(20) NOT NULL DEFAULT 'active',
+        toutify_updated_at INT UNSIGNED NOT NULL DEFAULT 0)$tail");
+    try { db()->exec('CREATE INDEX idx_toutify_websites_owner ON toutify_websites (owner)'); } catch (PDOException $e) {}
+    // Added after launch: the member's main website from Toutify
+    try { db()->query('SELECT website FROM users LIMIT 0'); } catch (PDOException $e) {
+        try { db()->exec('ALTER TABLE users ADD COLUMN website VARCHAR(255) NULL'); } catch (PDOException $e2) { error_log('ContentVendor: could not add users.website: ' . $e2->getMessage()); }
+    }
     try { db()->exec('CREATE INDEX idx_toutify_sessions_sub ON toutify_sessions (sub)'); } catch (PDOException $e) {}
 }
 
@@ -136,8 +145,8 @@ function toutify_apply_member(int $userId, array $m, ?int $updatedAt, bool $full
 {
     toutify_install();
     $m += ['business_name' => '', 'phone_number' => ''];
-    // Sign-in returns the full profile, so a missing website means it was cleared. Webhooks may not include it.
-    if ($fullProfile) $m += ['website' => ''];
+    // A missing or null website means the member has none
+    $m += ['website' => ''];
     $fields = ['name' => 'name', 'email' => 'email', 'business_name' => 'business_name', 'phone' => 'phone_number', 'website' => 'website', 'toutify_status' => 'account_status'];
     $set = [];
     $vals = [];
@@ -146,13 +155,10 @@ function toutify_apply_member(int $userId, array $m, ?int $updatedAt, bool $full
             $v = $m[$claim];
             if ($col === 'email') $v = strtolower((string) $v);
             $set[] = "$col = ?";
-            $vals[] = $v === '' ? null : $v;
+            $vals[] = ($v === '' || $v === null) ? null : $v;
         }
     }
-    if (($plan = toutify_tier_to_plan($m['tier'] ?? null)) !== null) {
-        $set[] = 'plan = ?';
-        $vals[] = $plan;
-    }
+    // The member-level tier claim is ignored: the plan comes from their websites' tiers (toutify_recompute_plan)
     if ($updatedAt !== null) {
         $set[] = 'toutify_updated_at = ?';
         $vals[] = $updatedAt;
@@ -188,7 +194,136 @@ function toutify_upsert_member(array $claims): array
     }
     toutify_apply_member($id, $claims, isset($claims['updated_at']) ? (int) $claims['updated_at'] : null);
     q('UPDATE users SET role = ?, deleted_at = NULL WHERE id = ?', [toutify_is_admin_sub($sub) ? 'admin' : 'member', $id]);
+    if (array_key_exists('websites', $claims) && is_array($claims['websites'] ?? [])) {
+        toutify_sync_member_websites($sub, (array) ($claims['websites'] ?? []));
+    }
+    toutify_recompute_plan($sub);
     return q('SELECT * FROM users WHERE id = ?', [$id])->fetch();
+}
+
+/* ---------- Websites (a member can have several on ContentVendor) ---------- */
+
+/** Insert or update one website from Toutify. Applies only if it is at least as new as what we have. */
+function toutify_upsert_website(array $w, string $status = 'active'): bool
+{
+    toutify_install();
+    $id = substr((string) ($w['id'] ?? ''), 0, 26);
+    $owner = substr((string) ($w['owner'] ?? ''), 0, 26);
+    if ($id === '' || $owner === '') return false;
+    $updated = isset($w['updated_at']) ? (int) $w['updated_at'] : 0;
+    $cur = q('SELECT toutify_updated_at FROM toutify_websites WHERE id = ?', [$id])->fetch();
+    if ($cur && $updated < (int) $cur['toutify_updated_at']) return false;
+    $cut = fn($k, $n) => isset($w[$k]) && $w[$k] !== '' ? mb_substr((string) $w[$k], 0, $n) : null;
+    $row = [$owner, (string) $cut('url', 255), (string) $cut('business_name', 150), $cut('phone_number', 40), $cut('street', 150),
+            $cut('city', 120), $cut('state', 60), $cut('zip', 20), $cut('country', 60), (string) $cut('tier', 20), $status, $updated];
+    if ($cur) {
+        q('UPDATE toutify_websites SET owner = ?, url = ?, business_name = ?, phone = ?, street = ?, city = ?, state = ?, zip = ?, country = ?, tier = ?, status = ?, toutify_updated_at = ? WHERE id = ?', [...$row, $id]);
+    } else {
+        q('INSERT INTO toutify_websites (owner, url, business_name, phone, street, city, state, zip, country, tier, status, toutify_updated_at, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [...$row, $id]);
+    }
+    return true;
+}
+
+/** Mark a website removed (website.removed / website.deleted carry only id, owner, updated_at) */
+function toutify_remove_website(array $w): bool
+{
+    toutify_install();
+    $id = (string) ($w['id'] ?? '');
+    $cur = q('SELECT toutify_updated_at FROM toutify_websites WHERE id = ?', [$id])->fetch();
+    if (!$cur) return false;
+    $updated = isset($w['updated_at']) ? (int) $w['updated_at'] : 0;
+    if ($updated < (int) $cur['toutify_updated_at']) return false;
+    q("UPDATE toutify_websites SET status = 'removed', toutify_updated_at = ? WHERE id = ?", [$updated, $id]);
+    return true;
+}
+
+/** At sign-in: upsert the member's websites and mark any not in the list as removed */
+function toutify_sync_member_websites(string $sub, array $list): void
+{
+    toutify_install();
+    $seen = [];
+    foreach ($list as $w) {
+        if (!is_array($w) || ($w['owner'] ?? '') !== $sub || empty($w['id'])) continue;
+        toutify_upsert_website($w, 'active');
+        $seen[] = (string) $w['id'];
+    }
+    if ($seen) {
+        $in = implode(',', array_fill(0, count($seen), '?'));
+        q("UPDATE toutify_websites SET status = 'removed' WHERE owner = ? AND status = 'active' AND id NOT IN ($in)", [$sub, ...$seen]);
+    } else {
+        q("UPDATE toutify_websites SET status = 'removed' WHERE owner = ? AND status = 'active'", [$sub]);
+    }
+}
+
+/** A member's ContentVendor plan = the highest tier among their active websites (Free if none) */
+function toutify_recompute_plan(string $sub): void
+{
+    toutify_install();
+    $rank = ['starter' => 0, 'pro' => 1, 'premium' => 2];
+    $best = 'starter';
+    foreach (q("SELECT tier FROM toutify_websites WHERE owner = ? AND status = 'active'", [$sub])->fetchAll() as $r) {
+        $p = toutify_tier_to_plan($r['tier']);
+        if ($p !== null && ($rank[$p] ?? 0) > $rank[$best]) $best = $p;
+    }
+    q('UPDATE users SET plan = ? WHERE toutify_sub = ?', [$best, $sub]);
+}
+
+function toutify_member_websites(string $sub): array
+{
+    toutify_install();
+    return q("SELECT * FROM toutify_websites WHERE owner = ? AND status = 'active' ORDER BY business_name, url", [$sub])->fetchAll();
+}
+
+/** Create the member from a webhook 'member' object if new, otherwise update them (newer-only) */
+function toutify_member_from_notice(array $m): void
+{
+    $sub = (string) ($m['sub'] ?? '');
+    if ($sub === '') return;
+    $user = q('SELECT * FROM users WHERE toutify_sub = ?', [$sub])->fetch();
+    if (!$user) {
+        toutify_upsert_member($m);
+        return;
+    }
+    $updated = isset($m['updated_at']) ? (int) $m['updated_at'] : 0;
+    if ($updated >= (int) $user['toutify_updated_at']) {
+        toutify_apply_member((int) $user['id'], $m, $updated);
+    }
+}
+
+/** One-off full refresh of every ContentVendor website from Toutify's API. Returns [websites, members]. */
+function toutify_refresh_all_websites(): array
+{
+    toutify_install();
+    $auth = 'Basic ' . base64_encode(urlencode(toutify_client_id()) . ':' . urlencode(toutify_setting('client_secret')));
+    $cursor = null;
+    $sites = 0;
+    $members = [];
+    for ($page = 0; $page < 200; $page++) {
+        $url = toutify_issuer() . '/api/v1/sites/websites?' . http_build_query(array_filter(['limit' => 500, 'cursor' => $cursor], fn($v) => $v !== null));
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 20, CURLOPT_HTTPHEADER => ['Authorization: ' . $auth, 'Accept: application/json']]);
+        $body = curl_exec($ch);
+        $code = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+        $json = is_string($body) ? json_decode($body, true) : null;
+        if ($code !== 200 || !is_array($json)) throw new RuntimeException("Toutify websites API returned $code");
+        $list = $json['websites'] ?? $json['data'] ?? [];
+        foreach ($list as $w) {
+            if (!is_array($w)) continue;
+            if (is_array($w['member'] ?? null)) {
+                toutify_member_from_notice($w['member']);
+                $members[$w['member']['sub'] ?? ''] = true;
+            }
+            toutify_upsert_website($w, 'active');
+            $sites++;
+        }
+        $cursor = $json['next_cursor'] ?? null;
+        if (!$cursor) break;
+    }
+    foreach (array_keys($members) as $sub) {
+        if ($sub !== '') toutify_recompute_plan($sub);
+    }
+    return [$sites, count($members)];
 }
 
 /* ---------- Sessions ---------- */
@@ -275,12 +410,17 @@ function toutify_verify_webhook(string $raw, string $header, ?int $now = null): 
 /** Apply a webhook body. Returns HTTP status to reply with. */
 function toutify_handle_webhook(array $body): int
 {
-    toutify_install();
     $id = (string) ($body['id'] ?? '');
     $type = (string) ($body['type'] ?? '');
     if ($id === '' || strlen($id) > 40) return 400;
 
-    q('DELETE FROM toutify_events WHERE received_at < ?', [date('Y-m-d H:i:s', strtotime('-30 days'))]);
+    try {
+        toutify_install();
+        q('DELETE FROM toutify_events WHERE received_at < ?', [date('Y-m-d H:i:s', strtotime('-30 days'))]);
+    } catch (Throwable $e) {
+        error_log('ContentVendor Toutify webhook setup failed: ' . $e->getMessage());
+        return 500;
+    }
 
     $pdo = db();
     $pdo->beginTransaction();
@@ -298,12 +438,21 @@ function toutify_handle_webhook(array $body): int
             if ($user) {
                 $updated = isset($m['updated_at']) ? (int) $m['updated_at'] : 0;
                 if ($updated >= (int) $user['toutify_updated_at']) {
-                    toutify_apply_member((int) $user['id'], $m, $updated, false);
+                    toutify_apply_member((int) $user['id'], $m, $updated);
                 }
                 if (in_array($type, ['member.suspended', 'member.closed'], true)) {
                     toutify_end_sessions($sub);
                 }
             }
+        } elseif (in_array($type, ['website.joined', 'website.updated'], true) && is_array($body['website'] ?? null)) {
+            if ($m) toutify_member_from_notice($m);
+            $prevOwner = q('SELECT owner FROM toutify_websites WHERE id = ?', [(string) ($body['website']['id'] ?? '')])->fetchColumn();
+            toutify_upsert_website($body['website'], 'active');
+            toutify_recompute_plan((string) ($body['website']['owner'] ?? $sub));
+            if ($prevOwner && $prevOwner !== ($body['website']['owner'] ?? '')) toutify_recompute_plan((string) $prevOwner);
+        } elseif (in_array($type, ['website.removed', 'website.deleted'], true) && is_array($body['website'] ?? null)) {
+            toutify_remove_website($body['website']);
+            toutify_recompute_plan((string) ($body['website']['owner'] ?? ''));
         } elseif ($type === 'member.deleted' && $sub !== '') {
             toutify_end_sessions($sub);
             q("UPDATE users SET toutify_status = 'deleted', deleted_at = ? WHERE toutify_sub = ?", [now(), $sub]);

@@ -5,6 +5,7 @@
         <p class="kicker">Super admin</p>
         <h1><?= e(['overview' => 'Overview', 'members' => 'Members', 'requests' => 'Done-for-you requests'][$tab]) ?></h1>
       </div>
+      <form method="post"><?= csrf_field() ?><input type="hidden" name="action" value="refresh_websites"><button class="btn btn-ghost" type="submit" title="Pull every ContentVendor website and owner from Toutify">↻ Refresh websites from Toutify</button></form>
     </div>
     <?php if ($tab === 'overview'): ?>
     <div class="stats">
