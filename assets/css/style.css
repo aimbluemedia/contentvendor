@@ -1419,3 +1419,7 @@ i.tk-pl-facebook{background:#1877f2}i.tk-pl-instagram{background:#d6246e}i.tk-pl
 @keyframes cpPulseRed{0%{box-shadow:0 0 0 0 rgba(239,68,68,.5)}70%{box-shadow:0 0 0 8px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
 .cp-new .cp-steps li{border-color:#fecaca}
 .cp-new .cp-steps:before{background:linear-gradient(#fca5a5,#fee2e2)}
+.cp-new .cp-first{padding:10px 20px 10px 16px;gap:12px;font-size:1.05rem;letter-spacing:.12em;color:#fff;background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 10px 24px rgba(220,38,38,.3)}
+.cp-new .cp-first i{width:12px;height:12px;background:#fff;animation-name:cpPulseWhite}
+@keyframes cpPulseWhite{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}70%{box-shadow:0 0 0 10px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+@media (max-width:640px){.cp-new .cp-first{font-size:.92rem;padding:8px 16px 8px 13px}}

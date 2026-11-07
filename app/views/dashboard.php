@@ -7,7 +7,7 @@
     <?php if (!$myPlan): ?>
       <section class="cp cp-new" aria-labelledby="cp-title">
         <div class="cp-copy">
-          <span class="cp-kicker"><i></i> Step 1 · Start here</span>
+          <span class="cp-kicker cp-first"><i></i> Start here first</span>
           <h2 id="cp-title">Build your <span>AI content plan</span></h2>
           <p>Tell us where you want to show up and how much time you have. Every day you get a short to-do list, and the AI writes each post for you in minutes.</p>
           <div class="cp-cta">
