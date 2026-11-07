@@ -1,4 +1,10 @@
 <?php
+/**
+ * Members sign in with Toutify (see app/toutify.php). ContentVendor never
+ * stores or asks for passwords. A PHP session counts as signed in only while
+ * its toutify_sessions row exists and the member is active on Toutify, so
+ * back-channel logouts and suspensions take effect on the next request.
+ */
 
 function current_user(): ?array
 {
@@ -6,71 +12,42 @@ function current_user(): ?array
     if ($user === false) {
         $user = null;
         if (!empty($_SESSION['uid'])) {
-            $user = q('SELECT * FROM users WHERE id = ?', [$_SESSION['uid']])->fetch() ?: null;
+            $row = q('SELECT * FROM users WHERE id = ?', [$_SESSION['uid']])->fetch() ?: null;
+            if ($row && toutify_session_valid($row)) {
+                $user = $row;
+            } else {
+                logout_user();
+            }
         }
     }
     return $user;
 }
 
-/** Where a signed-in user lands: the main admin goes to /superadmin, everyone else to /members */
+/** Where a signed-in member lands: the main admin goes to /superadmin, everyone else to /members */
 function home_path_for(array $user): string
 {
     return $user['role'] === 'admin' ? 'superadmin' : 'members';
 }
 
-/** Check an email and password; returns the user on success (and upgrades old hashes) */
-function attempt_login(string $email, $password): ?array
+/** Logged-out visitors on /members or /superadmin see a "Log in with Toutify" card on that page */
+function login_card(bool $adminOnly = false): void
 {
-    $user = q('SELECT * FROM users WHERE email = ?', [strtolower(trim($email))])->fetch();
-    if ($user && is_string($password) && password_verify($password, $user['password_hash'])) {
-        if (password_needs_rehash($user['password_hash'], PASSWORD_DEFAULT)) {
-            q('UPDATE users SET password_hash = ? WHERE id = ?', [password_hash($password, PASSWORD_DEFAULT), $user['id']]);
-        }
-        return $user;
-    }
-    usleep(300000); // slow down password guessing
-    return null;
-}
-
-/**
- * Show a login form in place on $here (/members or /superadmin). After signing
- * in on /superadmin the admin stays there (anyone else goes to /members); after
- * signing in on /members members stay there and the main admin goes to /superadmin.
- */
-function login_gate(string $here, bool $adminOnly = false): void
-{
-    $errors = [];
-    if (is_post() && post('_gate') === 'login') {
-        csrf_check();
-        $user = attempt_login(post('email'), $_POST['password'] ?? '');
-        if ($user) {
-            login_user((int) $user['id']);
-            if ($adminOnly) {
-                redirect($user['role'] === 'admin' ? $here : 'members');
-            }
-            redirect($here === 'members' ? home_path_for($user) : $here);
-        }
-        $errors[] = 'That email and password don\'t match.';
-    }
     render('auth_login', [
         'title'   => $adminOnly ? 'Super admin login' : 'Member login',
         'heading' => $adminOnly ? 'Super admin login' : 'Member login',
-        'intro'   => $adminOnly ? 'Sign in with the ContentVendor admin account.' : 'Sign in to your ContentVendor workspace.',
-        'action'  => url($here),
-        'gate'    => true,
+        'intro'   => $adminOnly ? 'Sign in with the Toutify account set as ContentVendor admin.' : 'Sign in with your Toutify account to open your ContentVendor workspace.',
         'signup'  => !$adminOnly,
-        'errors'  => $errors,
     ]);
     exit;
 }
 
-/** Require a signed-in user. With $here, show the login form on that page instead of redirecting. */
+/** Require a signed-in member. With $here, show the login card on that page instead of redirecting. */
 function require_login(?string $here = null): array
 {
     $user = current_user();
     if (!$user) {
         if ($here !== null) {
-            login_gate($here);
+            login_card();
         }
         flash('info', 'Please log in to continue.');
         redirect('members');
@@ -80,9 +57,8 @@ function require_login(?string $here = null): array
 
 function require_admin(?string $here = null): array
 {
-    $user = current_user();
-    if (!$user && $here !== null) {
-        login_gate($here, true);
+    if (!current_user() && $here !== null) {
+        login_card(true);
     }
     $user = require_login();
     if ($user['role'] !== 'admin') {
@@ -101,16 +77,4 @@ function logout_user(): void
 {
     $_SESSION = [];
     session_regenerate_id(true);
-}
-
-function register_user(string $name, string $email, string $password): int
-{
-    $role = strcasecmp($email, (string) config('admin_email', '')) === 0 ? 'admin' : 'member';
-    q(
-        'INSERT INTO users (name, email, password_hash, role, plan, created_at) VALUES (?, ?, ?, ?, ?, ?)',
-        [$name, strtolower($email), password_hash($password, PASSWORD_DEFAULT), $role, 'starter', now()]
-    );
-    $id = (int) db()->lastInsertId();
-    q('INSERT INTO business_profiles (user_id, updated_at) VALUES (?, ?)', [$id, now()]);
-    return $id;
 }

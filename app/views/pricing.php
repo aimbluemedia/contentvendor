@@ -78,7 +78,7 @@ $billingFaqs = [
     <div class="m-final">
       <h2>Start free today.</h2>
       <p>No credit card. Your first campaign takes about a minute.</p>
-      <a class="m-btn m-btn-primary" href="<?= e(url('register')) ?>">Create my free account</a>
+      <a class="m-btn m-btn-primary" href="<?= e(url('signup')) ?>">Create my free account</a>
     </div>
   </div>
 </section>

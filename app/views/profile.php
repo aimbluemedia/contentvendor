@@ -3,16 +3,26 @@
     <h1>Business profile</h1>
     <p class="muted">Enter your information once. Every ContentVendor tool uses it to write content that sounds like your business — no repeated typing.</p>
     <?php require ROOT . '/app/views/_errors.php'; ?>
+    <div class="card tx-account">
+      <div class="tx-head">
+        <div><h2>Your Toutify account</h2><p class="muted small">These details come from Toutify and are shared across SearchMonster, MonsterList, PromoMonster and LeadCrazy.</p></div>
+        <a class="btn btn-ghost" href="<?= e('https://toutify.com/members/profile.php?client_id=' . rawurlencode(toutify_client_id()) . '&return_to=' . rawurlencode(site_url(''))) ?>">Edit on Toutify ↗</a>
+      </div>
+      <dl class="tx-grid">
+        <div><dt>Name</dt><dd><?= e($user['name'] ?: '—') ?></dd></div>
+        <div><dt>Email</dt><dd><?= e($user['email'] ?: '—') ?></dd></div>
+        <div><dt>Business</dt><dd><?= e($user['business_name'] ?? '' ?: '—') ?></dd></div>
+        <div><dt>Phone</dt><dd><?= e($user['phone'] ?? '' ?: '—') ?></dd></div>
+      </dl>
+    </div>
     <form method="post" class="form card" action="<?= e(url('profile' . (isset($_GET['next']) ? '?next=' . urlencode((string) $_GET['next']) : ''))) ?>">
       <?= csrf_field() ?>
       <div class="row-2">
-        <label>Business name *<input name="business_name" required value="<?= e($profile['business_name']) ?>"></label>
         <label>Industry<input name="industry" placeholder="Landscaping, plumbing, roofing…" value="<?= e($profile['industry']) ?>"></label>
       </div>
       <label>Services * <span class="hint">One per line or comma-separated</span><textarea name="services" rows="3" required placeholder="Artificial turf installation, lawn care, irrigation repair"><?= e($profile['services']) ?></textarea></label>
       <div class="row-2">
         <label>Location *<input name="location" required placeholder="Phoenix, AZ" value="<?= e($profile['location']) ?>"></label>
-        <label>Phone<input name="phone" value="<?= e($profile['phone']) ?>"></label>
       </div>
       <div class="row-2">
         <label>Website<input name="website" placeholder="https://" value="<?= e($profile['website']) ?>"></label>

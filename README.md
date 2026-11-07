@@ -11,15 +11,13 @@ Plain **PHP 8.1+ / MySQL**. No Composer and no build step, so it runs on Hosting
 | Area | Details |
 |---|---|
 | Marketing site | Home page, pricing ($0 / $19 / $49 plans + feature table), done-for-you packages ($299 / $749 / $999) with a request form |
-| Accounts | Sign up, log in and log out, hashed passwords, CSRF protection, secure sessions |
+| Accounts | Sign-in and sign-up through **Toutify** (OpenID Connect). ContentVendor never stores or asks for passwords. See *Toutify sign-in* below |
 | Business profile | Entered once and used by every tool: services, location, service areas, voice, audience |
 | Campaign Builder | Pick a goal, describe the idea, choose destinations, and get one draft per channel from Claude |
 | Content library | Search and filter, edit, copy, download (.txt), approve, mark as published, delete |
 | Plan limits | Monthly AI generations (5 / 40 / 150), campaign channels (3 on Free, 8 on paid), scheduled posts (0 / 30 / 150) |
 | Pro / Premium | Scheduling, monthly calendar, repurposing content into other channels |
-| Member dashboard | `/members`: the login page and where every member lands after logging in (the old `/login` address redirects here). Shows the plan banner and today's marketing tasks |
-| Password reset | "Forgot password?" on the login form → `/forgot` emails a single-use link (expires in 1 hour) → `/reset` to choose a new password, then the member is signed in. Uses PHP `mail()`; set `mail_from` in the config to an address on your domain (create it in hPanel → Emails). Table `password_resets` is created automatically |
-| Show/hide password | Every password field has an eye button to show or hide what's typed |
+| Member dashboard | `/members`: where members land after signing in; logged-out visitors see a "Log in with Toutify" card here. Shows the plan banner and today's marketing tasks |
 | My platforms | `/platforms`: toggle switches for social platforms (Facebook, Instagram, TikTok, YouTube, Reddit, Pinterest). Content posts (website, Google Business, email, directories) are always on. Free can switch on 1, Pro 3, Premium all 6 (`social_platforms` in `app/plans.php`). The Campaign Builder, Repurpose and the Plan Creator only offer switched-on platforms. Table `member_platforms` is created automatically |
 | AI Content Plan Creator | `/planner`: members pick platforms, daily time and working days, and get 4 weeks of small daily tasks. Each task's "Do it now" opens the Campaign Builder pre-filled and marks the task done. Post ideas come from Claude when an API key is set, otherwise from templates built from the business profile. Tables `content_plans` and `plan_tasks` are created automatically on first use (also in `sql/schema.sql`) |
 | Super admin | `/superadmin`: members, plan changes, estimated MRR, done-for-you request pipeline. Only the admin account can open it; everyone else gets a 404. The admin lands here after logging in |
@@ -73,6 +71,41 @@ php -S localhost:8000 index.php
 - Server-side refusal fallback is on by default (`anthropic.fallbacks`).
 - One generation = one content item. A campaign with 8 destinations uses 8 generations.
 - The system prompt tells the AI never to invent reviews, prices or guarantees, and to write each destination as its own piece instead of duplicating text across directories.
+
+## Toutify sign-in (OpenID Connect)
+
+Members' accounts live on Toutify. ContentVendor signs them in with OpenID Connect (authorization code + PKCE S256, `client_secret_basic`), keeps a copy of their name, email, business name, phone, status and plan, and stays in sync through back-channel logout and signed webhooks.
+
+**Settings** (environment variables preferred; otherwise the `toutify` block in `config/config.php`, never in the code):
+
+| Setting | Value |
+|---|---|
+| `TOUTIFY_ISSUER` | `https://toutify.com` |
+| `TOUTIFY_CLIENT_ID` | `contentvendor` |
+| `TOUTIFY_CLIENT_SECRET` | from Toutify → Superadmin → Sites → ContentVendor |
+| `TOUTIFY_WEBHOOK_SECRET` | from Toutify → Superadmin → Sites → ContentVendor |
+| `toutify.admin_subs` (config) | Toutify member IDs (26-character `sub`) that get the super admin role |
+| `toutify.tier_map` (config, optional) | extra tier → plan mappings; `free`, `pro`, `premium` are built in |
+
+`app_url` in the config must be exactly the site address registered on Toutify (for example `https://www.contentvendor.com`).
+
+**Addresses registered on Toutify** (replace SITE with `app_url`):
+
+| Purpose | URL |
+|---|---|
+| Redirect URI | `SITE/auth/toutify/callback` |
+| Post-logout redirect | `SITE/` |
+| Initiate login | `SITE/auth/toutify/initiate` |
+| Back-channel logout | `SITE/auth/toutify/backchannel-logout` |
+| Webhook | `SITE/auth/toutify/webhook` |
+
+**Routes:** `/auth/toutify/login` (`?signup=1` adds `prompt=create`), `/callback`, `/initiate?iss=…`, `/logout`, `POST /backchannel-logout`, `POST /webhook`. Sign-up happens in Toutify's embedded form on the home page and `/signup`. The old `/login`, `/register`, `/forgot`, `/reset` and `/logout` addresses redirect to the Toutify equivalents.
+
+**How sessions end:** every ContentVendor session has a row in `toutify_sessions`. Logging out, a back-channel logout (by `sid`, or all of a member's sessions when there's no `sid`), or a suspended/closed/deleted webhook deletes the row, and that browser is signed out on its next request.
+
+**Libraries:** `jumbojett/openid-connect-php` and `firebase/php-jwt`, installed with Composer and committed in `vendor/` because Hostinger's Git deploy doesn't run Composer. To update them: `composer update` locally, delete the `.git` folders inside `vendor/`, commit.
+
+**First deploy (fresh start):** back up the database, then run `sql/migrations/2026-11-07-toutify-fresh-start.sql` once in phpMyAdmin. It removes all existing ContentVendor members and their content and creates the new tables.
 
 ## Homepage hero photo
 

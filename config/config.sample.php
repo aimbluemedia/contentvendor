@@ -26,13 +26,18 @@ return [
         'fallbacks' => true,   // re-run declined requests on Anthropic's recommended fallback model
     ],
 
-    // The first account registered with this email becomes an admin (team dashboard).
-    'admin_email' => 'you@example.com',
-
-    // Password reset emails are sent from this address. On Hostinger use an address on your own domain
-    // (create it in hPanel > Emails), e.g. no-reply@contentvendor.com. Empty = no-reply@<your domain>.
-    'mail_from'      => '',
-    'mail_from_name' => 'ContentVendor',
+    // Toutify sign-in (OpenID Connect). Prefer environment variables TOUTIFY_ISSUER, TOUTIFY_CLIENT_ID,
+    // TOUTIFY_CLIENT_SECRET and TOUTIFY_WEBHOOK_SECRET; these values are used only when those aren't set.
+    'toutify' => [
+        'issuer'         => 'https://toutify.com',
+        'client_id'      => 'contentvendor',
+        'client_secret'  => '',   // from Toutify (Superadmin > Sites > ContentVendor)
+        'webhook_secret' => '',   // from Toutify (Superadmin > Sites > ContentVendor)
+        // Toutify member IDs (the 26-character "sub") that get the ContentVendor super admin role
+        'admin_subs'     => [],
+        // Optional: map Toutify tier values to ContentVendor plans (free/pro/premium are mapped already)
+        'tier_map'       => [],
+    ],
 
     // Where "Upgrade" buttons go (your Toutify subscription page). Empty = done-for-you contact form.
     'upgrade_url' => '',

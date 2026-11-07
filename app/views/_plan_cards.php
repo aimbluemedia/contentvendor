@@ -12,7 +12,7 @@ $planPoints = [
       <h3><?= e($p['name']) ?></h3>
       <p class="m-plan-tag"><?= e($p['tagline']) ?></p>
       <div class="m-price"><?= e(money($p['price'])) ?><small>/month</small></div>
-      <a class="m-btn <?= $hero ? 'm-btn-primary' : 'm-btn-light' ?> m-btn-block" href="<?= e(url('register')) ?>"><?= $p['price'] ? 'Choose ' . e($p['name']) : 'Start free' ?></a>
+      <a class="m-btn <?= $hero ? 'm-btn-primary' : 'm-btn-light' ?> m-btn-block" href="<?= e(url('signup')) ?>"><?= $p['price'] ? 'Choose ' . e($p['name']) : 'Start free' ?></a>
       <ul><?php foreach ($planPoints[$key] as $pt): ?><li><?= e($pt) ?></li><?php endforeach; ?></ul>
     </div>
   <?php endforeach; ?>

@@ -1,0 +1,14 @@
+{
+    "name": "aimbluemedia/contentvendor",
+    "description": "ContentVendor by Toutify",
+    "type": "project",
+    "require": {
+        "php": ">=8.1",
+        "firebase/php-jwt": "^6.10",
+        "jumbojett/openid-connect-php": "^1.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}

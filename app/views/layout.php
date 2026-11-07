@@ -99,9 +99,7 @@ $side = function (string $href, string $icon, string $label, bool $active, strin
   <div class="sb-user">
     <span class="sb-avatar"><?= e(mb_strtoupper(mb_substr($me['name'], 0, 1))) ?></span>
     <div><b><?= e($me['name']) ?></b><small><?= e($me['email']) ?></small></div>
-    <form method="post" action="<?= e(url('logout')) ?>">
-      <?= csrf_field() ?><button class="sb-logout" type="submit" title="Log out" aria-label="Log out"><?= $svg('logout') ?></button>
-    </form>
+    <a class="sb-logout" href="<?= e(url('auth/toutify/logout')) ?>" title="Log out" aria-label="Log out"><?= $svg('logout') ?></a>
   </div>
 </aside>
 <div class="sb-main">
@@ -121,16 +119,14 @@ $side = function (string $href, string $icon, string $label, bool $active, strin
       <?php if ($me): ?>
         <?= $nav('pricing', 'Pricing') ?>
         <?= $nav('done-for-you', 'Done-for-you') ?>
-        <form method="post" action="<?= e(url('logout')) ?>" class="inline">
-          <?= csrf_field() ?><button class="link-button" type="submit">Log out</button>
-        </form>
+        <a href="<?= e(url('auth/toutify/logout')) ?>">Log out</a>
         <a class="btn btn-primary btn-sm" href="<?= e(url(home_path_for($me))) ?>">Go to dashboard</a>
       <?php else: ?>
         <?= $nav('', 'How it works') ?>
         <?= $nav('pricing', 'Pricing') ?>
         <?= $nav('done-for-you', 'Done-for-you') ?>
-        <?= $nav('members', 'Log in') ?>
-        <a class="btn btn-primary btn-sm" href="<?= e(url('register')) ?>">Start free</a>
+        <?= $nav('auth/toutify/login', 'Log in') ?>
+        <a class="btn btn-primary btn-sm" href="<?= e(url('signup')) ?>">Start free</a>
       <?php endif; ?>
     </nav>
   </div>
@@ -160,7 +156,7 @@ $side = function (string $href, string $icon, string $label, bool $active, strin
     <div class="footer-links">
       <a href="<?= e(url('pricing')) ?>">Pricing</a>
       <a href="<?= e(url('done-for-you')) ?>">Done-for-you packages</a>
-      <a href="<?= e(url($me ? home_path_for($me) : 'register')) ?>"><?= $me ? 'Dashboard' : 'Create a free account' ?></a>
+      <a href="<?= e(url($me ? home_path_for($me) : 'signup')) ?>"><?= $me ? 'Dashboard' : 'Create a free account' ?></a>
     </div>
   </div>
   <div class="container small muted">© <?= date('Y') ?> Toutify. Publishing availability depends on each network's API and permissions.</div>

@@ -3,7 +3,7 @@ Options -Indexes
 DirectoryIndex index.php
 
 # Block direct access to archives, dotfiles, docs and SQL dumps
-<FilesMatch "(\.(zip|sql|md|log|sqlite|txt)|^\..*)$">
+<FilesMatch "(\.(zip|sql|md|log|sqlite|txt)|^\..*|^composer\.(json|lock)$)$">
     Require all denied
 </FilesMatch>
 

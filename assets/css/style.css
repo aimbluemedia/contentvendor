@@ -1332,3 +1332,15 @@ i.tk-pl-facebook{background:#1877f2}i.tk-pl-instagram{background:#d6246e}i.tk-pl
 .forgot-link{margin:-8px 0 0;text-align:right;font-size:.88rem}
 .forgot-link a{color:#15803d;font-weight:600;text-decoration:none}
 .forgot-link a:hover{text-decoration:underline}
+.jf-embed{max-width:460px;margin:4px 0 6px}.jf-embed:empty{min-height:0}
+/* Profile: Toutify account (read-only) */
+.tx-account{margin-bottom:20px}
+.tx-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.tx-head h2{margin:0 0 4px;font-size:1.15rem}.tx-head p{margin:0}
+.tx-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0}
+.tx-grid div{background:var(--bg);border-radius:12px;padding:10px 14px}
+.tx-grid dt{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.tx-grid dd{margin:2px 0 0;font-weight:600;word-break:break-word}
+@media(max-width:600px){.tx-grid{grid-template-columns:1fr}}
+.tl-login .btn-lg{margin:8px 0 4px}
+.signup-fallback{margin:10px 0 0}.signup-fallback a{color:#15803d;font-weight:600}

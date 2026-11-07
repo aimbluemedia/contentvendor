@@ -27,7 +27,7 @@ $thumbOwner = asset('img/thumb-owner.webp');
       <h1>Create Content Today That Gets&nbsp;You <span class="th-accent">Found Tomorrow.</span></h1>
       <p class="th-intro">ContentVendor's AI writes the posts, articles and updates that keep your business visible on Google, AI search and social media, building an online presence that keeps bringing in leads.</p>
       <div class="th-actions">
-        <a class="th-btn th-btn-primary" href="<?= e(url('register')) ?>">Get Started Free <span aria-hidden="true">→</span></a>
+        <a class="th-btn th-btn-primary" href="#join-free">Get Started Free <span aria-hidden="true">→</span></a>
         <a class="th-btn th-btn-outline" href="#tools"><span class="th-play" aria-hidden="true">▶</span> See How It Works</a>
       </div>
       <div class="th-proof"><span><b class="th-tick">✓</b> More Visibility</span><span><b class="th-tick">✓</b> More Engagement</span><span><b class="th-tick">✓</b> More Leads</span></div>
@@ -211,7 +211,7 @@ $platforms = [
           </div>
           <div class="cz-cta" data-cta="real" hidden>
             <p data-out="gap"></p>
-            <a class="cz-submit" href="<?= e(url('register')) ?>">Join Free Today <span aria-hidden="true">→</span></a>
+            <a class="cz-submit" href="#join-free">Join Free Today <span aria-hidden="true">→</span></a>
             <small>Free forever plan · No credit card</small>
           </div>
         </div>
@@ -249,7 +249,7 @@ $freeBrands = [
           <span class="jf-pill">✦ Free forever membership</span>
           <h2>Join free. <span>Get it all for&nbsp;$0.</span></h2>
           <p>One free Toutify membership gives you the tools to get found, look trustworthy and turn visitors into leads, plus ContentVendor's AI content tools.</p>
-          <a class="jf-btn" href="<?= e(url('register')) ?>">Join Free Today <span aria-hidden="true">→</span></a>
+          <div class="jf-embed"><?php $signupTitle = 'Create your free account'; $signupButton = 'Join Free Today'; require ROOT . '/app/views/_toutify_signup.php'; ?></div>
           <ul class="jf-ticks"><li>No credit card</li><li>Free forever</li><li>Set up in 2 minutes</li></ul>
           <div class="jf-value"><b>$0</b><span>Every tool and directory listed here, included free</span></div>
         </div>
@@ -324,7 +324,7 @@ $freeBrands = [
     <div class="m-final">
       <h2>Your competitors posted this week. Did you?</h2>
       <p>Create your free account and publish your first campaign in minutes.</p>
-      <a class="m-btn m-btn-primary" href="<?= e(url('register')) ?>">Start free, no card needed</a>
+      <a class="m-btn m-btn-primary" href="#join-free">Start free, no card needed</a>
     </div>
   </div>
 </section>

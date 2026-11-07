@@ -4,13 +4,18 @@
 SET NAMES utf8mb4;
 
 CREATE TABLE IF NOT EXISTS users (
-  id            INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name          VARCHAR(120) NOT NULL,
-  email         VARCHAR(190) NOT NULL UNIQUE,
-  password_hash VARCHAR(255) NOT NULL,
-  role          VARCHAR(20)  NOT NULL DEFAULT 'member',   -- member | admin
-  plan          VARCHAR(20)  NOT NULL DEFAULT 'starter',  -- starter | pro | premium
-  created_at    DATETIME     NOT NULL
+  id                 INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  toutify_sub        CHAR(26)     NOT NULL UNIQUE,            -- permanent Toutify member ID
+  email              VARCHAR(190) NOT NULL DEFAULT '',
+  name               VARCHAR(190) NOT NULL DEFAULT '',
+  business_name      VARCHAR(190) NULL,
+  phone              VARCHAR(40)  NULL,
+  toutify_status     VARCHAR(20)  NOT NULL DEFAULT 'active',  -- active | suspended | closed | deleted
+  toutify_updated_at INT UNSIGNED NOT NULL DEFAULT 0,
+  role               VARCHAR(20)  NOT NULL DEFAULT 'member',  -- member | admin (admin = sub listed in config toutify.admin_subs)
+  plan               VARCHAR(20)  NOT NULL DEFAULT 'starter', -- starter (Free) | pro | premium, from Toutify's tier claim
+  deleted_at         DATETIME     NULL,
+  created_at         DATETIME     NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Shared Toutify Business Profile: entered once, used by every tool
@@ -112,19 +117,26 @@ CREATE TABLE IF NOT EXISTS plan_tasks (
   completed_at DATETIME NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Password reset links (also created automatically on first use)
-CREATE TABLE IF NOT EXISTS password_resets (
-  id         INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id    INT NOT NULL,
-  token_hash CHAR(64) NOT NULL,
-  expires_at DATETIME NOT NULL,
-  used_at    DATETIME NULL,
-  created_at DATETIME NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- Social platform switches (also created automatically on first use)
 CREATE TABLE IF NOT EXISTS member_platforms (
   user_id    INT NOT NULL PRIMARY KEY,
   platforms  VARCHAR(255) NOT NULL,
   updated_at DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Toutify sign-in sessions (one row per ContentVendor session; deleting a row signs that session out)
+CREATE TABLE IF NOT EXISTS toutify_sessions (
+  session_id VARCHAR(128) NOT NULL PRIMARY KEY,
+  sid        CHAR(32)     NULL,
+  sub        CHAR(26)     NOT NULL,
+  created_at DATETIME     NOT NULL,
+  INDEX idx_toutify_sessions_sid (sid),
+  INDEX idx_toutify_sessions_sub (sub)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Toutify webhook de-duplication (rows older than 30 days are removed automatically)
+CREATE TABLE IF NOT EXISTS toutify_events (
+  event_id    VARCHAR(40) NOT NULL PRIMARY KEY,
+  type        VARCHAR(40) NOT NULL,
+  received_at DATETIME    NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

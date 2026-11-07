@@ -18,6 +18,9 @@ if (!empty($GLOBALS['config']['debug'])) {
 }
 date_default_timezone_set($GLOBALS['config']['timezone'] ?? 'America/New_York');
 
+// Sign-in (state, nonce, PKCE verifier) must survive a slow Toutify sign-up: keep sessions for 2 hours
+ini_set('session.gc_maxlifetime', '7200');
+
 session_set_cookie_params([
     'lifetime' => 0,
     'path'     => '/',
@@ -28,10 +31,11 @@ session_set_cookie_params([
 session_name('cv_session');
 session_start();
 
+require ROOT . '/vendor/autoload.php';
 require ROOT . '/app/helpers.php';
 require ROOT . '/app/plans.php';
 require ROOT . '/app/auth.php';
 require ROOT . '/app/content.php';
 require ROOT . '/app/ai.php';
 require ROOT . '/app/planner.php';
-require ROOT . '/app/password_reset.php';
+require ROOT . '/app/toutify.php';

@@ -19,10 +19,7 @@ $routes = [
     ''             => 'home',
     'pricing'      => 'pricing',
     'done-for-you' => 'done_for_you',
-    'register'     => 'register',
-    'forgot'       => 'forgot',
-    'reset'        => 'reset',
-    'logout'       => 'logout',
+    'signup'       => 'signup',
     'members'      => 'dashboard',
     'planner'      => 'planner',
     'platforms'    => 'platforms',
@@ -38,9 +35,17 @@ $routes = [
 ];
 
 // Old addresses keep working
-$legacy = ['dashboard' => 'members', 'admin' => 'superadmin', 'login' => 'members'];
+$legacy = ['dashboard' => 'members', 'admin' => 'superadmin', 'login' => 'auth/toutify/login', 'register' => 'signup',
+           'forgot' => 'auth/toutify/login', 'reset' => 'auth/toutify/login', 'logout' => 'auth/toutify/logout'];
 if (isset($legacy[$path])) {
     header('Location: ' . url($legacy[$path]), true, 301);
+    exit;
+}
+
+// Toutify sign-in, logout, back-channel logout and webhook
+if (strpos($path, 'auth/toutify/') === 0) {
+    $action = substr($path, strlen('auth/toutify/'));
+    require ROOT . '/app/pages/toutify.php';
     exit;
 }
 
