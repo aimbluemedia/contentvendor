@@ -34,3 +34,4 @@ require ROOT . '/app/auth.php';
 require ROOT . '/app/content.php';
 require ROOT . '/app/ai.php';
 require ROOT . '/app/planner.php';
+require ROOT . '/app/password_reset.php';

@@ -29,6 +29,11 @@ return [
     // The first account registered with this email becomes an admin (team dashboard).
     'admin_email' => 'you@example.com',
 
+    // Password reset emails are sent from this address. On Hostinger use an address on your own domain
+    // (create it in hPanel > Emails), e.g. no-reply@contentvendor.com. Empty = no-reply@<your domain>.
+    'mail_from'      => '',
+    'mail_from_name' => 'ContentVendor',
+
     // Where "Upgrade" buttons go (your Toutify subscription page). Empty = done-for-you contact form.
     'upgrade_url' => '',
     'timezone'    => 'America/New_York',

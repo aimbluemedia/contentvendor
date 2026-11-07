@@ -9,6 +9,7 @@
         <input type="hidden" name="_gate" value="login">
         <label>Email<input type="email" name="email" required autocomplete="email" value="<?= e(old('email')) ?>"></label>
         <label>Password<input type="password" name="password" required autocomplete="current-password"></label>
+        <p class="forgot-link"><a href="<?= e(url('forgot')) ?>">Forgot password?</a></p>
         <button class="btn btn-primary btn-block" type="submit">Log in</button>
       </form>
       <?php if ($signup ?? true): ?><p class="small center">New here? <a href="<?= e(url('register')) ?>">Create a free account</a></p><?php endif; ?>

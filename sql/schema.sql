@@ -111,3 +111,20 @@ CREATE TABLE IF NOT EXISTS plan_tasks (
   item_id      INT NULL,
   completed_at DATETIME NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Password reset links (also created automatically on first use)
+CREATE TABLE IF NOT EXISTS password_resets (
+  id         INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id    INT NOT NULL,
+  token_hash CHAR(64) NOT NULL,
+  expires_at DATETIME NOT NULL,
+  used_at    DATETIME NULL,
+  created_at DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Social platform switches (also created automatically on first use)
+CREATE TABLE IF NOT EXISTS member_platforms (
+  user_id    INT NOT NULL PRIMARY KEY,
+  platforms  VARCHAR(255) NOT NULL,
+  updated_at DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

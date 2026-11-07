@@ -1321,3 +1321,14 @@ i.tk-pl-facebook{background:#1877f2}i.tk-pl-instagram{background:#d6246e}i.tk-pl
 .tk-pl-reddit{background:#fff0e9;color:#ff4500}i.tk-pl-reddit{background:#ff4500}
 @media(max-width:600px){.pf-lock{display:none!important}.pf-count{text-align:left;width:100%}}
 .pf-hint{margin:6px 12px 10px;font-size:.86rem;color:#92400e}
+
+/* Password fields: show/hide eye + forgot link */
+.pw-wrap{position:relative;display:block}
+.pw-wrap input{padding-right:48px}
+.pw-toggle{position:absolute;right:6px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:9px;background:transparent;color:#7c8c84;cursor:pointer}
+.pw-toggle:hover{background:var(--surface-2);color:#15803d}
+.pw-toggle:focus-visible{outline:2px solid #16a34a;outline-offset:1px}
+.pw-toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.forgot-link{margin:-8px 0 0;text-align:right;font-size:.88rem}
+.forgot-link a{color:#15803d;font-weight:600;text-decoration:none}
+.forgot-link a:hover{text-decoration:underline}
