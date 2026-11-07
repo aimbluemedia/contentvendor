@@ -203,10 +203,10 @@ function claude_plan_ideas(array $profile, int $count): array
     return $out;
 }
 
-/** Planner platforms the member may pick: content (blog, Google, email) + switched-on social platforms */
+/** Planner platforms the member may pick: content (blog, Google) + switched-on social platforms */
 function planner_allowed_platforms(array $user): array
 {
-    $allowed = ['google_business', 'article', 'email'];
+    $allowed = ['google_business', 'article'];
     foreach (enabled_platforms($user) as $p) {
         if (isset(PLAN_PLATFORMS[$p])) $allowed[] = $p;
     }

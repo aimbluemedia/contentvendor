@@ -24,7 +24,7 @@ $planUser = plan_of($user);
           <?php $okPl = planner_allowed_platforms($user); foreach (PLAN_PLATFORMS as $k => [$label]): if (!in_array($k, $okPl, true)) continue; ?>
             <label class="pc-chip"><input type="checkbox" name="platforms[]" value="<?= e($k) ?>" <?= in_array($k, $cur['platforms'], true) ? 'checked' : '' ?>><span><i class="tk-pl tk-pl-<?= e($k) ?>"></i><?= e($label) ?></span></label>
           <?php endforeach; ?>
-          <?php foreach (PLAN_PLATFORMS as $k => [$label]): if (in_array($k, $okPl, true)) continue; ?>
+          <?php foreach (PLAN_PLATFORMS as $k => [$label]): if ($k === 'email' || in_array($k, $okPl, true)) continue; ?>
             <a class="pick-locked" href="<?= e(url('platforms')) ?>">🔒 <?= e($label) ?></a>
           <?php endforeach; ?>
         </div>
