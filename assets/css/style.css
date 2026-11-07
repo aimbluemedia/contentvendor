@@ -1377,3 +1377,37 @@ i.tk-pl-facebook{background:#1877f2}i.tk-pl-instagram{background:#d6246e}i.tk-pl
 .tb-btn.ghost:hover{background:rgba(255,255,255,.16);color:#fff}
 @media (max-width:640px){.tb{padding:20px}.tb-actions{width:100%}}
 .ap-head h2{margin:0 0 6px}
+
+/* Dashboard: AI content plan card */
+.cp{position:relative;overflow:hidden;border-radius:26px;margin-bottom:24px;background:#fff;border:1px solid #bbf7d0;box-shadow:0 22px 50px rgba(21,128,61,.14)}
+.cp-new{display:grid;grid-template-columns:1.15fr 1fr;gap:28px 40px;align-items:center;padding:34px 36px;background:radial-gradient(600px 300px at 100% 0%,#dcfce7 0%,transparent 70%),linear-gradient(180deg,#fff,#f7fef9);border:2px solid #4ade80}
+.cp-new:before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(21,128,61,.09) 1px,transparent 1px);background-size:18px 18px;mask-image:linear-gradient(90deg,transparent 45%,#000)}
+.cp-kicker{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:#dcfce7;color:#086b2d;font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.cp-kicker i{width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 0 rgba(22,163,74,.5);animation:cpPulse 2s infinite}
+@keyframes cpPulse{70%{box-shadow:0 0 0 8px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
+@media (prefers-reduced-motion:reduce){.cp-kicker i{animation:none}}
+.cp-new h2{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:800;letter-spacing:-.035em;line-height:1.1;margin:14px 0 10px}
+.cp-new h2 span{background:linear-gradient(90deg,#15803d,#16a34a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cp-new p{margin:0 0 22px;color:var(--muted);font-size:1.05rem;max-width:520px}
+.cp-cta{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap}
+.cp-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 28px;border-radius:14px;color:#fff;font-weight:800;font-size:1.08rem;text-decoration:none;background:linear-gradient(135deg,#16a34a,#15803d);box-shadow:0 14px 30px rgba(22,163,74,.35);transition:transform .15s,box-shadow .15s}
+.cp-btn:hover{color:#fff;transform:translateY(-2px);box-shadow:0 18px 36px rgba(22,163,74,.42)}
+.cp-btn.sm{padding:11px 20px;font-size:.95rem;box-shadow:0 8px 18px rgba(22,163,74,.28)}
+.cp-note{color:var(--muted);font-size:.9rem;font-weight:600}
+.cp-steps{position:relative;list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.cp-steps:before{content:"";position:absolute;left:27px;top:28px;bottom:28px;width:2px;background:linear-gradient(#86efac,#dcfce7)}
+.cp-steps li{position:relative;display:flex;align-items:center;gap:16px;padding:14px 18px 14px 14px;border-radius:18px;background:#fff;border:1px solid #dcfce7;box-shadow:0 6px 16px rgba(21,128,61,.06)}
+.cp-ico{flex:none;display:grid;place-items:center;width:28px;height:28px;margin:0 0 0 0;padding:0}
+.cp-steps .cp-ico{width:28px;height:28px;border-radius:10px;background:linear-gradient(135deg,#16a34a,#15803d);box-shadow:0 0 0 6px #fff;padding:6px;box-sizing:content-box}
+.cp-ico svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cp-steps b{display:block;font-size:1rem}.cp-steps small{color:var(--muted);font-size:.86rem}
+.cp-active{padding:0 24px 22px}
+.cp-bar{display:flex;justify-content:space-between;align-items:center;gap:14px 20px;flex-wrap:wrap;margin:0 -24px 18px;padding:16px 24px;background:linear-gradient(90deg,#f0fdf4,#fff);border-bottom:1px solid #dcfce7}
+.cp-bar-copy{min-width:0}
+.cp-chips{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.cp-chips li{padding:4px 11px;border-radius:999px;background:#fff;border:1px solid #bbf7d0;color:#14532d;font-size:.82rem;font-weight:600}
+.cp-bar-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.cp-link{font-weight:700;color:#086b2d;text-decoration:none}
+.cp-count{font-weight:700;color:#086b2d;font-size:.9rem}
+@media (max-width:1000px){.cp-new{grid-template-columns:1fr}}
+@media (max-width:640px){.cp-new{padding:24px 20px}.cp-btn{width:100%}.cp-active{padding:0 16px 18px}.cp-bar{margin:0 -16px 16px;padding:14px 16px}.cp-bar-actions{width:100%;justify-content:space-between}}
