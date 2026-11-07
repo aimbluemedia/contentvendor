@@ -17,7 +17,7 @@
         </div>
         <ol class="cp-steps">
           <li><span class="cp-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></span><div><b>Pick your platforms</b><small>Facebook, Google, TikTok, your blog…</small></div></li>
-          <li><span class="cp-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Choose your time</b><small>From 5 minutes to an hour a day</small></div></li>
+          <li><span class="cp-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Decide your daily schedule</b><small>From 5 minutes to an hour a day</small></div></li>
           <li><span class="cp-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></span><div><b>Follow your daily tasks</b><small>AI drafts every post, you hit publish</small></div></li>
         </ol>
       </section>
