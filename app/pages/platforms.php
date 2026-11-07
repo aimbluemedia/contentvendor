@@ -5,6 +5,7 @@ if (is_post()) {
     try {
         save_platforms($user, (array) ($_POST['platforms'] ?? []));
         flash('success', 'Your platforms are saved. Your tools now create content for them.');
+        if (!setup_complete($user)) redirect('members'); // back to the setup cards for the next step
     } catch (InvalidArgumentException $ex) {
         flash('error', $ex->getMessage());
     }

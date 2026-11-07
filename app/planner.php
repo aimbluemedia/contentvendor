@@ -222,3 +222,20 @@ function platform_channel(string $key): string
 {
     return PLAN_PLATFORMS[$key][1] ?? 'facebook';
 }
+
+/** Dashboard setup steps a member must finish before posting: [key => done?] */
+function setup_steps(array $user, ?array $profile = null): array
+{
+    platforms_install();
+    $profile = $profile ?? business_profile((int) $user['id']);
+    return [
+        'profile'   => profile_is_complete($profile),
+        'platforms' => (bool) q('SELECT 1 FROM member_platforms WHERE user_id = ?', [$user['id']])->fetchColumn(),
+        'plan'      => active_plan((int) $user['id']) !== null,
+    ];
+}
+
+function setup_complete(array $user): bool
+{
+    return !in_array(false, setup_steps($user), true);
+}

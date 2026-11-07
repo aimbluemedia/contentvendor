@@ -1,5 +1,9 @@
 <?php
 $user = require_login();
+if (!setup_complete($user)) {
+    flash('error', 'Finish your 3 setup steps (business profile, platforms and content plan) to start posting.');
+    redirect('members');
+}
 $uid = (int) $user['id'];
 $plan = plan_of($user);
 $profile = business_profile($uid);

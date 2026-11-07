@@ -51,7 +51,7 @@ $nextPlan = $user['plan'] === 'starter' ? ['Pro', 3] : ($user['plan'] === 'pro' 
           <a href="<?= e(url('account')) ?>">Upgrade to <?= e($nextPlan[0]) ?> →</a>
         </div>
       <?php endif; ?>
-      <noscript><button class="ap-btn" type="submit">Save my platforms</button></noscript>
+      <div class="pf-save"><button class="ap-btn" type="submit">Save my platforms →</button></div>
     </form>
   </div>
 </section>
