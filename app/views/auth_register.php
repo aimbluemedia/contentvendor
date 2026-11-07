@@ -11,7 +11,7 @@
         <label>Password<input type="password" name="password" required minlength="8" autocomplete="new-password"></label>
         <button class="btn btn-primary btn-block" type="submit">Create account</button>
       </form>
-      <p class="small center">Already have an account? <a href="<?= e(url('login')) ?>">Log in</a></p>
+      <p class="small center">Already have an account? <a href="<?= e(url('members')) ?>">Log in</a></p>
     </div>
   </div>
 </section>

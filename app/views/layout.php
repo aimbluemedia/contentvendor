@@ -129,7 +129,7 @@ $side = function (string $href, string $icon, string $label, bool $active, strin
         <?= $nav('', 'How it works') ?>
         <?= $nav('pricing', 'Pricing') ?>
         <?= $nav('done-for-you', 'Done-for-you') ?>
-        <?= $nav('login', 'Log in') ?>
+        <?= $nav('members', 'Log in') ?>
         <a class="btn btn-primary btn-sm" href="<?= e(url('register')) ?>">Start free</a>
       <?php endif; ?>
     </nav>

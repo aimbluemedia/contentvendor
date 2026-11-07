@@ -20,7 +20,6 @@ $routes = [
     'pricing'      => 'pricing',
     'done-for-you' => 'done_for_you',
     'register'     => 'register',
-    'login'        => 'login',
     'logout'       => 'logout',
     'members'      => 'dashboard',
     'planner'      => 'planner',
@@ -37,7 +36,7 @@ $routes = [
 ];
 
 // Old addresses keep working
-$legacy = ['dashboard' => 'members', 'admin' => 'superadmin'];
+$legacy = ['dashboard' => 'members', 'admin' => 'superadmin', 'login' => 'members'];
 if (isset($legacy[$path])) {
     header('Location: ' . url($legacy[$path]), true, 301);
     exit;

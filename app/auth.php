@@ -33,9 +33,9 @@ function attempt_login(string $email, $password): ?array
 }
 
 /**
- * Show a login form in place on $here (e.g. /members) instead of redirecting
- * to /login. After a successful login the visitor stays on $here; a non-admin
- * signing in on an admin-only page is sent to /members.
+ * Show a login form in place on $here (/members or /superadmin). After signing
+ * in on /superadmin the admin stays there (anyone else goes to /members); after
+ * signing in on /members members stay there and the main admin goes to /superadmin.
  */
 function login_gate(string $here, bool $adminOnly = false): void
 {
@@ -45,7 +45,10 @@ function login_gate(string $here, bool $adminOnly = false): void
         $user = attempt_login(post('email'), $_POST['password'] ?? '');
         if ($user) {
             login_user((int) $user['id']);
-            redirect($adminOnly && $user['role'] !== 'admin' ? 'members' : $here);
+            if ($adminOnly) {
+                redirect($user['role'] === 'admin' ? $here : 'members');
+            }
+            redirect($here === 'members' ? home_path_for($user) : $here);
         }
         $errors[] = 'That email and password don\'t match.';
     }
@@ -70,7 +73,7 @@ function require_login(?string $here = null): array
             login_gate($here);
         }
         flash('info', 'Please log in to continue.');
-        redirect('login');
+        redirect('members');
     }
     return $user;
 }
