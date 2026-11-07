@@ -47,6 +47,8 @@ function toutify_install(): void
     db()->exec("CREATE TABLE IF NOT EXISTS toutify_events (
         event_id VARCHAR(40) NOT NULL PRIMARY KEY, type VARCHAR(40) NOT NULL, received_at DATETIME NOT NULL)$tail");
     try { db()->exec('CREATE INDEX idx_toutify_sessions_sid ON toutify_sessions (sid)'); } catch (PDOException $e) {}
+    // Added after launch: the member's website from Toutify
+    try { db()->query('SELECT website FROM users LIMIT 0'); } catch (PDOException $e) { db()->exec('ALTER TABLE users ADD COLUMN website VARCHAR(255) NULL'); }
     try { db()->exec('CREATE INDEX idx_toutify_sessions_sub ON toutify_sessions (sub)'); } catch (PDOException $e) {}
 }
 
@@ -130,10 +132,13 @@ function toutify_is_admin_sub(string $sub): bool
  * Copy Toutify fields onto the member row (and business name + phone into their profile).
  * Toutify omits empty values, so a missing business_name or phone_number means it was cleared.
  */
-function toutify_apply_member(int $userId, array $m, ?int $updatedAt): void
+function toutify_apply_member(int $userId, array $m, ?int $updatedAt, bool $fullProfile = true): void
 {
+    toutify_install();
     $m += ['business_name' => '', 'phone_number' => ''];
-    $fields = ['name' => 'name', 'email' => 'email', 'business_name' => 'business_name', 'phone' => 'phone_number', 'toutify_status' => 'account_status'];
+    // Sign-in returns the full profile, so a missing website means it was cleared. Webhooks may not include it.
+    if ($fullProfile) $m += ['website' => ''];
+    $fields = ['name' => 'name', 'email' => 'email', 'business_name' => 'business_name', 'phone' => 'phone_number', 'website' => 'website', 'toutify_status' => 'account_status'];
     $set = [];
     $vals = [];
     foreach ($fields as $col => $claim) {
@@ -160,6 +165,7 @@ function toutify_apply_member(int $userId, array $m, ?int $updatedAt): void
     $mirror = [];
     if (array_key_exists('business_name', $m)) $mirror['business_name'] = (string) $m['business_name'];
     if (array_key_exists('phone_number', $m)) $mirror['phone'] = (string) $m['phone_number'];
+    if (array_key_exists('website', $m)) $mirror['website'] = (string) $m['website'];
     if ($mirror) {
         business_profile($userId);
         $cols = implode(', ', array_map(fn($c) => "$c = ?", array_keys($mirror)));
@@ -292,7 +298,7 @@ function toutify_handle_webhook(array $body): int
             if ($user) {
                 $updated = isset($m['updated_at']) ? (int) $m['updated_at'] : 0;
                 if ($updated >= (int) $user['toutify_updated_at']) {
-                    toutify_apply_member((int) $user['id'], $m, $updated);
+                    toutify_apply_member((int) $user['id'], $m, $updated, false);
                 }
                 if (in_array($type, ['member.suspended', 'member.closed'], true)) {
                     toutify_end_sessions($sub);

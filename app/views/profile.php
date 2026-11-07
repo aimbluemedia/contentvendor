@@ -13,6 +13,7 @@
         <div><dt>Email</dt><dd><?= e($user['email'] ?: '—') ?></dd></div>
         <div><dt>Business</dt><dd><?= e($user['business_name'] ?? '' ?: '—') ?></dd></div>
         <div><dt>Phone</dt><dd><?= e($user['phone'] ?? '' ?: '—') ?></dd></div>
+        <div class="tx-wide"><dt>Website</dt><dd><?php $site = (string) ($user['website'] ?? ''); if ($site !== ''): $href = preg_match('~^https?://~i', $site) ? $site : 'https://' . $site; ?><a href="<?= e($href) ?>" target="_blank" rel="noopener"><?= e(preg_replace('~^https?://(www\.)?~i', '', rtrim($site, '/'))) ?> ↗</a><?php else: ?>—<?php endif; ?></dd></div>
       </dl>
     </div>
     <form method="post" class="form card" action="<?= e(url('profile' . (isset($_GET['next']) ? '?next=' . urlencode((string) $_GET['next']) : ''))) ?>">
@@ -25,7 +26,6 @@
         <label>Location *<input name="location" required placeholder="Phoenix, AZ" value="<?= e($profile['location']) ?>"></label>
       </div>
       <div class="row-2">
-        <label>Website<input name="website" placeholder="https://" value="<?= e($profile['website']) ?>"></label>
         <label>Brand voice
           <select name="brand_voice">
             <?php foreach (['friendly' => 'Friendly & approachable', 'professional' => 'Professional & trustworthy', 'bold' => 'Bold & energetic', 'warm' => 'Warm & family-owned', 'expert' => 'Expert & educational'] as $k => $v): ?>

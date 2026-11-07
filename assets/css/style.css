@@ -1344,3 +1344,6 @@ i.tk-pl-facebook{background:#1877f2}i.tk-pl-instagram{background:#d6246e}i.tk-pl
 @media(max-width:600px){.tx-grid{grid-template-columns:1fr}}
 .tl-login .btn-lg{margin:8px 0 4px}
 .signup-fallback{margin:10px 0 0}.signup-fallback a{color:#15803d;font-weight:600}
+.tx-grid .tx-wide{grid-column:1/-1}
+.tx-grid dd a{color:#15803d;font-weight:700;text-decoration:none}
+.tx-grid dd a:hover{text-decoration:underline}

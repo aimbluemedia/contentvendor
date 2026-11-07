@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
   name               VARCHAR(190) NOT NULL DEFAULT '',
   business_name      VARCHAR(190) NULL,
   phone              VARCHAR(40)  NULL,
+  website            VARCHAR(255) NULL,
   toutify_status     VARCHAR(20)  NOT NULL DEFAULT 'active',  -- active | suspended | closed | deleted
   toutify_updated_at INT UNSIGNED NOT NULL DEFAULT 0,
   role               VARCHAR(20)  NOT NULL DEFAULT 'member',  -- member | admin (admin = sub listed in config toutify.admin_subs)
