@@ -45,60 +45,58 @@ $dfyFaqs = [
   </div>
 </section>
 
-<section class="dfy-fomo">
+<?php
+// Savings calculator defaults (the same maths runs live in the browser)
+$calcPk = [];
+foreach (PACKAGES as $k => $pk) $calcPk[] = ['key' => $k, 'name' => $pk['name'], 'price' => (int) $pk['price']];
+$calcCap = ['starter' => 12, 'growth' => 40, 'dominator' => 120]; // approx. posts a month each package covers
+?>
+<section class="dfy-fomo dfy-calc-sec" id="calculator">
   <div class="dfy-fomo-bg" aria-hidden="true"></div>
   <div class="container">
     <div class="dfy-fomo-head">
       <span class="dfy-fomo-pill"><i></i> While you read this, your competitors are posting</span>
-      <h2>Every week you go quiet, <span>a competitor gets your customer.</span></h2>
-      <p>Customers check Google, social media and AI assistants before they call. The business that shows up every week is the one they remember. Which one sounds like you?</p>
+      <h2>What is your content really costing you? <span>Find out in 10 seconds.</span></h2>
+      <p>Move the sliders to match what you do today. We'll show what you'd save, and how many hours you'd get back.</p>
     </div>
 
-    <div class="dfy-duo">
-      <article class="dfy-side">
-        <div class="dfy-side-top">
-          <span class="dfy-side-tag">You do it yourself</span>
-          <span class="dfy-side-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 14.6A8.5 8.5 0 1 1 9.4 3.5a7 7 0 0 0 11.1 11.1z"/></svg></span>
+    <div class="dfy-calc" data-dfy-calc data-packages='<?= e(json_encode($calcPk)) ?>' data-caps='<?= e(json_encode($calcCap)) ?>'>
+      <div class="dfy-calc-in">
+        <div class="dfy-sl">
+          <div class="dfy-sl-top"><label for="c-posts">Posts you want each month</label><output data-out="posts">20 posts</output></div>
+          <input id="c-posts" type="range" min="4" max="120" step="2" value="20" data-in="posts">
+          <div class="dfy-sl-scale"><span>4</span><span>120</span></div>
         </div>
-        <h3>Stop writing posts at 10pm.</h3>
-        <p class="dfy-side-pain">Marketing happens after the real work, if it happens at all. Then you get busy, the posts stop, and customers forget you.</p>
-        <div class="dfy-cost">
-          <span>What it costs you now</span>
-          <div class="dfy-cost-row"><b>~20 hrs</b><small>a month writing, designing and posting</small></div>
-          <div class="dfy-cost-row"><b>Weeks</b><small>of silence every time you get busy</small></div>
+        <div class="dfy-sl">
+          <div class="dfy-sl-top"><label for="c-pay">What you pay for content now</label><output data-out="pay">$0 / month</output></div>
+          <input id="c-pay" type="range" min="0" max="5000" step="50" value="0" data-in="pay">
+          <div class="dfy-sl-scale"><span>$0 (I do it myself)</span><span>$5,000</span></div>
         </div>
-        <ul class="dfy-gain">
-          <li>We plan, write and publish your whole month</li>
-          <li>You approve from your phone in minutes</li>
-          <li>You stay visible, even in your busiest season</li>
-        </ul>
-        <div class="dfy-wait"><span>Every month you wait:</span> another ~20 hours gone</div>
-        <a class="dfy-side-btn" href="#request">Give me my time back <span aria-hidden="true">→</span></a>
-      </article>
+        <div class="dfy-sl">
+          <div class="dfy-sl-top"><label for="c-hours">Hours you spend on it each week</label><output data-out="hours">6 hrs / week</output></div>
+          <input id="c-hours" type="range" min="0" max="25" step="1" value="6" data-in="hours">
+          <div class="dfy-sl-scale"><span>0</span><span>25 hrs</span></div>
+        </div>
+        <div class="dfy-sl">
+          <div class="dfy-sl-top"><label for="c-rate">What an hour of your time is worth</label><output data-out="rate">$50 / hour</output></div>
+          <input id="c-rate" type="range" min="20" max="250" step="5" value="50" data-in="rate">
+          <div class="dfy-sl-scale"><span>$20</span><span>$250</span></div>
+        </div>
+      </div>
 
-      <div class="dfy-vs" aria-hidden="true">or</div>
-
-      <article class="dfy-side gold">
-        <div class="dfy-side-top">
-          <span class="dfy-side-tag">You pay someone to do it</span>
-          <span class="dfy-side-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2 6h20v12H2zm10 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg></span>
+      <div class="dfy-calc-out" aria-live="polite">
+        <span class="dfy-calc-k">Your monthly savings</span>
+        <div class="dfy-calc-big" data-out="save">$0</div>
+        <p class="dfy-calc-yr" data-out="year">That's $0 a year back in your business.</p>
+        <div class="dfy-calc-grid">
+          <div><b data-out="hrsback">26 hrs</b><span>back every month</span></div>
+          <div><b data-out="now">$1,300</b><span>true cost today</span></div>
+          <div><b data-out="pkg">Content Growth</b><span data-out="pkgprice">$749/mo · under $25/day</span></div>
         </div>
-        <h3>Save $1,000–$2,000 a month.</h3>
-        <p class="dfy-side-pain">A part-time social media employee costs about $2,000–$2,800 a month with payroll taxes, and it all stops when they're sick, on vacation or quit.</p>
-        <div class="dfy-cost">
-          <span>Monthly cost</span>
-          <div class="dfy-vsbar"><em>Employee</em><div><i class="emp" style="width:100%"></i></div><b>~$2,500</b></div>
-          <div class="dfy-vsbar"><em>Our team</em><div><i class="us" style="width:30%"></i></div><b>$<?= number_format(PACKAGES['growth']['price']) ?></b></div>
-          <div class="dfy-keep"><span>Put back in your pocket</span><b>~$1,750/mo</b></div>
-        </div>
-        <ul class="dfy-gain">
-          <li>A whole content team, no hiring or training</li>
-          <li>More output: up to 20 campaigns on 6 networks</li>
-          <li>Move the savings into ads and grow faster</li>
-        </ul>
-        <div class="dfy-wait"><span>Every month you wait:</span> ~$1,750 more on payroll</div>
-        <a class="dfy-side-btn" href="#request">Show me the savings <span aria-hidden="true">→</span></a>
-      </article>
+        <div class="dfy-calc-wait" data-out="wait">Every month you wait costs you $0.</div>
+        <a class="dfy-btn" href="<?= e(url('done-for-you?package=growth')) ?>#request" data-out="cta">Claim these savings <span aria-hidden="true">→</span></a>
+        <small class="dfy-calc-note">Estimate only. True cost today = what you pay + your hours × what your time is worth. We recommend the package that covers your posts.</small>
+      </div>
     </div>
 
     <div class="dfy-claim">
@@ -107,6 +105,42 @@ $dfyFaqs = [
     </div>
   </div>
 </section>
+<script>
+(function () {
+  var root = document.querySelector('[data-dfy-calc]');
+  if (!root) return;
+  var pk = JSON.parse(root.getAttribute('data-packages')), caps = JSON.parse(root.getAttribute('data-caps'));
+  var base = <?= json_encode(url('done-for-you')) ?>;
+  var $ = function (k) { return root.querySelector('[data-in="' + k + '"]'); };
+  var out = function (k) { return root.querySelector('[data-out="' + k + '"]'); };
+  var money = function (n) { return (n < 0 ? '-$' : '$') + Math.abs(Math.round(n)).toLocaleString('en-US'); };
+  function fill(el) { el.style.setProperty('--p', ((el.value - el.min) / (el.max - el.min) * 100) + '%'); }
+  function calc() {
+    var posts = +$('posts').value, pay = +$('pay').value, hours = +$('hours').value, rate = +$('rate').value;
+    ['posts', 'pay', 'hours', 'rate'].forEach(function (k) { fill($(k)); });
+    out('posts').textContent = posts + ' posts';
+    out('pay').textContent = money(pay) + ' / month';
+    out('hours').textContent = hours + ' hrs / week';
+    out('rate').textContent = money(rate) + ' / hour';
+    var pick = pk[pk.length - 1];
+    for (var i = 0; i < pk.length; i++) { if (posts <= (caps[pk[i].key] || 0)) { pick = pk[i]; break; } }
+    var hrsMonth = Math.round(hours * 52 / 12);
+    var now = pay + hrsMonth * rate;
+    var save = now - pick.price;
+    out('save').textContent = save > 0 ? money(save) : '$0';
+    out('save').classList.toggle('neg', save <= 0);
+    out('year').textContent = save > 0 ? "That's " + money(save * 12) + ' a year back in your business.' : 'You get ' + hrsMonth + ' hours back for ' + money(-save) + ' more a month.';
+    out('hrsback').textContent = hrsMonth + ' hrs';
+    out('now').textContent = money(now);
+    out('pkg').textContent = pick.name;
+    out('pkgprice').textContent = money(pick.price) + '/mo · under ' + money(Math.floor(pick.price * 12 / 365) + 1) + '/day';
+    out('wait').textContent = save > 0 ? 'Every month you wait costs you ' + money(save) + '.' : 'Every month you wait is another ' + hrsMonth + ' hours of your time.';
+    out('cta').setAttribute('href', base + '?package=' + pick.key + '#request');
+  }
+  root.addEventListener('input', calc);
+  calc();
+})();
+</script>
 
 <section class="m-section m-alt" id="packages">
   <div class="container">
