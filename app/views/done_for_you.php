@@ -142,26 +142,45 @@ $calcCap = ['starter' => 12, 'growth' => 40, 'dominator' => 120]; // approx. pos
 })();
 </script>
 
-<section class="m-section m-alt" id="packages">
+<section class="m-section dfy-pk-sec" id="packages">
   <div class="container">
     <div class="m-head">
       <span class="m-eyebrow">Packages</span>
-      <h2>Pick your pace. We do the rest.</h2>
-      <p>Every package includes the $49.99 Premium membership.</p>
+      <h2>Pick your pace. <span class="dfy-pk-hl">We do the rest.</span></h2>
+      <p>Every package includes the $49.99 Premium membership. No contract, cancel any time.</p>
     </div>
-    <div class="m-plans">
-      <?php foreach (PACKAGES as $key => $pkg): $hero = !empty($pkg['featured']); ?>
-        <div class="m-plan<?= $hero ? ' hero' : '' ?>">
-          <?php if ($hero): ?><span class="m-plan-badge">Most popular</span><?php endif; ?>
-          <h3><?= e($pkg['name']) ?></h3>
-          <p class="m-plan-tag"><?= e($pkg['for']) ?></p>
-          <div class="m-price">$<?= number_format($pkg['price']) ?><small>/month</small></div>
-          <a class="m-btn <?= $hero ? 'm-btn-primary' : 'm-btn-light' ?> m-btn-block" href="<?= e(url('done-for-you?package=' . $key)) ?>#request">Choose <?= e($pkg['name']) ?></a>
-          <ul><?php foreach ($pkg['includes'] as $inc): ?><li><?= e($inc) ?></li><?php endforeach; ?></ul>
-        </div>
+    <?php
+    $pkOut = ['starter' => 'Up to 12 posts + 1 article', 'growth' => 'Up to 40 posts + 4 articles', 'dominator' => 'Up to 120 posts + 4 articles'];
+    $pkIcon = [
+        'starter'   => '<path d="M12 2l2.6 6.4L21 9l-5 4.4L17.5 20 12 16.6 6.5 20 8 13.4 3 9l6.4-.6z"/>',
+        'growth'    => '<path d="M3 20h4v-7H3zm7 0h4V9h-4zm7 0h4V4h-4z"/>',
+        'dominator' => '<path d="M5 16 3 6l5.5 4L12 4l3.5 6L21 6l-2 10zm0 2h14v2H5z"/>',
+    ];
+    ?>
+    <div class="dfy-pk">
+      <?php foreach (PACKAGES as $key => $pkg): $hero = !empty($pkg['featured']); $day = (int) floor($pkg['price'] * 12 / 365) + 1; ?>
+        <article class="dfy-pk-card<?= $hero ? ' is-hero' : '' ?>">
+          <?php if ($hero): ?><span class="dfy-pk-badge">Most popular</span><?php endif; ?>
+          <div class="dfy-pk-top">
+            <span class="dfy-pk-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><?= $pkIcon[$key] ?? $pkIcon['starter'] ?></svg></span>
+            <h3><?= e($pkg['name']) ?></h3>
+          </div>
+          <p class="dfy-pk-for"><?= e($pkg['for']) ?></p>
+          <div class="dfy-pk-price"><b>$<?= number_format($pkg['price']) ?></b><span>/month</span></div>
+          <span class="dfy-pk-day">Under $<?= $day ?> a day</span>
+          <div class="dfy-pk-out"><span>Each month you get</span><b><?= e($pkOut[$key] ?? '') ?></b></div>
+          <a class="dfy-pk-btn" href="<?= e(url('done-for-you?package=' . $key)) ?>#request">Choose <?= e($pkg['name']) ?> <span aria-hidden="true">→</span></a>
+          <ul class="dfy-pk-list"><?php foreach ($pkg['includes'] as $inc): ?><li><?= e($inc) ?></li><?php endforeach; ?></ul>
+        </article>
       <?php endforeach; ?>
     </div>
-    <p class="m-center m-muted m-small">A campaign is one idea adapted for each network. Original video and on-site photography are not included. Elite niche directories: $99/mo, subject to approval.</p>
+    <ul class="dfy-pk-trust">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1.2 13.6 6-6-1.4-1.4-4.6 4.6-2.2-2.2-1.4 1.4z"/></svg>You approve every post</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 5h-2v6.1l4.6 2.8 1-1.7-3.6-2.2z"/></svg>Month to month, no contract</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/></svg>Premium membership included</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H8l-4 4z"/></svg>Strategist call within 1 business day</li>
+    </ul>
+    <p class="m-center m-muted m-small">A campaign is one idea adapted for each network. Post counts are approximate. Original video and on-site photography are not included. Elite niche directories: $99/mo, subject to approval.</p>
   </div>
 </section>
 
