@@ -12,14 +12,15 @@ $dfyFaqs = [
   <div class="container dfy-hero-grid">
     <div class="dfy-hero-copy">
       <span class="dfy-pill"><i></i> Done-for-you content, powered by AI</span>
-      <h1>Grow your business with content that keeps you <span>ahead of the competition</span>.</h1>
-      <p class="dfy-lead">Our team uses AI to plan, write and publish a full month of content and social media for your business. You show up everywhere customers look, every week, while your competitors go quiet.</p>
+      <?php $dfyMin = min(array_column(PACKAGES, 'price')); $dfyDay = (int) floor($dfyMin * 12 / 365) + 1; ?>
+      <h1>For under $<?= $dfyDay ?> a day, we handle your content. <span>You make more money doing what you do best.</span></h1>
+      <p class="dfy-lead">Every hour you spend writing posts is an hour you're not serving customers or winning new jobs. Our team uses AI to plan, write and publish your content and social media every month, so you're free to grow your business.</p>
       <div class="dfy-cta">
-        <a class="dfy-btn" href="#request">Get my monthly content plan <span aria-hidden="true">→</span></a>
+        <a class="dfy-btn" href="#request">Free up my time <span aria-hidden="true">→</span></a>
         <a class="dfy-btn ghost" href="#packages">See packages</a>
       </div>
       <ul class="dfy-trust">
-        <li><b>From $299</b><span>per month</span></li>
+        <li><b>Under $<?= $dfyDay ?>/day</b><span>from $<?= number_format($dfyMin) ?>/month</span></li>
         <li><b>You approve</b><span>every post</span></li>
         <li><b>No contract</b><span>month to month</span></li>
       </ul>

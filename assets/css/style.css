@@ -1693,3 +1693,7 @@ html{scroll-behavior:smooth}
 .ap-dfy-list li>span{color:#dc2626}.ap-dfy-list li>span svg{width:22px;height:22px}
 .dfy-ov-ic{color:#15803d}
 .dfy-side-ic{color:#86efac}.dfy-side.gold .dfy-side-ic{color:#fbbf24}
+.dfy-hero{padding-top:72px}
+.dfy-hero h1{font-size:clamp(2.1rem,4.4vw,3.4rem)}
+.dfy-hero h1 span{display:block;margin-top:6px}
+.dfy-photo{margin-top:16px}
