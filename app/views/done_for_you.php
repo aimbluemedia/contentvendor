@@ -36,7 +36,7 @@ $dfyFaqs = [
         </ul>
       </div>
       <div class="dfy-ov o2" aria-hidden="true"><b>You vs. local competitors</b><div class="dfy-bars"><span style="--w:92%">You · 32 posts</span><span style="--w:38%">Competitor A</span><span style="--w:21%">Competitor B</span></div></div>
-      <div class="dfy-ov o3" aria-hidden="true"><span class="dfy-ov-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>20+ hours</b><small>back this month</small></div></div>
+      <div class="dfy-ov o3" aria-hidden="true"><span class="dfy-ov-ic"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 5h-2v6.1l4.6 2.8 1-1.7-3.6-2.2z"/></svg></span><div><b>20+ hours</b><small>back this month</small></div></div>
     </div>
   </div>
   <div class="container">
@@ -57,7 +57,7 @@ $dfyFaqs = [
       <article class="dfy-side">
         <div class="dfy-side-top">
           <span class="dfy-side-tag">You do it yourself</span>
-          <span class="dfy-side-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></span>
+          <span class="dfy-side-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 14.6A8.5 8.5 0 1 1 9.4 3.5a7 7 0 0 0 11.1 11.1z"/></svg></span>
         </div>
         <h3>Stop writing posts at 10pm.</h3>
         <p class="dfy-side-pain">Marketing happens after the real work, if it happens at all. Then you get busy, the posts stop, and customers forget you.</p>
@@ -80,7 +80,7 @@ $dfyFaqs = [
       <article class="dfy-side gold">
         <div class="dfy-side-top">
           <span class="dfy-side-tag">You pay someone to do it</span>
-          <span class="dfy-side-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg></span>
+          <span class="dfy-side-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2 6h20v12H2zm10 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg></span>
         </div>
         <h3>Save $1,000–$2,000 a month.</h3>
         <p class="dfy-side-pain">A part-time social media employee costs about $2,000–$2,800 a month with payroll taxes, and it all stops when they're sick, on vacation or quit.</p>

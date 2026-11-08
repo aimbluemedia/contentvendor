@@ -74,10 +74,10 @@ $upgradeUrl = config('upgrade_url') ?: url('done-for-you');
         <a class="ap-dfy-btn" href="<?= e(url('done-for-you')) ?>">See Done For You <span aria-hidden="true">→</span></a>
       </div>
       <ul class="ap-dfy-list">
-        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><div><b>We plan your month</b><small>Campaigns built around your seasons, services and offers.</small></div></li>
-        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><div><b>We write every post</b><small>Social posts for up to 6 networks, plus website articles.</small></div></li>
-        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></svg></span><div><b>We publish and report</b><small>Posts go out on schedule, with a report every month.</small></div></li>
-        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>You get 20+ hours back</b><small>Approve from your phone in minutes, or let us publish.</small></div></li>
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7 2h2v2h6V2h2v2h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2zM5 10v9h14v-9zm2 2h3v3H7z"/></svg></span><div><b>We plan your month</b><small>Campaigns built around your seasons, services and offers.</small></div></li>
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.2 3.3a1.5 1.5 0 0 1 2.1 0l3.4 3.4a1.5 1.5 0 0 1 0 2.1L9.5 20H4v-5.5z"/></svg></span><div><b>We write every post</b><small>Social posts for up to 6 networks, plus website articles.</small></div></li>
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2.5 10.6 21.5 2.5l-8.1 19-2.6-7.8z"/></svg></span><div><b>We publish and report</b><small>Posts go out on schedule, with a report every month.</small></div></li>
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 5h-2v6.1l4.6 2.8 1-1.7-3.6-2.2z"/></svg></span><div><b>You get 20+ hours back</b><small>Approve from your phone in minutes, or let us publish.</small></div></li>
       </ul>
     </section>
     <p class="ap-foot small muted"><a href="<?= e(url('pricing')) ?>">See the full feature comparison →</a> · Features marked “soon” are rolling out in phases.</p>
