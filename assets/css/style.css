@@ -1457,3 +1457,20 @@ i.tk-pl-facebook{background:#1877f2}i.tk-pl-instagram{background:#d6246e}i.tk-pl
 .su-btn.ghost:hover{color:#065f46;background:#f0fdf4}
 @media (max-width:1000px){.su-cards{grid-template-columns:1fr}.su-progress{justify-items:start}}
 .pf-save{display:flex;justify-content:flex-end;margin-top:18px}.pf-save .ap-btn{width:auto;padding:13px 26px}
+
+/* Dashboard: next post card (after setup is complete) */
+.nx{padding:24px 26px;margin-bottom:24px;border-radius:22px;background:linear-gradient(180deg,#fff5f5,#fef2f2);border:2px solid #fca5a5;box-shadow:0 18px 40px rgba(220,38,38,.12)}
+.nx-head{display:flex;justify-content:space-between;align-items:center;gap:16px 24px;flex-wrap:wrap}
+.nx-head .su-btn{margin-top:0}
+.nx-kicker{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:#ef4444;color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.nx-kicker i{width:8px;height:8px;border-radius:50%;background:#fff;animation:cpPulseWhite 2s infinite}
+@media (prefers-reduced-motion:reduce){.nx-kicker i{animation:none}}
+.nx h2{font-size:clamp(1.3rem,2.2vw,1.7rem);letter-spacing:-.03em;margin:10px 0 4px}
+.nx-head p{margin:0;color:#7f1d1d;font-weight:600}
+.nx-list{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.nx-list li{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;background:#fff;border:1px solid #fecaca}
+.nx-list li>div{min-width:0}
+.nx-list b{display:block;font-size:.98rem;line-height:1.35}
+.nx-list small{color:var(--muted);font-size:.84rem}
+.nx-list .tk-pl{flex:none}
+@media (max-width:640px){.nx{padding:20px}.nx-head .su-btn{width:100%}.nx-list li{flex-direction:column;align-items:flex-start;gap:8px}}

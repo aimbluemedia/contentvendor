@@ -79,5 +79,35 @@ $cards = [
         </article>
       <?php endforeach; ?>
     </div>
+
+    <?php if ($allDone): $nextDay = next_task_day((int) $user['id']); ?>
+      <section class="nx" aria-labelledby="nx-title">
+        <div class="nx-head">
+          <div>
+            <span class="nx-kicker"><i></i> Your next post</span>
+            <?php if ($nextDay): [$nxDate, $nxTasks] = $nextDay;
+              $nxWhen = $nxDate === date('Y-m-d') ? 'Today · ' : ($nxDate === date('Y-m-d', strtotime('+1 day')) ? 'Tomorrow · ' : ''); ?>
+              <h2 id="nx-title"><?= e($nxWhen . date($nxWhen ? 'D, M j' : 'l, M j', strtotime($nxDate))) ?></h2>
+              <p><?= count($nxTasks) ?> post<?= count($nxTasks) === 1 ? '' : 's' ?> to publish on
+                <?php $nxPl = array_values(array_unique(array_map(fn($t) => platform_label($t['platform']), $nxTasks))); echo e(implode(', ', $nxPl)); ?></p>
+            <?php else: ?>
+              <h2 id="nx-title">No posts scheduled yet</h2>
+              <p>Your plan has no open tasks coming up. Edit your plan to get a fresh month of posts.</p>
+            <?php endif; ?>
+          </div>
+          <a class="su-btn" href="<?= e(url('planner')) ?>">Go to My Content Plan <span aria-hidden="true">→</span></a>
+        </div>
+        <?php if ($nextDay): ?>
+          <ul class="nx-list">
+            <?php foreach ($nxTasks as $t): $pl = PLAN_PLATFORMS[$t['platform']] ?? [ucfirst($t['platform']), '', 10]; ?>
+              <li>
+                <span class="tk-pl tk-pl-<?= e($t['platform']) ?>"><?= e($pl[0]) ?></span>
+                <div><b><?= e($t['idea']) ?></b><small><?= e(GOALS[$t['goal']] ?? '') ?> · ~<?= (int) $pl[2] ?> min</small></div>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        <?php endif; ?>
+      </section>
+    <?php endif; ?>
   </div>
 </section>

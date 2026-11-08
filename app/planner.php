@@ -239,3 +239,15 @@ function setup_complete(array $user): bool
 {
     return !in_array(false, setup_steps($user), true);
 }
+
+/** The member's next day with open tasks (today or later): [date, tasks] or null */
+function next_task_day(int $userId): ?array
+{
+    planner_install();
+    $date = q("SELECT MIN(due_date) FROM plan_tasks t JOIN content_plans p ON p.id = t.plan_id AND p.active = 1
+        WHERE t.user_id = ? AND t.status = 'todo' AND t.due_date >= ?", [$userId, date('Y-m-d')])->fetchColumn();
+    if (!$date) return null;
+    $tasks = q("SELECT t.* FROM plan_tasks t JOIN content_plans p ON p.id = t.plan_id AND p.active = 1
+        WHERE t.user_id = ? AND t.status = 'todo' AND t.due_date = ? ORDER BY t.id", [$userId, $date])->fetchAll();
+    return [$date, $tasks];
+}
