@@ -1665,3 +1665,20 @@ html{scroll-behavior:smooth}
 @media (max-width:640px){.dfy-fomo{padding:64px 0}.dfy-side{padding:22px 18px}.dfy-side-btn,.dfy-claim a{width:100%;text-align:center}}
 @media (prefers-reduced-motion:reduce){.dfy-fomo-pill i,.dfy-claim-dot{animation:none}.dfy-side:hover{transform:none}}
 .dfy-claim p{margin:0;flex:1 1 280px}.dfy-claim>div{flex:1 1 400px;flex-wrap:nowrap}.dfy-claim-dot{flex:none}
+
+/* My plan: Done For You card */
+.ap-dfy{display:grid;grid-template-columns:1fr 1.05fr;gap:28px 36px;align-items:center;margin-top:28px;padding:32px 34px;border-radius:26px;background:radial-gradient(500px 260px at 100% 0%,#fee2e2,transparent 70%),linear-gradient(180deg,#fff5f5,#fef2f2);border:2px solid #fca5a5;box-shadow:0 22px 50px rgba(220,38,38,.12)}
+.ap-dfy-tag{display:inline-block;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 8px 18px rgba(220,38,38,.25)}
+.ap-dfy h2{font-size:clamp(1.5rem,2.6vw,2rem);letter-spacing:-.03em;margin:14px 0 10px}
+.ap-dfy-copy>p{color:var(--muted);margin:0 0 18px}
+.ap-dfy-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 12px;margin-bottom:20px}
+.ap-dfy-price b{font-size:1.5rem;letter-spacing:-.03em;color:#b91c1c}.ap-dfy-price span{color:var(--muted);font-size:.9rem}
+.ap-dfy-btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:14px;color:#fff;font-weight:800;text-decoration:none;background:linear-gradient(135deg,#16a34a,#15803d);box-shadow:0 14px 30px rgba(22,163,74,.32);transition:transform .15s}
+.ap-dfy-btn:hover{color:#fff;transform:translateY(-2px)}
+.ap-dfy-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ap-dfy-list li{display:flex;gap:12px;align-items:flex-start;padding:16px;border-radius:18px;background:#fff;border:1px solid #fecaca}
+.ap-dfy-list li>span{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#fef2f2;font-size:1.2rem}
+.ap-dfy-list b{display:block;font-size:.98rem}.ap-dfy-list small{color:var(--muted);font-size:.85rem;line-height:1.45}
+.ap-foot{margin:14px 0 0}
+@media (max-width:1000px){.ap-dfy{grid-template-columns:1fr}}
+@media (max-width:640px){.ap-dfy{padding:22px 18px}.ap-dfy-list{grid-template-columns:1fr}.ap-dfy-btn{width:100%;justify-content:center}}

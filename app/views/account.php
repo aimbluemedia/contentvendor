@@ -65,15 +65,21 @@ $upgradeUrl = config('upgrade_url') ?: url('done-for-you');
       <?php endforeach; ?>
     </div>
 
-    <div class="ap-why">
-      <h2>Why upgrade?</h2>
-      <div class="ap-why-grid">
-        <div><b>More drafts, less writing</b><p>Free gives you 5 AI drafts a month. Pro gives 40 and Premium 150, enough to follow your daily plan without writing posts yourself.</p></div>
-        <div><b>Post on autopilot</b><p>Pro and Premium let you schedule posts ahead, so a busy week never means going quiet online.</p></div>
-        <div><b>Your month, planned for you</b><p>Premium's AI planner fills your calendar each month. You approve once and you're done.</p></div>
+    <section class="ap-dfy" aria-labelledby="ap-dfy-title">
+      <div class="ap-dfy-copy">
+        <span class="ap-dfy-tag">Done For You</span>
+        <h2 id="ap-dfy-title">Too busy to post? Let our team do it all.</h2>
+        <p>Our content team uses AI to plan, write and publish a full month of content and social media for your business. You just approve it, and you stay ahead of the competition.</p>
+        <div class="ap-dfy-price"><b>From $<?= number_format(min(array_column(PACKAGES, 'price'))) ?>/mo</b><span>Premium membership included · month to month</span></div>
+        <a class="ap-dfy-btn" href="<?= e(url('done-for-you')) ?>">See Done For You <span aria-hidden="true">→</span></a>
       </div>
-      <p class="ap-links"><a href="<?= e(url('pricing')) ?>">See the full feature comparison →</a> · <a href="<?= e(url('done-for-you')) ?>">Prefer we do it all for you? Done-for-you from $299/mo →</a></p>
-      <p class="small muted">Features marked “soon” are rolling out in phases.</p>
-    </div>
+      <ul class="ap-dfy-list">
+        <li><span aria-hidden="true">🗓</span><div><b>We plan your month</b><small>Campaigns built around your seasons, services and offers.</small></div></li>
+        <li><span aria-hidden="true">✍️</span><div><b>We write every post</b><small>Social posts for up to 6 networks, plus website articles.</small></div></li>
+        <li><span aria-hidden="true">🚀</span><div><b>We publish and report</b><small>Posts go out on schedule, with a report every month.</small></div></li>
+        <li><span aria-hidden="true">⏱</span><div><b>You get 20+ hours back</b><small>Approve from your phone in minutes, or let us publish.</small></div></li>
+      </ul>
+    </section>
+    <p class="ap-foot small muted"><a href="<?= e(url('pricing')) ?>">See the full feature comparison →</a> · Features marked “soon” are rolling out in phases.</p>
   </div>
 </section>
