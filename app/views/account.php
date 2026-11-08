@@ -68,9 +68,10 @@ $upgradeUrl = config('upgrade_url') ?: url('done-for-you');
     <section class="ap-dfy" aria-labelledby="ap-dfy-title">
       <div class="ap-dfy-copy">
         <span class="ap-dfy-tag">Done For You</span>
-        <h2 id="ap-dfy-title">Too busy to post? Let our team do it all.</h2>
-        <p>Our content team uses AI to plan, write and publish a full month of content and social media for your business. You just approve it, and you stay ahead of the competition.</p>
-        <div class="ap-dfy-price"><b>From $<?= number_format(min(array_column(PACKAGES, 'price'))) ?>/mo</b><span>Premium membership included · month to month</span></div>
+        <h2 id="ap-dfy-title">You have a million things to do. Let us handle your content.</h2>
+        <p>Running and growing a business takes everything you've got. Now, with AI, our team can plan, write and publish your content and social media every month, so you can focus on the work only you can do.</p>
+        <?php $dfyMin = min(array_column(PACKAGES, 'price')); ?>
+        <div class="ap-dfy-price"><b>Under $<?= (int) floor($dfyMin * 12 / 365) + 1 ?> a day</b><span>From $<?= number_format($dfyMin) ?>/mo · Premium included · month to month</span></div>
         <a class="ap-dfy-btn" href="<?= e(url('done-for-you')) ?>">See Done For You <span aria-hidden="true">→</span></a>
       </div>
       <ul class="ap-dfy-list">
