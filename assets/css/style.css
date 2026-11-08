@@ -1612,3 +1612,56 @@ html{scroll-behavior:smooth}
 @media (max-width:1000px){.dfy-photo>img{aspect-ratio:5/4}.dfy-ov.o1{left:12px}.dfy-ov.o2{right:12px;bottom:auto;top:16px}.dfy-ov.o3{left:12px;top:16px}}
 @media (max-width:640px){.dfy-photo>img{aspect-ratio:4/3}.dfy-ov.o3{left:auto;right:10px;top:auto;bottom:10px}}
 .dfy-hero{padding-top:56px}.dfy-photo{margin-top:24px}@media (max-width:1000px){.dfy-photo{margin-top:0}}
+
+/* Done-for-you: FOMO section after the hero */
+.dfy-fomo{position:relative;overflow:hidden;isolation:isolate;padding:96px 0;color:#fff;background:linear-gradient(160deg,#052e1c 0%,#064e3b 55%,#0b6b45 100%)}
+.dfy-fomo-bg{position:absolute;inset:0;z-index:-1;background:radial-gradient(600px 360px at 15% 0%,rgba(74,222,128,.22),transparent 70%),radial-gradient(600px 360px at 90% 100%,rgba(251,191,36,.14),transparent 70%)}
+.dfy-fomo-bg:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:44px 44px}
+.dfy-fomo-head{max-width:780px;margin:0 auto 52px;text-align:center}
+.dfy-fomo-pill{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:999px;background:rgba(239,68,68,.16);border:1px solid rgba(248,113,113,.45);color:#fecaca;font-weight:700;font-size:.88rem}
+.dfy-fomo-pill i{width:9px;height:9px;border-radius:50%;background:#ef4444;animation:cpPulseRed 1.8s infinite}
+.dfy-fomo-head h2{font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.08;letter-spacing:-.04em;margin:20px 0 16px;color:#fff}
+.dfy-fomo-head h2 span{display:block;background:linear-gradient(90deg,#86efac,#4ade80);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dfy-fomo-head p{margin:0 auto;max-width:640px;color:rgba(255,255,255,.75);font-size:1.12rem}
+.dfy-duo{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:stretch}
+.dfy-vs{align-self:center;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#fff;color:#064e3b;font-weight:800;box-shadow:0 0 0 8px rgba(255,255,255,.08)}
+.dfy-side{display:flex;flex-direction:column;padding:30px;border-radius:26px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px);transition:transform .2s,border-color .2s}
+.dfy-side:hover{transform:translateY(-4px);border-color:rgba(134,239,172,.5)}
+.dfy-side.gold:hover{border-color:rgba(251,191,36,.55)}
+.dfy-side-top{display:flex;justify-content:space-between;align-items:center}
+.dfy-side-tag{padding:6px 14px;border-radius:999px;background:#22c55e;color:#052e1c;font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.dfy-side.gold .dfy-side-tag{background:#fbbf24}
+.dfy-side-ic{font-size:1.6rem}
+.dfy-side h3{font-size:clamp(1.5rem,2.6vw,2rem);letter-spacing:-.03em;margin:18px 0 10px;color:#fff}
+.dfy-side-pain{color:rgba(255,255,255,.72);margin:0 0 20px}
+.dfy-cost{display:grid;gap:10px;padding:18px;border-radius:18px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.08);margin-bottom:20px}
+.dfy-cost>span{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.dfy-cost-row{display:flex;align-items:baseline;gap:12px}
+.dfy-cost-row b{min-width:90px;font-size:1.6rem;letter-spacing:-.03em;color:#fca5a5}
+.dfy-cost-row small{color:rgba(255,255,255,.75);font-size:.9rem}
+.dfy-vsbar{display:grid;grid-template-columns:76px 1fr 64px;gap:10px;align-items:center;font-size:.88rem}
+.dfy-vsbar em{font-style:normal;color:rgba(255,255,255,.75)}
+.dfy-vsbar>div{height:12px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}
+.dfy-vsbar i{display:block;height:100%;border-radius:999px}
+.dfy-vsbar i.emp{background:linear-gradient(90deg,#f87171,#ef4444)}.dfy-vsbar i.us{background:linear-gradient(90deg,#86efac,#22c55e)}
+.dfy-vsbar b{text-align:right}
+.dfy-keep{display:flex;justify-content:space-between;align-items:baseline;padding-top:10px;border-top:1px dashed rgba(255,255,255,.18)}
+.dfy-keep span{color:rgba(255,255,255,.75);font-weight:600}.dfy-keep b{font-size:1.7rem;letter-spacing:-.03em;color:#fbbf24}
+.dfy-gain{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:9px}
+.dfy-gain li{position:relative;padding-left:28px;color:rgba(255,255,255,.9)}
+.dfy-gain li:before{content:"✓";position:absolute;left:0;top:2px;display:grid;place-items:center;width:19px;height:19px;border-radius:50%;background:#22c55e;color:#052e1c;font-size:.72rem;font-weight:800}
+.dfy-side.gold .dfy-gain li:before{background:#fbbf24}
+.dfy-wait{margin:auto 0 18px;padding:11px 14px;border-radius:12px;background:rgba(239,68,68,.14);border:1px solid rgba(248,113,113,.35);color:#fecaca;font-size:.9rem}
+.dfy-wait span{font-weight:800;color:#fff}
+.dfy-side-btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:15px 22px;border-radius:14px;background:#22c55e;color:#052e1c;font-weight:800;text-decoration:none;box-shadow:0 14px 30px rgba(34,197,94,.3);transition:transform .15s}
+.dfy-side-btn:hover{color:#052e1c;transform:translateY(-2px)}
+.dfy-side.gold .dfy-side-btn{background:#fbbf24;box-shadow:0 14px 30px rgba(251,191,36,.28)}
+.dfy-claim{display:flex;justify-content:space-between;align-items:center;gap:14px 24px;flex-wrap:wrap;margin-top:28px;padding:18px 24px;border-radius:18px;background:#fff;color:var(--text);box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.dfy-claim>div{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.dfy-claim-dot{width:12px;height:12px;border-radius:50%;background:#ef4444;animation:cpPulseRed 1.8s infinite}
+.dfy-claim a{padding:12px 22px;border-radius:12px;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;font-weight:800;text-decoration:none;white-space:nowrap}
+.dfy-claim a:hover{color:#fff}
+@media (max-width:1000px){.dfy-duo{grid-template-columns:1fr}.dfy-vs{justify-self:center}}
+@media (max-width:640px){.dfy-fomo{padding:64px 0}.dfy-side{padding:22px 18px}.dfy-side-btn,.dfy-claim a{width:100%;text-align:center}}
+@media (prefers-reduced-motion:reduce){.dfy-fomo-pill i,.dfy-claim-dot{animation:none}.dfy-side:hover{transform:none}}
+.dfy-claim p{margin:0;flex:1 1 280px}.dfy-claim>div{flex:1 1 400px;flex-wrap:nowrap}.dfy-claim-dot{flex:none}

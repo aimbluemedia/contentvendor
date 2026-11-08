@@ -44,44 +44,65 @@ $dfyFaqs = [
   </div>
 </section>
 
-<section class="m-section dfy-paths">
+<section class="dfy-fomo">
+  <div class="dfy-fomo-bg" aria-hidden="true"></div>
   <div class="container">
-    <div class="m-head">
-      <span class="m-eyebrow">Which one sounds like you?</span>
-      <h2>Two ways small businesses win with us.</h2>
-      <p>Whether you post yourself or pay someone to do it, done-for-you content pays for itself.</p>
+    <div class="dfy-fomo-head">
+      <span class="dfy-fomo-pill"><i></i> While you read this, your competitors are posting</span>
+      <h2>Every week you go quiet, <span>a competitor gets your customer.</span></h2>
+      <p>Customers check Google, social media and AI assistants before they call. The business that shows up every week is the one they remember. Which one sounds like you?</p>
     </div>
-    <div class="dfy-path-grid">
-      <article class="dfy-path">
-        <span class="dfy-path-tag">You do it yourself</span>
-        <h3>Get your evenings and weekends back.</h3>
-        <p>You know you should post, but it happens late at night, after the real work. When you get busy, it stops, and customers forget you.</p>
-        <div class="dfy-big"><b>20+ hours</b><span>back every month</span></div>
-        <ul class="dfy-list">
-          <li><b>We plan your month</b> around your seasons, services and offers.</li>
-          <li><b>We write every post</b> for each network, plus website articles.</li>
-          <li><b>You approve in minutes</b> from your phone, or let us publish.</li>
-          <li><b>You never go quiet</b>, even in your busiest weeks.</li>
+
+    <div class="dfy-duo">
+      <article class="dfy-side">
+        <div class="dfy-side-top">
+          <span class="dfy-side-tag">You do it yourself</span>
+          <span class="dfy-side-ic" aria-hidden="true">🌙</span>
+        </div>
+        <h3>Stop writing posts at 10pm.</h3>
+        <p class="dfy-side-pain">Marketing happens after the real work, if it happens at all. Then you get busy, the posts stop, and customers forget you.</p>
+        <div class="dfy-cost">
+          <span>What it costs you now</span>
+          <div class="dfy-cost-row"><b>~20 hrs</b><small>a month writing, designing and posting</small></div>
+          <div class="dfy-cost-row"><b>Weeks</b><small>of silence every time you get busy</small></div>
+        </div>
+        <ul class="dfy-gain">
+          <li>We plan, write and publish your whole month</li>
+          <li>You approve from your phone in minutes</li>
+          <li>You stay visible, even in your busiest season</li>
         </ul>
-        <a class="dfy-btn" href="#request">Give me my time back <span aria-hidden="true">→</span></a>
+        <div class="dfy-wait"><span>⏳ Every month you wait:</span> another ~20 hours gone</div>
+        <a class="dfy-side-btn" href="#request">Give me my time back <span aria-hidden="true">→</span></a>
       </article>
 
-      <article class="dfy-path money">
-        <span class="dfy-path-tag">You pay someone to do it</span>
-        <h3>Save $1,000 to $2,000 a month in payroll.</h3>
-        <p>A part-time employee for social media costs about $2,000–$2,800 a month once you add payroll taxes. Our team does more for a fraction of that.</p>
-        <div class="dfy-compare">
-          <div class="dfy-row"><span>Part-time employee</span><div class="dfy-meter emp"><i style="width:100%"></i></div><b>~$2,500/mo</b></div>
-          <div class="dfy-row"><span>Content Growth</span><div class="dfy-meter us"><i style="width:30%"></i></div><b>$<?= number_format(PACKAGES['growth']['price']) ?>/mo</b></div>
-          <div class="dfy-save"><span>You keep</span><b>~$1,750 a month</b></div>
+      <div class="dfy-vs" aria-hidden="true">or</div>
+
+      <article class="dfy-side gold">
+        <div class="dfy-side-top">
+          <span class="dfy-side-tag">You pay someone to do it</span>
+          <span class="dfy-side-ic" aria-hidden="true">💸</span>
         </div>
-        <ul class="dfy-list">
-          <li><b>No hiring, training or sick days.</b> A whole team, not one person.</li>
-          <li><b>More output:</b> up to 20 campaigns on 6 networks every month.</li>
-          <li><b>Put the savings into advertising</b> and grow even faster.</li>
+        <h3>Save $1,000–$2,000 a month.</h3>
+        <p class="dfy-side-pain">A part-time social media employee costs about $2,000–$2,800 a month with payroll taxes, and it all stops when they're sick, on vacation or quit.</p>
+        <div class="dfy-cost">
+          <span>Monthly cost</span>
+          <div class="dfy-vsbar"><em>Employee</em><div><i class="emp" style="width:100%"></i></div><b>~$2,500</b></div>
+          <div class="dfy-vsbar"><em>Our team</em><div><i class="us" style="width:30%"></i></div><b>$<?= number_format(PACKAGES['growth']['price']) ?></b></div>
+          <div class="dfy-keep"><span>Put back in your pocket</span><b>~$1,750/mo</b></div>
+        </div>
+        <ul class="dfy-gain">
+          <li>A whole content team, no hiring or training</li>
+          <li>More output: up to 20 campaigns on 6 networks</li>
+          <li>Move the savings into ads and grow faster</li>
         </ul>
-        <a class="dfy-btn" href="#request">Show me the savings <span aria-hidden="true">→</span></a>
+        <div class="dfy-wait"><span>⏳ Every month you wait:</span> ~$1,750 more on payroll</div>
+        <a class="dfy-side-btn" href="#request">Show me the savings <span aria-hidden="true">→</span></a>
       </article>
+    </div>
+
+    <div class="dfy-claim">
+      <div><span class="dfy-claim-dot" aria-hidden="true"></span><p><b>We take on a limited number of new businesses each month</b> so every client gets real attention.</p></div>
+      <a href="#request">Claim my spot <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
