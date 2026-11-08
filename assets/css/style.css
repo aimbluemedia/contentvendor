@@ -1697,3 +1697,42 @@ html{scroll-behavior:smooth}
 .dfy-hero h1{font-size:clamp(2.1rem,4.4vw,3.4rem)}
 .dfy-hero h1 span{display:block;margin-top:6px}
 .dfy-photo{margin-top:16px}
+
+/* Done-for-you FOMO section: light version (white cards, light green panels) */
+.dfy-fomo{color:var(--text);background:linear-gradient(180deg,#f0fdf4 0%,#ecfdf3 50%,#f7fef9 100%)}
+.dfy-fomo-bg{background:radial-gradient(600px 360px at 10% 0%,rgba(134,239,172,.35),transparent 70%),radial-gradient(600px 360px at 95% 100%,rgba(253,230,138,.35),transparent 70%)}
+.dfy-fomo-bg:after{background-image:linear-gradient(rgba(21,128,61,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(21,128,61,.05) 1px,transparent 1px)}
+.dfy-fomo-pill{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
+.dfy-fomo-head h2{color:var(--text)}
+.dfy-fomo-head h2 span{background:linear-gradient(90deg,#15803d,#16a34a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dfy-fomo-head p{color:var(--muted)}
+.dfy-vs{background:#15803d;color:#fff;box-shadow:0 0 0 8px rgba(21,128,61,.12)}
+.dfy-side{background:#fff;border:1px solid #bbf7d0;backdrop-filter:none;box-shadow:0 24px 54px rgba(21,128,61,.12)}
+.dfy-side:hover{border-color:#4ade80}
+.dfy-side.gold{border-color:#fde68a;box-shadow:0 24px 54px rgba(217,119,6,.12)}
+.dfy-side.gold:hover{border-color:#fbbf24}
+.dfy-side-tag{background:#16a34a;color:#fff}
+.dfy-side.gold .dfy-side-tag{background:#f59e0b;color:#fff}
+.dfy-side-ic{background:#dcfce7;color:#15803d}
+.dfy-side.gold .dfy-side-ic{background:#fef3c7;color:#d97706}
+.dfy-side h3{color:var(--text)}
+.dfy-side-pain{color:var(--muted)}
+.dfy-cost{background:#f0fdf4;border:1px solid #bbf7d0}
+.dfy-cost>span{color:#15803d}
+.dfy-cost-row b{color:#dc2626}
+.dfy-cost-row small{color:#334139}
+.dfy-vsbar em{color:#334139}
+.dfy-vsbar>div{background:#dcfce7}
+.dfy-vsbar b{color:var(--text)}
+.dfy-keep{border-top-color:#bbf7d0}
+.dfy-keep span{color:#334139}
+.dfy-keep b{color:#15803d}
+.dfy-gain li{color:#334139}
+.dfy-gain li:before{background:#16a34a;color:#fff}
+.dfy-side.gold .dfy-gain li:before{background:#f59e0b;color:#fff}
+.dfy-wait{background:#fef2f2;border-color:#fecaca;color:#7f1d1d}
+.dfy-wait span{color:#b91c1c}
+.dfy-side-btn{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;box-shadow:0 14px 30px rgba(22,163,74,.32)}
+.dfy-side-btn:hover{color:#fff}
+.dfy-side.gold .dfy-side-btn{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;box-shadow:0 14px 30px rgba(217,119,6,.3)}
+.dfy-claim{border:2px solid #fecaca;box-shadow:0 18px 40px rgba(220,38,38,.1)}
