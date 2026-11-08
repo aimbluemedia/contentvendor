@@ -37,7 +37,6 @@ if (!$editing) {
     $data['weekTotal'] = count($week);
     $data['todayTasks'] = array_values(array_filter(tasks_between($uid, $today, $today), fn($t) => true));
     $data['overdue'] = array_values(array_filter(tasks_between($uid, date('Y-m-d', strtotime('-3 days')), date('Y-m-d', strtotime('-1 day'))), fn($t) => $t['status'] === 'todo'));
-    $data['upcoming'] = tasks_between($uid, date('Y-m-d', strtotime('+1 day')), date('Y-m-d', strtotime('+7 days')));
     $data['monthTasks'] = count(tasks_between($uid, $today, date('Y-m-d', strtotime('+27 days'))));
 }
 render('planner', $data);

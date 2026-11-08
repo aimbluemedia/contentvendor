@@ -84,16 +84,14 @@ $planUser = plan_of($user);
     <h2 class="pv-h">Today · <?= e(date('l, M j')) ?></h2>
     <div class="tk-list">
       <?php $back = 'planner'; foreach (array_merge($overdue, $todayTasks) as $t) require ROOT . '/app/views/_task_row.php'; ?>
-      <?php if (!$todayTasks && !$overdue): ?><div class="tk-empty">No tasks today. Enjoy the break! Your next tasks are below.</div><?php endif; ?>
+      <?php if (!$todayTasks && !$overdue): ?><div class="tk-empty">No tasks today. Enjoy the break! <a href="<?= e(url('calendar')) ?>">See your next posts on the calendar →</a></div><?php endif; ?>
     </div>
 
-    <h2 class="pv-h">Coming up</h2>
-    <?php $byDay = []; foreach ($upcoming as $t) $byDay[$t['due_date']][] = $t; ?>
-    <?php if (!$byDay): ?><p class="muted">Nothing scheduled in the next 7 days.</p><?php endif; ?>
-    <?php foreach ($byDay as $date => $list): ?>
-      <div class="pv-day"><span><?= e(date('D, M j', strtotime($date))) ?></span></div>
-      <div class="tk-list"><?php foreach ($list as $t) require ROOT . '/app/views/_task_row.php'; ?></div>
-    <?php endforeach; ?>
+    <div class="pv-next">
+      <span>Want to see what's coming up?</span>
+      <a href="<?= e(url('calendar')) ?>">Open your calendar →</a>
+      <a href="<?= e(url('posting-guide')) ?>">📘 Posting guide</a>
+    </div>
 <?php endif; ?>
   </div>
 </section>

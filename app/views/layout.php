@@ -5,7 +5,7 @@ $nav = function (string $path, string $label) use ($current) {
     $active = $current === $path ? ' class="active"' : '';
     return '<a href="' . e(url($path)) . '"' . $active . '>' . e($label) . '</a>';
 };
-$appRoutes = ['members', 'planner', 'platforms', 'create', 'campaign', 'library', 'item', 'calendar', 'profile', 'account', 'superadmin'];
+$appRoutes = ['members', 'planner', 'platforms', 'create', 'campaign', 'library', 'item', 'calendar', 'profile', 'account', 'superadmin', 'posting-guide'];
 $isApp = $me && in_array($current, $appRoutes, true);
 $isSuper = $isApp && $current === 'superadmin';
 $view = (string) ($_GET['view'] ?? '');
@@ -15,6 +15,7 @@ $ic = [
     'home'     => '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
     'create'   => '<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3"/>',
     'library'  => '<path d="M4 4h5v16H4zM10 4h5v16h-5z"/><path d="M16 5l4 1-3 14-4-1"/>',
+    'guide'    => '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M8 7h7M8 11h5"/>',
     'calendar' => '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
     'profile'  => '<path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/>',
     'plan'     => '<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/>',
@@ -80,6 +81,7 @@ $side = function (string $href, string $icon, string $label, bool $active, strin
       <?= $side(url('platforms'), 'toggle', 'My platforms', $current === 'platforms', count(enabled_platforms($me)) . '/' . platform_limit($me)) ?>
       <?= $side(url('library'), 'library', 'Content library', in_array($current, ['library', 'item', 'campaign'], true)) ?>
       <?= $side(url('calendar'), 'calendar', 'Calendar', $current === 'calendar') ?>
+      <?= $side(url('posting-guide'), 'guide', 'Posting guide', $current === 'posting-guide') ?>
       <span class="sb-label">Account</span>
       <?= $side(url('profile'), 'profile', 'Business profile', $current === 'profile') ?>
       <?= $side(url('account'), 'plan', 'My plan', $current === 'account') ?>

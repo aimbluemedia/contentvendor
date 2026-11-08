@@ -22,6 +22,7 @@ $routes = [
     'signup'       => 'signup',
     'members'      => 'dashboard',
     'planner'      => 'planner',
+    'posting-guide' => 'guide',
     'platforms'    => 'platforms',
     'profile'      => 'profile',
     'create'       => 'create',

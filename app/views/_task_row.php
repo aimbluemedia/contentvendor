@@ -7,7 +7,7 @@ $pl = PLAN_PLATFORMS[$t['platform']] ?? [ucfirst($t['platform']), 'facebook', 10
     <button type="submit" aria-label="<?= $t['status'] === 'done' ? 'Mark as not done' : 'Mark as done' ?>"><?= $t['status'] === 'done' ? '✓' : '' ?></button>
   </form>
   <div class="tk-body">
-    <div class="tk-meta"><span class="tk-pl tk-pl-<?= e($t['platform']) ?>"><?= e($pl[0]) ?></span><span><?= e(GOALS[$t['goal']] ?? '') ?></span><span>~<?= (int) $pl[2] ?> min</span></div>
+    <div class="tk-meta"><span class="tk-pl tk-pl-<?= e($t['platform']) ?>"><?= e($pl[0]) ?></span><span><?= e(GOALS[$t['goal']] ?? '') ?></span><span>~<?= (int) $pl[2] ?> min</span><?php if (isset(POSTING_GUIDE[$t['platform']])): ?><a class="tk-guide" href="<?= e(guide_url($t['platform'])) ?>">📘 How to post on <?= e(POSTING_GUIDE[$t['platform']]['title']) ?></a><?php endif; ?></div>
     <p><?= e($t['idea']) ?></p>
   </div>
   <div class="tk-actions">

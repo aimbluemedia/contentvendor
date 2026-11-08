@@ -12,4 +12,12 @@ $byDay = [];
 foreach ($items as $it) {
     $byDay[(int) date('j', strtotime($it['scheduled_at']))][] = $it;
 }
-render('calendar', ['title' => 'Content calendar', 'user' => $user, 'first' => $first, 'byDay' => $byDay, 'plan' => plan_of($user)]);
+// Planned posts from the member's content plan
+$tasksByDay = [];
+$activePlan = active_plan((int) $user['id']);
+if ($activePlan) {
+    $tasks = q('SELECT * FROM plan_tasks WHERE plan_id = ? AND due_date >= ? AND due_date < ? ORDER BY due_date, id',
+        [$activePlan['id'], date('Y-m-d', $first), date('Y-m-d', $next)])->fetchAll();
+    foreach ($tasks as $t) $tasksByDay[(int) date('j', strtotime($t['due_date']))][] = $t;
+}
+render('calendar', ['title' => 'Content calendar', 'user' => $user, 'first' => $first, 'byDay' => $byDay, 'tasksByDay' => $tasksByDay, 'plan' => plan_of($user)]);
