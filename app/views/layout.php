@@ -79,9 +79,9 @@ $side = function (string $href, string $icon, string $label, bool $active, strin
       <?php $todayTodo = 0; if (active_plan((int) $me['id'])) { $todayTodo = count(array_filter(tasks_between((int) $me['id'], date('Y-m-d'), date('Y-m-d')), fn($t) => $t['status'] === 'todo')); } ?>
       <?= $side(url('planner'), 'plan2', 'My content plan', $current === 'planner', $todayTodo ? (string) $todayTodo : '') ?>
       <?= $side(url('platforms'), 'toggle', 'My platforms', $current === 'platforms', count(enabled_platforms($me)) . '/' . platform_limit($me)) ?>
-      <?= $side(url('library'), 'library', 'Content library', in_array($current, ['library', 'item', 'campaign'], true)) ?>
-      <?= $side(url('calendar'), 'calendar', 'Calendar', $current === 'calendar') ?>
       <?= $side(url('posting-guide'), 'guide', 'Posting guide', $current === 'posting-guide') ?>
+      <?= $side(url('calendar'), 'calendar', 'Calendar', $current === 'calendar') ?>
+      <?= $side(url('library'), 'library', 'Content library', in_array($current, ['library', 'item', 'campaign'], true)) ?>
       <span class="sb-label">Account</span>
       <?= $side(url('profile'), 'profile', 'Business profile', $current === 'profile') ?>
       <?= $side(url('account'), 'plan', 'My plan', $current === 'account') ?>
