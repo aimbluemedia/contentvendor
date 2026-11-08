@@ -7,28 +7,88 @@ $dfyFaqs = [
     ['Is there a contract?', 'No. Packages are month to month.'],
 ];
 ?>
-<section class="m-hero">
-  <div class="container m-hero-grid">
-    <div class="m-hero-copy">
-      <span class="m-eyebrow">Done-for-you content</span>
-      <h1>We write it. <span class="m-hl">You approve it.</span></h1>
-      <p class="m-lead">No time for marketing? Our team plans, writes, schedules and reports on your content, so you stay visible every week without lifting a finger.</p>
-      <div class="m-cta">
-        <a class="m-btn m-btn-primary" href="#request">Request a package</a>
-        <a class="m-btn m-btn-light" href="#packages">See packages</a>
+<section class="dfy-hero">
+  <div class="dfy-hero-bg" aria-hidden="true"></div>
+  <div class="container dfy-hero-grid">
+    <div class="dfy-hero-copy">
+      <span class="dfy-pill"><i></i> Done-for-you content, powered by AI</span>
+      <h1>Grow your business with content that keeps you <span>ahead of the competition</span>.</h1>
+      <p class="dfy-lead">Our team uses AI to plan, write and publish a full month of content and social media for your business. You show up everywhere customers look, every week, while your competitors go quiet.</p>
+      <div class="dfy-cta">
+        <a class="dfy-btn" href="#request">Get my monthly content plan <span aria-hidden="true">→</span></a>
+        <a class="dfy-btn ghost" href="#packages">See packages</a>
       </div>
-      <ul class="m-ticks"><li>Premium membership included</li><li>Month to month</li><li>Monthly report</li></ul>
+      <ul class="dfy-trust">
+        <li><b>From $299</b><span>per month</span></li>
+        <li><b>You approve</b><span>every post</span></li>
+        <li><b>No contract</b><span>month to month</span></li>
+      </ul>
     </div>
-    <div class="m-hero-visual" aria-hidden="true">
-      <div class="m-card">
-        <div class="m-card-head"><b>Ready for your approval</b><span class="m-pill">3 new</span></div>
-        <ul class="m-gen-list">
-          <li><span>👍</span>Spring cleanup special<em>Approve</em></li>
-          <li><span>📝</span>5 signs your sprinklers need repair<em>Approve</em></li>
-          <li><span>🎬</span>Before &amp; after: Mesa backyard<em class="done">Scheduled</em></li>
-        </ul>
-        <div class="m-mini-stats"><div><b>32</b><span>posts</span></div><div><b>4</b><span>articles</span></div><div><b>6</b><span>networks</span></div></div>
+
+    <div class="dfy-visual" aria-hidden="true">
+      <div class="dfy-month">
+        <div class="dfy-month-head">
+          <div><small>Your content this month</small><b><?= e(date('F')) ?> plan</b></div>
+          <span class="dfy-live"><i></i> AI + our team</span>
+        </div>
+        <div class="dfy-grid">
+          <?php
+          $cells = ['facebook','','google_business','instagram','','tiktok','article','','facebook','','youtube','google_business','instagram','','','pinterest','facebook','','tiktok','google_business','','instagram','','article','facebook','','reddit','youtube'];
+          foreach ($cells as $i => $c): ?>
+            <span class="dfy-cell<?= $c ? ' on' : '' ?>"><em><?= $i + 1 ?></em><?php if ($c): ?><i class="tk-pl tk-pl-<?= e($c) ?>"></i><?php endif; ?></span>
+          <?php endforeach; ?>
+        </div>
+        <div class="dfy-month-foot">
+          <div><b>32</b><span>posts</span></div><div><b>4</b><span>articles</span></div><div><b>6</b><span>networks</span></div><div><b>0</b><span>hours of your time</span></div>
+        </div>
       </div>
+      <div class="dfy-float f1"><span class="tk-pl tk-pl-google_business">Google</span><b>Spring cleanup special</b><em>✓ Published</em></div>
+      <div class="dfy-float f2"><b>You vs. local competitors</b><div class="dfy-bars"><span style="--w:92%">You</span><span style="--w:38%">Competitor A</span><span style="--w:21%">Competitor B</span></div><small>Posts this month</small></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="dfy-strip"><span>We create for</span><?php foreach (['facebook' => 'Facebook', 'instagram' => 'Instagram', 'google_business' => 'Google Business', 'tiktok' => 'TikTok', 'youtube' => 'YouTube', 'pinterest' => 'Pinterest', 'reddit' => 'Reddit', 'article' => 'Your website'] as $k => $l): ?><b class="tk-pl tk-pl-<?= $k ?>"><?= $l ?></b><?php endforeach; ?></div>
+  </div>
+</section>
+
+<section class="m-section dfy-paths">
+  <div class="container">
+    <div class="m-head">
+      <span class="m-eyebrow">Which one sounds like you?</span>
+      <h2>Two ways small businesses win with us.</h2>
+      <p>Whether you post yourself or pay someone to do it, done-for-you content pays for itself.</p>
+    </div>
+    <div class="dfy-path-grid">
+      <article class="dfy-path">
+        <span class="dfy-path-tag">You do it yourself</span>
+        <h3>Get your evenings and weekends back.</h3>
+        <p>You know you should post, but it happens late at night, after the real work. When you get busy, it stops, and customers forget you.</p>
+        <div class="dfy-big"><b>20+ hours</b><span>back every month</span></div>
+        <ul class="dfy-list">
+          <li><b>We plan your month</b> around your seasons, services and offers.</li>
+          <li><b>We write every post</b> for each network, plus website articles.</li>
+          <li><b>You approve in minutes</b> from your phone, or let us publish.</li>
+          <li><b>You never go quiet</b>, even in your busiest weeks.</li>
+        </ul>
+        <a class="dfy-btn" href="#request">Give me my time back <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="dfy-path money">
+        <span class="dfy-path-tag">You pay someone to do it</span>
+        <h3>Save $1,000 to $2,000 a month in payroll.</h3>
+        <p>A part-time employee for social media costs about $2,000–$2,800 a month once you add payroll taxes. Our team does more for a fraction of that.</p>
+        <div class="dfy-compare">
+          <div class="dfy-row"><span>Part-time employee</span><div class="dfy-meter emp"><i style="width:100%"></i></div><b>~$2,500/mo</b></div>
+          <div class="dfy-row"><span>Content Growth</span><div class="dfy-meter us"><i style="width:30%"></i></div><b>$<?= number_format(PACKAGES['growth']['price']) ?>/mo</b></div>
+          <div class="dfy-save"><span>You keep</span><b>~$1,750 a month</b></div>
+        </div>
+        <ul class="dfy-list">
+          <li><b>No hiring, training or sick days.</b> A whole team, not one person.</li>
+          <li><b>More output:</b> up to 20 campaigns on 6 networks every month.</li>
+          <li><b>Put the savings into advertising</b> and grow even faster.</li>
+        </ul>
+        <a class="dfy-btn" href="#request">Show me the savings <span aria-hidden="true">→</span></a>
+      </article>
     </div>
   </div>
 </section>
