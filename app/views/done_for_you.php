@@ -25,25 +25,18 @@ $dfyFaqs = [
       </ul>
     </div>
 
-    <div class="dfy-visual" aria-hidden="true">
-      <div class="dfy-month">
-        <div class="dfy-month-head">
-          <div><small>Your content this month</small><b><?= e(date('F')) ?> plan</b></div>
-          <span class="dfy-live"><i></i> AI + our team</span>
-        </div>
-        <div class="dfy-grid">
-          <?php
-          $cells = ['facebook','','google_business','instagram','','tiktok','article','','facebook','','youtube','google_business','instagram','','','pinterest','facebook','','tiktok','google_business','','instagram','','article','facebook','','reddit','youtube'];
-          foreach ($cells as $i => $c): ?>
-            <span class="dfy-cell<?= $c ? ' on' : '' ?>"><em><?= $i + 1 ?></em><?php if ($c): ?><i class="tk-pl tk-pl-<?= e($c) ?>"></i><?php endif; ?></span>
-          <?php endforeach; ?>
-        </div>
-        <div class="dfy-month-foot">
-          <div><b>32</b><span>posts</span></div><div><b>4</b><span>articles</span></div><div><b>6</b><span>networks</span></div><div><b>0</b><span>hours of your time</span></div>
-        </div>
+    <div class="dfy-photo">
+      <img src="<?= e(asset('img/hero-owner.webp')) ?>" alt="Smiling small business owner at her laptop while our team handles her content" width="1672" height="941" fetchpriority="high">
+      <div class="dfy-ov o1" aria-hidden="true">
+        <div class="dfy-ov-head"><b>Ready for your approval</b><span>3 new</span></div>
+        <ul>
+          <li><i class="tk-pl tk-pl-facebook"></i>Spring cleanup special<em>Approve</em></li>
+          <li><i class="tk-pl tk-pl-article"></i>5 signs your yard needs turf<em>Approve</em></li>
+          <li><i class="tk-pl tk-pl-tiktok"></i>Before &amp; after: Mesa backyard<em class="ok">Scheduled</em></li>
+        </ul>
       </div>
-      <div class="dfy-float f1"><span class="tk-pl tk-pl-google_business">Google</span><b>Spring cleanup special</b><em>✓ Published</em></div>
-      <div class="dfy-float f2"><b>You vs. local competitors</b><div class="dfy-bars"><span style="--w:92%">You</span><span style="--w:38%">Competitor A</span><span style="--w:21%">Competitor B</span></div><small>Posts this month</small></div>
+      <div class="dfy-ov o2" aria-hidden="true"><b>You vs. local competitors</b><div class="dfy-bars"><span style="--w:92%">You · 32 posts</span><span style="--w:38%">Competitor A</span><span style="--w:21%">Competitor B</span></div></div>
+      <div class="dfy-ov o3" aria-hidden="true"><span>⏱</span><div><b>20+ hours</b><small>back this month</small></div></div>
     </div>
   </div>
   <div class="container">
