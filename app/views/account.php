@@ -74,10 +74,10 @@ $upgradeUrl = config('upgrade_url') ?: url('done-for-you');
         <a class="ap-dfy-btn" href="<?= e(url('done-for-you')) ?>">See Done For You <span aria-hidden="true">→</span></a>
       </div>
       <ul class="ap-dfy-list">
-        <li><span aria-hidden="true">🗓</span><div><b>We plan your month</b><small>Campaigns built around your seasons, services and offers.</small></div></li>
-        <li><span aria-hidden="true">✍️</span><div><b>We write every post</b><small>Social posts for up to 6 networks, plus website articles.</small></div></li>
-        <li><span aria-hidden="true">🚀</span><div><b>We publish and report</b><small>Posts go out on schedule, with a report every month.</small></div></li>
-        <li><span aria-hidden="true">⏱</span><div><b>You get 20+ hours back</b><small>Approve from your phone in minutes, or let us publish.</small></div></li>
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><div><b>We plan your month</b><small>Campaigns built around your seasons, services and offers.</small></div></li>
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><div><b>We write every post</b><small>Social posts for up to 6 networks, plus website articles.</small></div></li>
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></svg></span><div><b>We publish and report</b><small>Posts go out on schedule, with a report every month.</small></div></li>
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>You get 20+ hours back</b><small>Approve from your phone in minutes, or let us publish.</small></div></li>
       </ul>
     </section>
     <p class="ap-foot small muted"><a href="<?= e(url('pricing')) ?>">See the full feature comparison →</a> · Features marked “soon” are rolling out in phases.</p>

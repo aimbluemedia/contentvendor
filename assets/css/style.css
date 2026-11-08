@@ -1682,3 +1682,9 @@ html{scroll-behavior:smooth}
 .ap-foot{margin:14px 0 0}
 @media (max-width:1000px){.ap-dfy{grid-template-columns:1fr}}
 @media (max-width:640px){.ap-dfy{padding:22px 18px}.ap-dfy-list{grid-template-columns:1fr}.ap-dfy-btn{width:100%;justify-content:center}}
+.ap-dfy-list li>span svg{width:20px;height:20px;fill:none;stroke:#dc2626;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dfy-ov-ic{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#dcfce7}
+.dfy-ov-ic svg{width:20px;height:20px;fill:none;stroke:#15803d;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dfy-side-ic{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.1)}
+.dfy-side-ic svg{width:22px;height:22px;fill:none;stroke:#86efac;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dfy-side.gold .dfy-side-ic svg{stroke:#fbbf24}

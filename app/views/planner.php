@@ -90,7 +90,7 @@ $planUser = plan_of($user);
     <div class="pv-next">
       <span>Want to see what's coming up?</span>
       <a href="<?= e(url('calendar')) ?>">Open your calendar →</a>
-      <a href="<?= e(url('posting-guide')) ?>">📘 Posting guide</a>
+      <a href="<?= e(url('posting-guide')) ?>">Posting guide →</a>
     </div>
 <?php endif; ?>
   </div>
