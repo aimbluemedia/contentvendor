@@ -159,3 +159,13 @@ CREATE TABLE IF NOT EXISTS toutify_websites (
   toutify_updated_at INT UNSIGNED NOT NULL DEFAULT 0,
   INDEX idx_toutify_websites_owner (owner)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Premium automatic content recycling (also created automatically on first use)
+CREATE TABLE IF NOT EXISTS recycle_log (
+  id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id     INT NOT NULL,
+  item_id     INT NOT NULL,
+  new_item_id INT NOT NULL,
+  created_at  DATETIME NOT NULL,
+  INDEX idx_recycle_user (user_id, created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

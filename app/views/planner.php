@@ -81,6 +81,34 @@ $planUser = plan_of($user);
       </div>
     <?php endif; ?>
 
+    <?php if ($user['plan'] === 'premium'): ?>
+      <section class="mp-card" data-month-writer data-total="<?= (int) $monthPending ?>">
+        <div class="mp-copy">
+          <span class="mp-tag">AI monthly planner</span>
+          <?php if ($monthPending): ?>
+            <h2>Write your whole month in one click.</h2>
+            <p><?= (int) $monthPending ?> upcoming task<?= $monthPending === 1 ? '' : 's' ?> in the next 30 days don't have a draft yet. The AI writes each one so you can review and approve them all at once.</p>
+          <?php else: ?>
+            <h2>Your month is written.</h2>
+            <p>Every task in the next 30 days has a draft ready. Review and approve them, then post them on their days.</p>
+          <?php endif; ?>
+          <div class="mp-bar" hidden><i></i></div>
+          <p class="mp-status small" aria-live="polite"></p>
+        </div>
+        <div class="mp-actions">
+          <?php if ($monthPending): ?>
+            <form method="post"><?= csrf_field() ?><input type="hidden" name="action" value="write_month"><button class="btn btn-primary" type="submit" data-mp-go>Write my month (<?= (int) $monthPending ?> drafts)</button></form>
+          <?php endif; ?>
+          <?php if ($monthCampaign): ?><a class="mp-link" href="<?= e(url('campaign?id=' . $monthCampaign)) ?>">Review &amp; approve drafts →</a><?php endif; ?>
+        </div>
+      </section>
+    <?php else: ?>
+      <section class="mp-card mp-lock">
+        <div class="mp-copy"><span class="mp-tag">Premium</span><h2>Let the AI write your whole month.</h2><p>Premium writes a draft for every task in your plan, so you approve the month in one sitting.</p></div>
+        <div class="mp-actions"><a class="btn btn-primary" href="<?= e(url('account')) ?>">Upgrade to Premium</a></div>
+      </section>
+    <?php endif; ?>
+
     <h2 class="pv-h">Today · <?= e(date('l, M j')) ?></h2>
     <div class="tk-list">
       <?php $back = 'planner'; foreach (array_merge($overdue, $todayTasks) as $t) require ROOT . '/app/views/_task_row.php'; ?>
@@ -95,3 +123,27 @@ $planUser = plan_of($user);
 <?php endif; ?>
   </div>
 </section>
+<script>
+(function () {
+  var card = document.querySelector('[data-month-writer]');
+  var go = card && card.querySelector('[data-mp-go]');
+  if (!go || !window.fetch) return;
+  var form = go.form, total = +card.getAttribute('data-total'), bar = card.querySelector('.mp-bar'), fill = bar.querySelector('i'), status = card.querySelector('.mp-status');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); go.disabled = true; bar.hidden = false;
+    var done = 0, body = new FormData(form); body.set('action', 'write_one');
+    (function next() {
+      status.textContent = 'Writing draft ' + (done + 1) + ' of ' + total + '…';
+      fetch(form.getAttribute('action') || location.href, { method: 'POST', body: body, credentials: 'same-origin' })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (!d.ok) { status.textContent = d.error; go.disabled = false; return; }
+          done += d.written; fill.style.width = Math.min(100, done / total * 100) + '%';
+          if (d.left > 0 && d.written > 0) return next();
+          status.textContent = 'Done! ' + done + ' drafts written.'; setTimeout(function () { location.reload(); }, 800);
+        })
+        .catch(function () { status.textContent = 'Connection problem. Click again to continue.'; go.disabled = false; });
+    })();
+  });
+})();
+</script>

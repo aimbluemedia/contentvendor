@@ -1,7 +1,7 @@
 <?php
 $faqs = [
     ['Is it really free?', 'Yes. The Free plan is $0 forever: 5 AI content pieces a month, content posts (website, Google Business, email) plus 1 social platform of your choice and your content library. No credit card and no trial clock.'],
-    ['Which tools are free?', 'The AI Campaign Builder, Article & Blog Writer, Social Post Writer, Google Business Updates, Offer Builder, Video Script Writer and Email Promotions are all free forever. Pro and Premium add scheduling, the calendar, repurposing, branded images and automation.'],
+    ['Which tools are free?', 'The AI Campaign Builder, Article & Blog Writer, Social Post Writer, Google Business Updates, Offer Builder, Video Script Writer and Email Promotions are all free forever. Pro and Premium add scheduling, the calendar, repurposing, image and video prompts, the AI monthly planner and automatic recycling.'],
     ['How does this help me show up in Google and AI search?', 'Search engines and AI assistants like ChatGPT, Perplexity, Claude and Gemini favor businesses with fresh, helpful and consistent information. ContentVendor makes it easy to publish that every week. No one can guarantee rankings or AI recommendations, but staying active and useful is the foundation.'],
     ['I\'m not a marketer. Can I use this?', 'That\'s exactly who it\'s built for. Pick a goal, type one sentence about your business, and approve the drafts. No prompts, SEO or social media know-how needed.'],
     ['What do I need to get started?', 'Just your business name, services and service area. Add them once to your business profile and every tool uses them. Most owners publish their first campaign in a few minutes.'],

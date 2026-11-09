@@ -5,7 +5,7 @@ $nav = function (string $path, string $label) use ($current) {
     $active = $current === $path ? ' class="active"' : '';
     return '<a href="' . e(url($path)) . '"' . $active . '>' . e($label) . '</a>';
 };
-$appRoutes = ['members', 'planner', 'platforms', 'create', 'campaign', 'library', 'item', 'calendar', 'profile', 'account', 'superadmin', 'posting-guide'];
+$appRoutes = ['members', 'planner', 'platforms', 'create', 'campaign', 'library', 'item', 'calendar', 'profile', 'account', 'superadmin', 'posting-guide', 'performance'];
 $isApp = $me && in_array($current, $appRoutes, true);
 $isSuper = $isApp && $current === 'superadmin';
 $view = (string) ($_GET['view'] ?? '');
@@ -82,6 +82,7 @@ $side = function (string $href, string $icon, string $label, bool $active, strin
       <?= $side(url('posting-guide'), 'guide', 'Posting guide', $current === 'posting-guide') ?>
       <?= $side(url('calendar'), 'calendar', 'Calendar', $current === 'calendar') ?>
       <?= $side(url('library'), 'library', 'Content library', in_array($current, ['library', 'item', 'campaign'], true)) ?>
+      <?= $side(url('performance'), 'chart', 'Performance', $current === 'performance') ?>
       <span class="sb-label">Account</span>
       <?= $side(url('profile'), 'profile', 'Business profile', $current === 'profile') ?>
       <?= $side(url('account'), 'plan', 'My plan', $current === 'account') ?>

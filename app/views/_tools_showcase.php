@@ -58,23 +58,23 @@ $tools = [
     ['calendar', 'pro', 'Content Calendar', 'See your whole month and never miss a post.', false,
         ['Plan the month at a glance', 'See what is drafted, scheduled and live', 'Never go quiet again'],
         '<div class="tp-cal"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><i></i><i class="f">👍</i><i></i><i class="g">📍</i><i class="i">📸</i><i class="a">📝</i><i></i><i class="f">👍</i><i></i><i class="v">🎬</i><i></i><i class="g">📍</i><i class="i">📸</i><i></i><i class="f">👍</i></div>'],
-    ['schedule', 'pro', 'Scheduling & Auto-publish', 'Approve once and your posts go out on time.', true,
-        ['Schedule weeks of posts in minutes', 'Facebook, Instagram and Google Business', 'Post-status tracking'],
+    ['schedule', 'pro', 'Scheduling & Posting Plan', 'Plan every post, then publish with any app you like.', false,
+        ['Schedule weeks of posts in minutes', 'Works with your favourite posting app', 'Track what has been posted'],
         '<ul class="tp-sched"><li><b>Tue 9:00</b><span>👍 Summer turf special</span><em>Scheduled</em></li><li><b>Wed 12:00</b><span>📍 Free estimates this week</span><em>Scheduled</em></li><li><b>Thu 6:00</b><span>📸 Before &amp; after: Mesa</span><em>Scheduled</em></li><li><b>Fri 9:00</b><span>🎬 “Still mowing in July?”</span><em class="d">Draft</em></li></ul>'],
-    ['images', 'pro', 'Business-Branded Images', 'On-brand graphics with your name and offer.', true,
-        ['Your colors, name and phone', 'Sized for every network', '10/month on Pro, 40 on Premium'],
-        '<div class="tp-img"><div class="tp-img-card"><small>DESERT TURF PROS</small><b>$200 OFF</b><span>Turf installation · This month</span><em>(602) 555-0142</em></div><div class="tp-img-sizes"><span>1:1 Instagram</span><span>1.91:1 Facebook</span><span>2:3 Pinterest</span></div></div>'],
-    ['directory', 'pro', 'Directory Distribution', 'Share updates across the Toutify network.', true,
+    ['images', 'pro', 'Image & Video Prompts', 'Ready-to-paste prompts for Canva, ChatGPT and more.', false,
+        ['Your name, offer and phone built in', 'Sized for every network', 'Works in any image or video creator'],
+        '<div class="tp-img"><div class="tp-img-card"><small>IMAGE PROMPT</small><b>$200 OFF</b><span>“Create a bright 4:5 Instagram image for Desert Turf Pros… main message: $200 off turf installation”</span><em>Copy → paste into Canva</em></div><div class="tp-img-sizes"><span>Image</span><span>Short video</span><span>Variations</span></div></div>'],
+    ['directory', 'pro', 'Directory Posts', 'Ready-to-paste updates for your Toutify listings.', false,
         ['SearchMonster storefront updates', 'MonsterList and state directories', 'Business facts kept consistent'],
-        '<ul class="tp-dirs"><li><i>🔎</i>SearchMonster storefront<em>Published</em></li><li><i>📋</i>MonsterList listing<em>Updated</em></li><li><i>🏛️</i>Arizona state directory<em>Published</em></li><li><i>⭐</i>PromoMonster reviews<em>Linked</em></li></ul>'],
-    ['planner', 'premium', 'AI Monthly Content Planner', 'A month of campaigns planned for you to approve.', true,
+        '<ul class="tp-dirs"><li><i>🔎</i>SearchMonster storefront<em>Ready to paste</em></li><li><i>📋</i>MonsterList listing<em>Ready to paste</em></li><li><i>🏛️</i>Arizona state directory<em>Ready to paste</em></li><li><i>⭐</i>PromoMonster profile<em>Ready to paste</em></li></ul>'],
+    ['planner', 'premium', 'AI Monthly Content Planner', 'Your whole month of posts written for you to approve.', false,
         ['Built around your seasons and services', 'Weeks of content ready to approve', 'The biggest time-saver'],
         '<ul class="tp-weeks"><li><b>Week 1</b>Summer turf special · $200 off</li><li><b>Week 2</b>Pet-friendly turf tips</li><li><b>Week 3</b>Customer spotlight: Mesa backyard</li><li><b>Week 4</b>Drip irrigation for desert yards</li></ul><p class="tp-meta">32 drafts ready · Approve all in one click</p>'],
-    ['recycle', 'premium', 'Automatic Content Recycling', 'Your best evergreen posts return, refreshed.', true,
-        ['Top posts come back on a schedule', 'Rewritten so they never look copied', 'Stay active with zero effort'],
-        '<div class="tp-recycle"><div><small>Posted in March</small><p>“5 signs your sprinklers need repair”</p><em>👍 212 · top performer</em></div><div class="tp-arrow">↻ refreshed and back on</div><div><small>June 3</small><p>“Is your sprinkler system ready for summer?”</p><em class="s">Scheduled</em></div></div>'],
-    ['stats', 'premium', 'Performance Dashboard', 'See what is working and what brings in leads.', false,
-        ['Published, scheduled and drafts at a glance', 'Track usage and activity', 'Advanced reporting on Premium'],
+    ['recycle', 'premium', 'Automatic Content Recycling', 'Your older posts return every week, refreshed.', false,
+        ['Older posts come back every week', 'Rewritten so they never look copied', 'Stay active with zero effort'],
+        '<div class="tp-recycle"><div><small>Posted in March</small><p>“5 signs your sprinklers need repair”</p><em>Published 52 days ago</em></div><div class="tp-arrow">↻ refreshed and back on</div><div><small>June 3</small><p>“Is your sprinkler system ready for summer?”</p><em class="s">New draft</em></div></div>'],
+    ['stats', 'premium', 'Performance Dashboard', 'See what you post, where, and how consistent you are.', false,
+        ['Published posts and streaks at a glance', 'Weekly activity and channel mix', 'Personal recommendations on Premium'],
         '<div class="tp-stats"><div><b>32</b><small>Published</small></div><div><b>14</b><small>Scheduled</small></div><div><b>6</b><small>Drafts</small></div></div><div class="tp-bars"><i style="height:30%"></i><i style="height:45%"></i><i style="height:40%"></i><i style="height:62%"></i><i style="height:58%"></i><i style="height:80%"></i><i style="height:92%"></i></div>'],
 ];
 $tierLabel = ['free' => 'Free', 'pro' => 'Pro', 'premium' => 'Premium'];
@@ -139,6 +139,6 @@ $svg = fn($k) => '<svg viewBox="0 0 24 24" aria-hidden="true">' . $ico[$k] . '</
       <div><b>All <?= (int) $counts['free'] ?> free tools are yours the moment you join.</b><span>No credit card. No trial clock. Upgrade only if you want more.</span></div>
       <a class="tl-cta" href="#join-free">Get my free tools <span aria-hidden="true">→</span></a>
     </div>
-    <p class="tl-disclaimer">Sample content shown for an example business. Features marked “Rolling out” are being released in phases.</p>
+    <p class="tl-disclaimer">Sample content shown for an example business.</p>
   </div>
 </section>

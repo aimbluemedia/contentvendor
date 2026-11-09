@@ -16,6 +16,28 @@ if (is_post()) {
         } catch (InvalidArgumentException $ex) {
             $errors[] = $ex->getMessage();
         }
+    } elseif ($action === 'write_one' || $action === 'write_month') {
+        // Premium: AI monthly planner writes drafts for upcoming tasks
+        $ajax = $action === 'write_one';
+        $fail = function (string $msg) use ($ajax) {
+            if ($ajax) { header('Content-Type: application/json'); echo json_encode(['ok' => false, 'error' => $msg]); exit; }
+            flash('error', $msg); redirect('planner');
+        };
+        if ($user['plan'] !== 'premium') $fail('The AI monthly planner is included with Premium.');
+        if (!profile_is_complete($profile)) $fail('Finish your business profile first so the AI can write about your business.');
+        @set_time_limit(300);
+        $pending = month_pending_tasks($uid);
+        $batch = $ajax ? array_slice($pending, 0, 1) : array_slice($pending, 0, 3);
+        $written = 0;
+        try {
+            foreach ($batch as $t) { write_task_draft($user, $profile, $t); $written++; }
+        } catch (AiException $ex) {
+            $fail($ex->getMessage());
+        }
+        $left = count($pending) - $written;
+        if ($ajax) { header('Content-Type: application/json'); echo json_encode(['ok' => true, 'written' => $written, 'left' => $left]); exit; }
+        flash('success', $left ? "{$written} drafts written. {$left} to go." : 'Your month is written. Review and approve your drafts.');
+        redirect('planner');
     } elseif ($action === 'task') {
         $task = find_task($uid, (int) post('task_id'));
         if ($task && in_array(post('status'), ['done', 'skipped', 'todo'], true)) {
@@ -38,5 +60,7 @@ if (!$editing) {
     $data['todayTasks'] = array_values(array_filter(tasks_between($uid, $today, $today), fn($t) => true));
     $data['overdue'] = array_values(array_filter(tasks_between($uid, date('Y-m-d', strtotime('-3 days')), date('Y-m-d', strtotime('-1 day'))), fn($t) => $t['status'] === 'todo'));
     $data['monthTasks'] = count(tasks_between($uid, $today, date('Y-m-d', strtotime('+27 days'))));
+    $data['monthPending'] = count(month_pending_tasks($uid));
+    $data['monthCampaign'] = q("SELECT id FROM campaigns WHERE user_id = ? AND goal = 'plan' ORDER BY id DESC LIMIT 1", [$uid])->fetchColumn() ?: null;
 }
 render('planner', $data);

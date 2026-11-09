@@ -12,7 +12,7 @@ $pl = PLAN_PLATFORMS[$t['platform']] ?? [ucfirst($t['platform']), 'facebook', 10
   </div>
   <div class="tk-actions">
     <?php if ($t['status'] === 'todo'): ?>
-      <a class="tk-go" href="<?= e(url('create?task=' . $t['id'])) ?>">Do it now →</a>
+      <?php if (!empty($t['item_id'])): ?><a class="tk-go" href="<?= e(url('item?id=' . $t['item_id'])) ?>">Review draft →</a><?php else: ?><a class="tk-go" href="<?= e(url('create?task=' . $t['id'])) ?>">Do it now →</a><?php endif; ?>
       <form method="post" action="<?= e(url('planner')) ?>">
         <?= csrf_field() ?><input type="hidden" name="action" value="task"><input type="hidden" name="task_id" value="<?= (int) $t['id'] ?>"><input type="hidden" name="back" value="<?= e($back) ?>"><input type="hidden" name="status" value="skipped">
         <button class="tk-skip" type="submit">Skip</button>

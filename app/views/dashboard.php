@@ -111,3 +111,13 @@ $cards = [
     <?php endif; ?>
   </div>
 </section>
+<?php if ($user['plan'] === 'premium' && recycle_due($user)): ?>
+<script>
+// Premium automatic recycling: refresh older posts in the background, at most once a week
+(function () {
+  if (!window.fetch) return;
+  var body = new FormData(); body.append('_csrf', <?= json_encode(csrf_token()) ?>); body.append('action', 'auto_recycle');
+  fetch(<?= json_encode(url('performance')) ?>, { method: 'POST', body: body, credentials: 'same-origin' }).catch(function () {});
+})();
+</script>
+<?php endif; ?>

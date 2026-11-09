@@ -9,13 +9,13 @@ $tiers = [
     'pro' => [
         'label' => 'Pro', 'verb' => 'Schedule it', 'best' => 'Posting consistently every week without the daily scramble.',
         'lead' => 'Everything in Free, plus',
-        'items' => [['3 social platforms (Facebook, Instagram, TikTok, YouTube, Reddit or Pinterest)', false], ['40 AI drafts a month (8× more)', false], ['Schedule 30 posts a month', false], ['Full content calendar', false], ['Turn one article into many posts', false], ['10 branded images a month', true]],
+        'items' => [['3 social platforms (Facebook, Instagram, TikTok, YouTube, Reddit or Pinterest)', false], ['40 AI drafts a month (8× more)', false], ['Schedule 30 posts a month', false], ['Full content calendar', false], ['Turn one article into many posts', false], ['Image & video prompts for every post', false]],
         'time' => ['Once a week', 'Batch your week in one sitting', 'Save ~10 hrs a month'],
     ],
     'premium' => [
         'label' => 'Premium', 'verb' => 'Automate it', 'best' => 'Owners who want their marketing planned and scheduled for them.',
         'lead' => 'Everything in Pro, plus',
-        'items' => [['All 6 social platforms', false], ['150 AI drafts a month', false], ['Schedule 150 posts a month', false], ['AI monthly planner fills your month', true], ['Automatic recycling of your best posts', true], ['40 branded images a month', true], ['Advanced performance reports', false]],
+        'items' => [['All 6 social platforms', false], ['150 AI drafts a month', false], ['Schedule 150 posts a month', false], ['AI monthly planner writes your month', false], ['Automatic recycling of your older posts', false], ['Advanced performance dashboard', false]],
         'time' => ['Once a month', 'Approve your whole month at once', 'Save 30+ hrs a month'],
     ],
 ];
@@ -81,6 +81,6 @@ $upgradeUrl = config('upgrade_url') ?: url('done-for-you');
         <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 5h-2v6.1l4.6 2.8 1-1.7-3.6-2.2z"/></svg></span><div><b>You get 20+ hours back</b><small>Approve from your phone in minutes, or let us publish.</small></div></li>
       </ul>
     </section>
-    <p class="ap-foot small muted"><a href="<?= e(url('pricing')) ?>">See the full feature comparison →</a> · Features marked “soon” are rolling out in phases.</p>
+    <p class="ap-foot small muted"><a href="<?= e(url('pricing')) ?>">See the full feature comparison →</a></p>
   </div>
 </section>

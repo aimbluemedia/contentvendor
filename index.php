@@ -23,6 +23,7 @@ $routes = [
     'members'      => 'dashboard',
     'planner'      => 'planner',
     'posting-guide' => 'guide',
+    'performance'  => 'performance',
     'platforms'    => 'platforms',
     'profile'      => 'profile',
     'create'       => 'create',

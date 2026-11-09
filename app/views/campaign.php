@@ -3,7 +3,7 @@
     <p class="small"><a href="<?= e(url('library')) ?>">← Library</a></p>
     <div class="dash-head">
       <div>
-        <p class="kicker"><?= e(GOALS[$campaign['goal']] ?? 'Campaign') ?> · <?= e(date('M j, Y', strtotime($campaign['created_at']))) ?></p>
+        <p class="kicker"><?= e(GOALS[$campaign['goal']] ?? ['plan' => 'AI monthly planner', 'recycle' => 'Recycled content'][$campaign['goal']] ?? 'Campaign') ?> · <?= e(date('M j, Y', strtotime($campaign['created_at']))) ?></p>
         <h1 class="h2"><?= e(mb_strimwidth($campaign['idea'], 0, 120, '…')) ?></h1>
       </div>
       <form method="post"><?= csrf_field() ?><input type="hidden" name="action" value="approve_all"><button class="btn btn-primary" type="submit">Approve all drafts</button></form>

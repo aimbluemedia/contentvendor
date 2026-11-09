@@ -22,7 +22,7 @@ $billingFaqs = [
 <section class="m-section m-pt0">
   <div class="container">
     <?php require ROOT . '/app/views/_plan_cards.php'; ?>
-    <p class="m-center m-muted m-small">Limits are per business per month. Images, auto-publishing, the planner and recycling are rolling out in phases.</p>
+    <p class="m-center m-muted m-small">Limits are per business per month. Post with any app you like: ContentVendor writes it, you publish it.</p>
   </div>
 </section>
 

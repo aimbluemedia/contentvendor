@@ -8,19 +8,19 @@ const PLANS = [
         'name' => 'Free', 'price' => 0, 'verb' => 'Create',
         'tagline' => 'Free AI content creation for business owners getting started.',
         'generations' => 5, 'scheduling' => false, 'scheduled_posts' => 0,
-        'images' => 0, 'social_accounts' => 0, 'social_platforms' => 1,
+        'prompts' => false, 'social_platforms' => 1,
     ],
     'pro' => [
         'name' => 'Pro', 'price' => 19, 'verb' => 'Schedule',
         'tagline' => 'Consistent content and social publishing with less work.',
         'generations' => 40, 'scheduling' => true, 'scheduled_posts' => 30,
-        'images' => 10, 'social_accounts' => 3, 'social_platforms' => 3,
+        'prompts' => true, 'social_platforms' => 3,
     ],
     'premium' => [
         'name' => 'Premium', 'price' => 49.99, 'verb' => 'Automate',
         'tagline' => 'A complete AI-powered content and promotion system.',
         'generations' => 150, 'scheduling' => true, 'scheduled_posts' => 150,
-        'images' => 40, 'social_accounts' => 7, 'social_platforms' => 6,
+        'prompts' => true, 'social_platforms' => 6,
     ],
 ];
 
@@ -31,15 +31,14 @@ const PLAN_FEATURES = [
     ['Social media caption writer', true, true, true],
     ['Content posts (website, Google Business, email, directories)', true, true, true],
     ['Social platforms you can switch on', '1', '3', 'All 6'],
-    ['Business-branded images / month', false, '10', '40'],
-    ['Connected social accounts', false, '3', '7'],
+    ['Image & video prompts for every post', false, true, true],
     ['Scheduled posts / month', false, '30', '150'],
     ['Content calendar', 'Basic', 'Full', 'Advanced'],
-    ['Auto-publish to supported networks', false, true, true],
+    ['Post with any app you like (copy, download, posting guide)', true, true, true],
     ['Turn articles into social posts', false, true, true],
     ['AI monthly content planner', false, false, true],
     ['Automatic content recycling', false, false, true],
-    ['Directory content distribution', 'Manual', 'Limited', 'Advanced'],
+    ['Directory-ready posts for your Toutify listings', true, true, true],
     ['Content performance dashboard', 'Basic', 'Standard', 'Advanced'],
 ];
 

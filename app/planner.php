@@ -251,3 +251,42 @@ function next_task_day(int $userId): ?array
         WHERE t.user_id = ? AND t.status = 'todo' AND t.due_date = ? ORDER BY t.id", [$userId, $date])->fetchAll();
     return [$date, $tasks];
 }
+
+/** Premium monthly planner: open tasks in the next 30 days that don't have a draft yet */
+function month_pending_tasks(int $userId): array
+{
+    planner_install();
+    return q("SELECT t.* FROM plan_tasks t JOIN content_plans p ON p.id = t.plan_id AND p.active = 1
+        WHERE t.user_id = ? AND t.status = 'todo' AND t.item_id IS NULL AND t.due_date >= ? AND t.due_date <= ?
+        ORDER BY t.due_date, t.id", [$userId, date('Y-m-d', strtotime('-3 days')), date('Y-m-d', strtotime('+30 days'))])->fetchAll();
+}
+
+/** The campaign that groups this month's planner drafts (created on first use) */
+function month_campaign_id(int $userId): int
+{
+    $label = 'Monthly content plan · ' . date('F Y');
+    $id = q("SELECT id FROM campaigns WHERE user_id = ? AND goal = 'plan' AND idea = ? ORDER BY id DESC LIMIT 1", [$userId, $label])->fetchColumn();
+    if ($id) return (int) $id;
+    q('INSERT INTO campaigns (user_id, goal, idea, created_at) VALUES (?, ?, ?, ?)', [$userId, 'plan', $label, now()]);
+    return (int) db()->lastInsertId();
+}
+
+/** Write the draft for one planner task and link it. Returns the new item id. */
+function write_task_draft(array $user, array $profile, array $task): int
+{
+    $uid = (int) $user['id'];
+    if (generations_left($user) < 1) {
+        throw new AiException("You've used this month's AI drafts. They reset on the 1st.");
+    }
+    $channel = platform_channel($task['platform']);
+    if (!in_array($channel, allowed_channels($user), true)) {
+        $channel = 'facebook';
+    }
+    $result = generate_campaign($profile, isset(GOALS[$task['goal']]) ? $task['goal'] : 'active', $task['idea'], [$channel]);
+    $draft = $result['items'][0] ?? null;
+    if (!$draft) throw new AiException('The AI did not return a draft. Please try again.');
+    $itemId = save_item($uid, month_campaign_id($uid), $draft['channel'], $draft['title'], $draft['body'], $result['source']);
+    q('UPDATE plan_tasks SET item_id = ? WHERE id = ? AND user_id = ?', [$itemId, $task['id'], $uid]);
+    record_usage($uid, 1);
+    return $itemId;
+}

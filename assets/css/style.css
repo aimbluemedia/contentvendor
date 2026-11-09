@@ -1867,3 +1867,58 @@ html{scroll-behavior:smooth}
 @media (max-width:1000px){.dfy-req{grid-template-columns:1fr}}
 @media (max-width:640px){.dfy-offer,.dfy-form{padding:24px 18px}.dfy-pick{grid-template-columns:1fr}.dfy-offer-trust{grid-template-columns:1fr}.dfy-form-body .row-2{grid-template-columns:1fr;gap:0}}
 .dfy-offer-save b{display:flex;flex-direction:column;align-items:flex-end;line-height:1.05;font-size:1.6rem}.dfy-offer-save b small{font-size:.95rem;letter-spacing:0;color:#fff;font-weight:700}
+
+/* Item page: creator prompts */
+.cp-prompts-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.cp-prompts-head h2{margin:0}
+.cp-prompts-tag{padding:4px 10px;border-radius:999px;background:#dcfce7;color:#086b2d;font-size:.75rem;font-weight:800}
+.cp-prompt{margin-top:14px;padding:14px;border-radius:14px;background:#f8faf9;border:1px solid var(--border)}
+.cp-prompt-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.cp-prompt small{display:block;color:var(--muted);margin:2px 0 8px}
+.cp-prompt textarea{font-size:.88rem;line-height:1.5;background:#fff;resize:vertical}
+.cp-prompt-lock{margin-top:12px;padding:16px;border-radius:14px;background:#fef2f2;border:1px solid #fecaca}
+.cp-prompt-lock p{margin:4px 0 10px;color:var(--muted)}
+
+/* Planner: AI monthly planner card */
+.mp-card{display:flex;justify-content:space-between;align-items:center;gap:16px 24px;flex-wrap:wrap;margin:0 0 22px;padding:22px 24px;border-radius:20px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0}
+.mp-card.mp-lock{background:linear-gradient(135deg,#fff5f5,#fef2f2);border-color:#fecaca}
+.mp-copy{flex:1 1 380px}
+.mp-tag{display:inline-block;padding:4px 11px;border-radius:999px;background:#16a34a;color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.mp-lock .mp-tag{background:#dc2626}
+.mp-card h2{font-size:1.3rem;margin:8px 0 4px}.mp-card p{margin:0;color:var(--muted)}
+.mp-bar{height:10px;border-radius:999px;background:#fff;overflow:hidden;margin-top:12px}.mp-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#22c55e,#15803d);transition:width .3s}
+.mp-status{margin-top:6px!important;font-weight:700;color:#086b2d!important}
+.mp-actions{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.mp-link{font-weight:800;color:#086b2d;text-decoration:none}
+
+/* Performance dashboard */
+.pf2-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.pf2-head h1{margin:8px 0 4px}.pf2-head p{margin:0}
+.pf2-tier{padding:6px 14px;border-radius:999px;background:#dcfce7;color:#086b2d;font-weight:800;font-size:.85rem}
+.pf2-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.pf2-tile{padding:18px;border-radius:18px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow)}
+.pf2-tile span{display:block;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.pf2-tile b{display:block;font-size:2rem;letter-spacing:-.04em;margin:4px 0;color:#15803d}
+.pf2-tile small{color:var(--muted);font-size:.82rem}
+.pf2-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.pf2-card{position:relative;overflow:hidden;padding:22px;border-radius:20px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow)}
+.pf2-card h2{font-size:1.15rem;margin:0 0 2px}
+.pf2-card.is-locked>*:not(.pf2-lock):not(h2){filter:blur(4px);opacity:.5;pointer-events:none}
+.pf2-lock{position:absolute;inset:50px 20px 20px;display:grid;place-content:center;justify-items:center;gap:10px;text-align:center}
+.pf2-chart{display:flex;align-items:flex-end;gap:8px;height:180px;margin-top:16px}
+.pf2-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
+.pf2-col i{display:block;width:100%;max-width:38px;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#4ade80,#15803d)}
+.pf2-col small{font-size:.68rem;color:var(--muted);white-space:nowrap}.pf2-n{font-size:.75rem;font-weight:800;color:#14532d}
+.pf2-ch{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.pf2-ch li{display:grid;grid-template-columns:170px 1fr 30px;gap:10px;align-items:center;font-size:.9rem}
+.pf2-ch li div{height:10px;border-radius:999px;background:#eef4f0;overflow:hidden}.pf2-ch li i{display:block;height:100%;border-radius:999px;background:#16a34a}
+.pf2-ch b{text-align:right}
+.pf2-tips{margin:12px 0 0;padding-left:18px;display:grid;gap:8px}
+.pf2-rc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 14px}
+.pf2-rc div{padding:10px;border-radius:12px;background:#f0fdf4;border:1px solid #bbf7d0;text-align:center}
+.pf2-rc b{display:block;font-size:1.3rem;color:#15803d}.pf2-rc span{font-size:.74rem;color:var(--muted)}
+.pf2-recycle form{display:inline-block;margin-right:12px}
+.pf2-up{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:20px 22px;border-radius:20px;background:linear-gradient(135deg,#fff5f5,#fef2f2);border:1px solid #fecaca}
+.pf2-up p{margin:2px 0 0;color:var(--muted)}
+@media (max-width:900px){.pf2-tiles{grid-template-columns:1fr 1fr}.pf2-grid{grid-template-columns:1fr}.pf2-ch li{grid-template-columns:120px 1fr 26px}}
+.pf2-chart{gap:5px;min-width:0}.pf2-col{min-width:0}.pf2-col small{font-size:.64rem;overflow:visible}
