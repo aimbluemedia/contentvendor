@@ -1803,3 +1803,18 @@ html{scroll-behavior:smooth}
 @media (max-width:1000px){.dfy-pk{grid-template-columns:1fr;max-width:480px;margin:0 auto}.dfy-pk-card.is-hero{transform:none;order:-1}.dfy-pk-card.is-hero:hover{transform:translateY(-4px)}.dfy-pk-for{min-height:0}}
 @media (prefers-reduced-motion:reduce){.dfy-pk-card,.dfy-pk-card:hover{transition:none}}
 .dfy-pk-trust{gap:12px 26px}.dfy-pk-trust li{white-space:nowrap}@media (max-width:640px){.dfy-pk-trust{justify-content:flex-start}.dfy-pk-trust li{white-space:normal}}
+
+/* Done-for-you: no-obligation trial section */
+.dfy-try{background:#fff}
+.dfy-try-card{display:grid;grid-template-columns:1fr 1.05fr;gap:32px 44px;align-items:center;padding:44px;border-radius:30px;background:radial-gradient(600px 300px at 0% 0%,#dcfce7,transparent 70%),linear-gradient(180deg,#f7fef9,#f0fdf4);border:1px solid #bbf7d0;box-shadow:0 26px 60px rgba(21,128,61,.12)}
+.dfy-try-tag{display:inline-block;padding:6px 14px;border-radius:999px;background:#16a34a;color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.dfy-try h2{font-size:clamp(1.9rem,3.6vw,2.7rem);line-height:1.1;letter-spacing:-.04em;margin:16px 0 14px}
+.dfy-try h2 span{display:block;color:#15803d}
+.dfy-try-copy>p{color:var(--muted);font-size:1.06rem;margin:0 0 24px;max-width:520px}
+.dfy-try-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dfy-try-list li{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:18px;background:#fff;border:1px solid #dcfce7;box-shadow:0 8px 20px rgba(21,128,61,.06)}
+.dfy-try-list li>span{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:#dcfce7;color:#15803d}
+.dfy-try-list svg{width:22px;height:22px;fill:currentColor}
+.dfy-try-list b{display:block;font-size:1rem}.dfy-try-list small{color:var(--muted);font-size:.86rem;line-height:1.45}
+@media (max-width:1000px){.dfy-try-card{grid-template-columns:1fr}}
+@media (max-width:640px){.dfy-try-card{padding:26px 18px}.dfy-try-list{grid-template-columns:1fr}.dfy-try .dfy-btn{width:100%}}

@@ -184,17 +184,21 @@ $calcCap = ['starter' => 12, 'growth' => 40, 'dominator' => 120]; // approx. pos
   </div>
 </section>
 
-<section class="m-section">
+<section class="m-section dfy-try">
   <div class="container">
-    <div class="m-head">
-      <span class="m-eyebrow">How it works</span>
-      <h2>Four simple steps.</h2>
-    </div>
-    <div class="m-steps four">
-      <div class="m-step"><span>1</span><h3>Tell us about you</h3><p>A short call to set up your business profile.</p></div>
-      <div class="m-step"><span>2</span><h3>We plan your month</h3><p>Campaigns built around your seasons and offers.</p></div>
-      <div class="m-step"><span>3</span><h3>You approve</h3><p>Review and edit drafts from any device.</p></div>
-      <div class="m-step"><span>4</span><h3>We publish &amp; report</h3><p>Posts go out on schedule. A report every month.</p></div>
+    <div class="dfy-try-card">
+      <div class="dfy-try-copy">
+        <span class="dfy-try-tag">No obligation</span>
+        <h2>Try us for one month. <span>Stay because it works.</span></h2>
+        <p>There's no long-term contract and no commitment. Give us one month to show what consistent, professional content can do for your business. If it isn't the right fit, you can pause or cancel at any time.</p>
+        <a class="dfy-btn" href="#request">Start my first month <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="dfy-try-list">
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6 2h9l5 5v15H6zm8 1.5V8h4.5zM9 12h8v1.6H9zm0 3.5h8v1.6H9z"/></svg></span><div><b>No long-term contract</b><small>Every package is month to month. You're never locked in.</small></div></li>
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zM9 8v8h2V8zm4 0v8h2V8z"/></svg></span><div><b>Pause when you need to</b><small>Slow season or a busy month? Put your package on hold.</small></div></li>
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-3.5 6.1L7.1 9.5 9.6 12l-2.5 2.5 1.4 1.4 2.5-2.5 2.5 2.5 1.4-1.4-2.5-2.5 2.5-2.5-1.4-1.4-2.5 2.5z"/></svg></span><div><b>Cancel any time</b><small>Just let us know. No questions, no pressure.</small></div></li>
+        <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/></svg></span><div><b>Your content stays yours</b><small>Everything we create remains in your ContentVendor library.</small></div></li>
+      </ul>
     </div>
   </div>
 </section>
