@@ -1866,3 +1866,4 @@ html{scroll-behavior:smooth}
 .dfy-form-foot{margin:12px 0 0;text-align:center;color:var(--muted);font-size:.85rem}
 @media (max-width:1000px){.dfy-req{grid-template-columns:1fr}}
 @media (max-width:640px){.dfy-offer,.dfy-form{padding:24px 18px}.dfy-pick{grid-template-columns:1fr}.dfy-offer-trust{grid-template-columns:1fr}.dfy-form-body .row-2{grid-template-columns:1fr;gap:0}}
+.dfy-offer-save b{display:flex;flex-direction:column;align-items:flex-end;line-height:1.05;font-size:1.6rem}.dfy-offer-save b small{font-size:.95rem;letter-spacing:0;color:#fff;font-weight:700}
