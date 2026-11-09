@@ -188,10 +188,10 @@ $calcCap = ['starter' => 12, 'growth' => 40, 'dominator' => 120]; // approx. pos
   <div class="container">
     <div class="dfy-try-card">
       <div class="dfy-try-copy">
-        <span class="dfy-try-tag">No obligation</span>
+        <span class="dfy-try-tag">First month free</span>
         <h2>Try us for one month. <span>Stay because it works.</span></h2>
-        <p>There's no long-term contract and no commitment. Give us one month to show what consistent, professional content can do for your business. If it isn't the right fit, you can pause or cancel at any time.</p>
-        <a class="dfy-btn" href="#request">Start my first month <span aria-hidden="true">→</span></a>
+        <p>Your first month is free, with no long-term contract and no commitment. Give us one month to show what consistent, professional content can do for your business. If it isn't the right fit, you can pause or cancel at any time.</p>
+        <a class="dfy-btn" href="#request">Start my free month <span aria-hidden="true">→</span></a>
       </div>
       <ul class="dfy-try-list">
         <li><span aria-hidden="true"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6 2h9l5 5v15H6zm8 1.5V8h4.5zM9 12h8v1.6H9zm0 3.5h8v1.6H9z"/></svg></span><div><b>No long-term contract</b><small>Every package is month to month. You're never locked in.</small></div></li>
@@ -203,36 +203,64 @@ $calcCap = ['starter' => 12, 'growth' => 40, 'dominator' => 120]; // approx. pos
   </div>
 </section>
 
-<section class="m-section m-alt" id="request">
-  <div class="container m-req">
-    <div>
-      <span class="m-eyebrow">Get started</span>
-      <h2>Request a package</h2>
-      <p class="m-muted">A content strategist will contact you within one business day.</p>
-      <ul class="m-ticks stack"><li>No long contract</li><li>Switch packages any time</li><li>Your content stays yours</li></ul>
-    </div>
-    <div class="m-card m-form-card">
+<section class="m-section dfy-req-sec" id="request">
+  <div class="container dfy-req">
+    <aside class="dfy-offer">
+      <span class="dfy-offer-tag"><i></i> New client offer</span>
+      <h2>Your first month <span>is on us.</span></h2>
+      <p>Try Done For You free for one month. Our team plans, writes and publishes your content, and you only continue if you love the results.</p>
+      <div class="dfy-offer-save"><span>Your free month is worth up to</span><b>$<?= number_format(max(array_column(PACKAGES, 'price'))) ?></b></div>
+      <ol class="dfy-offer-steps">
+        <li><b>Send your request</b><small>Takes about a minute.</small></li>
+        <li><b>Meet your strategist</b><small>We call you within one business day.</small></li>
+        <li><b>Your free month begins</b><small>Approve your first posts from your phone.</small></li>
+      </ol>
+      <ul class="dfy-offer-trust">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1.2 13.6 6-6-1.4-1.4-4.6 4.6-2.2-2.2-1.4 1.4z"/></svg>No credit card to start</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1.2 13.6 6-6-1.4-1.4-4.6 4.6-2.2-2.2-1.4 1.4z"/></svg>No contract</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1.2 13.6 6-6-1.4-1.4-4.6 4.6-2.2-2.2-1.4 1.4z"/></svg>Cancel any time</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1.2 13.6 6-6-1.4-1.4-4.6 4.6-2.2-2.2-1.4 1.4z"/></svg>Your content stays yours</li>
+      </ul>
+    </aside>
+
+    <div class="dfy-form">
+      <div class="dfy-form-head">
+        <h3>Claim your free month</h3>
+        <p>Pick a package. You won't pay anything for the first month.</p>
+      </div>
       <?php require ROOT . '/app/views/_errors.php'; ?>
-      <form method="post" action="<?= e(url('done-for-you')) ?>#request" class="form">
+      <form method="post" action="<?= e(url('done-for-you')) ?>#request" class="form dfy-form-body">
         <?= csrf_field() ?>
         <fieldset>
-          <legend>Package</legend>
-          <div class="m-pkg-pick">
+          <legend>1. Choose your package</legend>
+          <div class="dfy-pick">
             <?php foreach (PACKAGES as $key => $pkg): ?>
-              <label><input type="radio" name="package" value="<?= e($key) ?>" <?= old('package', $selected) === $key ? 'checked' : '' ?> required><span><b><?= e($pkg['name']) ?></b><small>$<?= number_format($pkg['price']) ?>/mo</small></span></label>
+              <label>
+                <input type="radio" name="package" value="<?= e($key) ?>" <?= old('package', $selected) === $key ? 'checked' : '' ?> required>
+                <span>
+                  <?php if (!empty($pkg['featured'])): ?><em>Popular</em><?php endif; ?>
+                  <b><?= e(str_replace('Content ', '', $pkg['name'])) ?></b>
+                  <small><s>$<?= number_format($pkg['price']) ?></s> <strong>$0</strong> first month</small>
+                  <i>then $<?= number_format($pkg['price']) ?>/mo</i>
+                </span>
+              </label>
             <?php endforeach; ?>
           </div>
         </fieldset>
-        <div class="row-2">
-          <label>Your name<input name="name" required autocomplete="name" value="<?= e(old('name', $user['name'] ?? '')) ?>"></label>
-          <label>Email<input type="email" name="email" required autocomplete="email" value="<?= e(old('email', $user['email'] ?? '')) ?>"></label>
-        </div>
-        <div class="row-2">
-          <label>Phone<input name="phone" autocomplete="tel" value="<?= e(old('phone')) ?>"></label>
-          <label>Business name<input name="business" autocomplete="organization" value="<?= e(old('business')) ?>"></label>
-        </div>
-        <label>Anything we should know?<textarea name="message" rows="3" placeholder="Services, area, goals…"><?= e(old('message')) ?></textarea></label>
-        <button class="m-btn m-btn-primary m-btn-block" type="submit">Send my request</button>
+        <fieldset>
+          <legend>2. Tell us about you</legend>
+          <div class="row-2">
+            <label>Your name<input name="name" required autocomplete="name" placeholder="Jane Smith" value="<?= e(old('name', $user['name'] ?? '')) ?>"></label>
+            <label>Email<input type="email" name="email" required autocomplete="email" placeholder="jane@yourbusiness.com" value="<?= e(old('email', $user['email'] ?? '')) ?>"></label>
+          </div>
+          <div class="row-2">
+            <label>Phone<input name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" value="<?= e(old('phone')) ?>"></label>
+            <label>Business name<input name="business" autocomplete="organization" placeholder="Your business" value="<?= e(old('business')) ?>"></label>
+          </div>
+          <label>Anything we should know? <span class="dfy-opt">Optional</span><textarea name="message" rows="3" placeholder="Your services, service area and goals…"><?= e(old('message')) ?></textarea></label>
+        </fieldset>
+        <button class="dfy-submit" type="submit">Start my free month <span aria-hidden="true">→</span></button>
+        <p class="dfy-form-foot">No credit card. No contract. A strategist will contact you within one business day.</p>
       </form>
     </div>
   </div>

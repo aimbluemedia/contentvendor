@@ -14,7 +14,7 @@ if (is_post()) {
             'INSERT INTO service_requests (user_id, package, name, email, phone, business, message, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [$user['id'] ?? null, $package, $name, $email, post('phone'), post('business'), post('message'), 'new', now()]
         );
-        flash('success', 'Thanks! Our content team will contact you within one business day.');
+        flash('success', 'Thanks! Your free month is reserved. A content strategist will contact you within one business day.');
         redirect('done-for-you');
     }
 }
