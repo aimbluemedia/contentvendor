@@ -48,9 +48,9 @@ return [
     // Details shown on the Privacy Policy and Terms of Service pages
     'legal' => [
         'company'       => 'Global Media Inc',   // legal business name
-        'email'         => '',          // contact email for privacy and legal questions
-        'address'       => '',          // mailing address (optional)
-        'governing_law' => '',          // e.g. "the State of Arizona"
+        'email'         => 'support@toutify.com',
+        'address'       => "2700 S Gilbert Rd, Suite 199\nChandler, AZ 85286",
+        'governing_law' => 'the State of Arizona',
         'updated'       => 'November 13, 2026',
     ],
     'timezone'    => 'America/New_York',

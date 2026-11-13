@@ -9,8 +9,8 @@ function legal_company(): string { return (string) (config('legal.company') ?: '
 
 function legal_contact_html(): string
 {
-    $email = trim((string) config('legal.email', ''));
-    $addr = trim((string) config('legal.address', ''));
+    $email = trim((string) (config('legal.email') ?: 'support@toutify.com'));
+    $addr = trim((string) (config('legal.address') ?: "2700 S Gilbert Rd, Suite 199\nChandler, AZ 85286"));
     $out = $email !== '' ? 'Email: <a href="mailto:' . e($email) . '">' . e($email) . '</a>' : 'Use the contact options in your Toutify account or on toutify.com.';
     if ($addr !== '') $out .= '<br>Mail: ' . nl2br(e($addr));
     return $out;
@@ -94,7 +94,7 @@ function legal_privacy(): array
 function legal_terms(): array
 {
     $co = legal_company();
-    $law = trim((string) config('legal.governing_law', ''));
+    $law = trim((string) (config('legal.governing_law') ?: 'the State of Arizona'));
     return [
         ['Agreement', [
             "These Terms of Service (\"Terms\") are an agreement between you and {$co} (\"we\", \"us\") for your use of ContentVendor. By creating an account or using ContentVendor, you agree to these Terms and our Privacy Policy. If you use ContentVendor for a business, you agree on behalf of that business.",
