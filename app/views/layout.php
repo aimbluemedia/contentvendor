@@ -150,19 +150,94 @@ $side = function (string $href, string $icon, string $label, bool $active, strin
 <?php if ($isApp): ?>
 </div>
 <?php else: ?>
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <strong>ContentVendor</strong>
-      <p>Create once. Promote everywhere. Part of the Toutify network with SearchMonster, MonsterList, PromoMonster and LeadCrazy.</p>
+<?php
+$ftTools = [
+    ['ContentVendor', 'Posts and articles written for you, on autopilot.', '<path d="M4 20h4L19 9l-4-4L4 16z"/>', true],
+    ['SearchMonster', 'Show up when customers ask AI who to hire.', '<path fill-rule="evenodd" d="M10.5 3a7.5 7.5 0 0 1 6 12l4.3 4.3-1.5 1.5-4.3-4.3A7.5 7.5 0 1 1 10.5 3zm0 2.2a5.3 5.3 0 1 0 0 10.6 5.3 5.3 0 0 0 0-10.6z"/>', false],
+    ['MonsterList', 'Get listed in directories across the web. Free.', '<path fill-rule="evenodd" d="M5 2h14v20H5zm3 5v2h8V7zm0 4v2h8v-2zm0 4v2h5v-2z"/>', false],
+    ['PromoMonster', 'Win more 5-star reviews and protect your reputation.', '<path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/>', false],
+    ['LeadCrazy', 'Turn visitors into quote requests with the Million Dollar Lead Form.', '<path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/>', false],
+    ['Official Directories', 'Claim your free spot in official state directories.', '<path d="M12 2 2 7v2h20V7zM4 11v7h3v-7zm6.5 0v7h3v-7zM17 11v7h3v-7zM2 20h20v2H2z"/>', false],
+];
+$ftLoggedIn = (bool) $me;
+$ftPrivacy = (string) config('privacy_url', '');
+$ftTerms = (string) config('terms_url', '');
+?>
+<section class="ft-member" aria-labelledby="ft-member-title">
+  <div class="container">
+    <div class="ft-top">
+      <div class="ft-copy">
+        <span class="ft-kicker"><i></i> Toutify membership</span>
+        <h2 id="ft-member-title">One free account. <span>Your whole growth toolkit.</span></h2>
+        <p>Join Toutify once and ContentVendor comes with it, plus the tools that get you found, reviewed and talked about. No credit card, no trial clock, no catch.</p>
+        <ul class="ft-chips">
+          <li>Free forever</li><li>No credit card</li><li>Every tool included</li><li>One login, every site</li>
+        </ul>
+      </div>
+      <div class="ft-cta">
+        <?php if ($ftLoggedIn): ?>
+          <a class="ft-btn" href="<?= e(url(home_path_for($me))) ?>">Go to my dashboard <span aria-hidden="true">→</span></a>
+        <?php else: ?>
+          <a class="ft-btn" href="<?= e(url('signup')) ?>">Start free, takes a minute <span aria-hidden="true">→</span></a>
+          <a class="ft-login" href="<?= e(url('auth/toutify/login')) ?>">Already a member? Log in</a>
+        <?php endif; ?>
+      </div>
     </div>
-    <div class="footer-links">
-      <a href="<?= e(url('pricing')) ?>">Pricing</a>
-      <a href="<?= e(url('done-for-you')) ?>">Done-for-you packages</a>
-      <a href="<?= e(url($me ? home_path_for($me) : 'signup')) ?>"><?= $me ? 'Dashboard' : 'Create a free account' ?></a>
-    </div>
+    <p class="ft-label">Included with your free membership</p>
+    <ul class="ft-tools">
+      <?php foreach ($ftTools as [$name, $desc, $icon, $here]): ?>
+        <li class="<?= $here ? 'is-here' : '' ?>">
+          <span class="ft-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><?= $icon ?></svg></span>
+          <div><b><?= e($name) ?></b><small><?= e($desc) ?></small></div>
+          <?php if ($here): ?><em>You are here</em><?php endif; ?>
+        </li>
+      <?php endforeach; ?>
+    </ul>
   </div>
-  <div class="container small muted">© <?= date('Y') ?> Toutify. Publishing availability depends on each network's API and permissions.</div>
+</section>
+<footer class="site-footer ft">
+  <div class="container ft-grid" style="--ft-cols:<?= ($ftPrivacy || $ftTerms) ? 4 : 3 ?>">
+    <div class="ft-brand">
+      <a class="ft-logo" href="<?= e(url('')) ?>"><span class="ft-mark">CV</span><span>Content<b>Vendor</b><small>by Toutify</small></span></a>
+      <p>AI content and social media for small businesses: plan it, write it and post it everywhere your customers look.</p>
+    </div>
+    <nav aria-label="ContentVendor">
+      <h3>ContentVendor</h3>
+      <a href="<?= e(url('')) ?>">Home</a>
+      <a href="<?= e(url('')) ?>#tools">Free AI tools</a>
+      <a href="<?= e(url('pricing')) ?>">Pricing</a>
+      <a href="<?= e(url('done-for-you')) ?>">Done-for-you content</a>
+    </nav>
+    <nav aria-label="Features">
+      <h3>Features</h3>
+      <a href="<?= e(url('')) ?>#tools">AI Campaign Builder</a>
+      <a href="<?= e(url('')) ?>#tools">Daily content plan</a>
+      <a href="<?= e(url('')) ?>#tools">Image &amp; video prompts</a>
+      <a href="<?= e(url('')) ?>#tools">Performance dashboard</a>
+    </nav>
+    <nav aria-label="Account">
+      <h3>Account</h3>
+      <?php if ($ftLoggedIn): ?>
+        <a href="<?= e(url(home_path_for($me))) ?>">Members dashboard</a>
+        <a href="<?= e(url('auth/toutify/logout')) ?>">Log out</a>
+      <?php else: ?>
+        <a href="<?= e(url('signup')) ?>">Create a free account</a>
+        <a href="<?= e(url('auth/toutify/login')) ?>">Log in</a>
+        <a href="<?= e(url('members')) ?>">Members dashboard</a>
+      <?php endif; ?>
+    </nav>
+    <?php if ($ftPrivacy || $ftTerms): ?>
+      <nav aria-label="Legal">
+        <h3>Legal</h3>
+        <?php if ($ftPrivacy): ?><a href="<?= e($ftPrivacy) ?>">Privacy</a><?php endif; ?>
+        <?php if ($ftTerms): ?><a href="<?= e($ftTerms) ?>">Terms</a><?php endif; ?>
+      </nav>
+    <?php endif; ?>
+  </div>
+  <div class="container ft-bottom">
+    <span>© <?= date('Y') ?> ContentVendor by Toutify. All rights reserved.</span>
+    <span>Content you create stays in your library.</span>
+  </div>
 </footer>
 <?php endif; ?>
 <script src="<?= e(asset('js/app.js')) ?>"></script>

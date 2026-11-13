@@ -41,5 +41,8 @@ return [
 
     // Where "Upgrade" buttons go (your Toutify subscription page). Empty = done-for-you contact form.
     'upgrade_url' => '',
+    // Footer legal links (e.g. your Toutify privacy policy and terms pages). Leave empty to hide them.
+    'privacy_url' => '',
+    'terms_url'   => '',
     'timezone'    => 'America/New_York',
 ];
