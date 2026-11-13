@@ -5,7 +5,7 @@
  * Each section: [heading, [paragraphs or ['list' => [...]] ]]
  */
 
-function legal_company(): string { return (string) (config('legal.company') ?: 'Toutify'); }
+function legal_company(): string { return (string) (config('legal.company') ?: 'Global Media Inc'); }
 
 function legal_contact_html(): string
 {

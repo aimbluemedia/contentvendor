@@ -47,7 +47,7 @@ return [
 
     // Details shown on the Privacy Policy and Terms of Service pages
     'legal' => [
-        'company'       => 'Toutify',   // legal business name, e.g. "Toutify LLC"
+        'company'       => 'Global Media Inc',   // legal business name
         'email'         => '',          // contact email for privacy and legal questions
         'address'       => '',          // mailing address (optional)
         'governing_law' => '',          // e.g. "the State of Arizona"
