@@ -41,8 +41,17 @@ return [
 
     // Where "Upgrade" buttons go (your Toutify subscription page). Empty = done-for-you contact form.
     'upgrade_url' => '',
-    // Footer legal links (e.g. your Toutify privacy policy and terms pages). Leave empty to hide them.
+    // Footer legal links. Leave empty to use ContentVendor's own /privacy and /terms pages.
     'privacy_url' => '',
     'terms_url'   => '',
+
+    // Details shown on the Privacy Policy and Terms of Service pages
+    'legal' => [
+        'company'       => 'Toutify',   // legal business name, e.g. "Toutify LLC"
+        'email'         => '',          // contact email for privacy and legal questions
+        'address'       => '',          // mailing address (optional)
+        'governing_law' => '',          // e.g. "the State of Arizona"
+        'updated'       => 'November 13, 2026',
+    ],
     'timezone'    => 'America/New_York',
 ];

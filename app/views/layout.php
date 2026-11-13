@@ -160,8 +160,8 @@ $ftTools = [
     ['Official Directories', 'Claim your free spot in official state directories.', '<path d="M12 2 2 7v2h20V7zM4 11v7h3v-7zm6.5 0v7h3v-7zM17 11v7h3v-7zM2 20h20v2H2z"/>', false],
 ];
 $ftLoggedIn = (bool) $me;
-$ftPrivacy = (string) config('privacy_url', '');
-$ftTerms = (string) config('terms_url', '');
+$ftPrivacy = (string) (config('privacy_url') ?: url('privacy'));
+$ftTerms = (string) (config('terms_url') ?: url('terms'));
 ?>
 <section class="ft-member" aria-labelledby="ft-member-title">
   <div class="container">
